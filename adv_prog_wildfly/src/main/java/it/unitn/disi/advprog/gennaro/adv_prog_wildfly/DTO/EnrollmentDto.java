@@ -1,8 +1,6 @@
 package it.unitn.disi.advprog.gennaro.adv_prog_wildfly.DTO;
 
 import it.unitn.disi.advprog.gennaro.adv_prog_wildfly.entities.Enrollment;
-import it.unitn.disi.advprog.gennaro.adv_prog_wildfly.entities.EnrollmentId;
-import it.unitn.disi.advprog.gennaro.adv_prog_wildfly.entities.Student;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -11,19 +9,19 @@ import java.util.Objects;
  * DTO for {@link Enrollment}
  */
 public class EnrollmentDto implements Serializable {
-    private final EnrollmentId id;
+    private final EnrollmentIdDto id;
     private final CourseDto course;
-    private final Student stMatriculation;
+    private final StudentDto stMatriculation;
     private final Integer grade;
 
-    public EnrollmentDto(EnrollmentId id, CourseDto course, Student stMatriculation, Integer grade) {
+    public EnrollmentDto(EnrollmentIdDto id, CourseDto course, StudentDto stMatriculation, Integer grade) {
         this.id = id;
         this.course = course;
         this.stMatriculation = stMatriculation;
         this.grade = grade;
     }
 
-    public EnrollmentId getId() {
+    public EnrollmentIdDto getId() {
         return id;
     }
 
@@ -31,7 +29,7 @@ public class EnrollmentDto implements Serializable {
         return course;
     }
 
-    public Student getStMatriculation() {
+    public StudentDto getStMatriculation() {
         return stMatriculation;
     }
 
