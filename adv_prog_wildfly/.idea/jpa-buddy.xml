@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="JpaBuddyIdeaProjectConfig">
+    <option name="defaultUnitInitialized" value="true" />
+    <option name="renamerInitialized" value="true" />
+    <option name="reverseEngineeringLastDbConnectionId" value="e773120a-4dda-4dfb-9cf1-18e2a5a396bb" />
+    <option name="reLastEntityCreationPackage" value="src/main/java/it/unitn/disi/advprog/gennaro/adv_prog_wildfly/entities" />
+  </component>
+</project>
