@@ -1,6 +1,5 @@
 package it.unitn.disi.advprog.gennaro.adv_prog_wildfly.managers;
 
-
 import it.unitn.disi.advprog.gennaro.adv_prog_wildfly.DTO.EnrollmentDto;
 import it.unitn.disi.advprog.gennaro.adv_prog_wildfly.DTO.StudentDto;
 import it.unitn.disi.advprog.gennaro.adv_prog_wildfly.DTOAssembler.DTOAssembler;
@@ -39,15 +38,15 @@ public class StudentManagerBean implements StudentManagerFacade {
     public List<EnrollmentDto> getStudentCourses(int matriculation) {
         logger.info("Retrieving student [ " + matriculation + " ] enrollments");
         Student student = this.studentBean.getStudentByMatriculation(matriculation);
-        if(student == null){
+        if (student == null) {
             return null;
         }
         List<Enrollment> enrollmentList = this.enrollmentBean.getEnrollmentByStudent(student);
-        if(enrollmentList == null || enrollmentList.isEmpty()){
+        if (enrollmentList == null || enrollmentList.isEmpty()) {
             return null;
         }
         List<EnrollmentDto> enrollmentDTOList = (List<EnrollmentDto>) new LinkedList();
-        for (Enrollment e:
+        for (Enrollment e :
                 enrollmentList) {
             enrollmentDTOList.add(DTOAssembler.getEnrollmentDTO(e));
         }
