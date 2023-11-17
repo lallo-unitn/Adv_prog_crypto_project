@@ -1,4 +1,4 @@
-<%@ page import="it.unitn.disi.advprog.gennaro.adv_prog_wildfly.DTO.TeacherDto" %>
+<%@ page import="it.unitn.disi.advprog.gennaro.adv_prog_wildfly.DTO.DTO" %>
 <%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>

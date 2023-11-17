@@ -1,4 +1,4 @@
-package it.unitn.disi.advprog.gennaro.adv_prog_tomcat.DTO;
+package it.unitn.disi.advprog.gennaro.adv_prog_wildfly.DTO;
 
 import java.io.Serializable;
 import java.util.Objects;
