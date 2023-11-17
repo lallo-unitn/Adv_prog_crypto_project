@@ -15,7 +15,7 @@ public class DTOAssembler {
         );
     }
 
-    private static Set<EnrollmentDto> getEnrollmentDTO(Set<Enrollment> enrollmentSet) {
+    private static Set<EnrollmentDto> getEnrollmentsDTO(Set<Enrollment> enrollmentSet) {
         Set<EnrollmentDto> enrollmentDtos = new java.util.HashSet<>(Set.of());
         for (Enrollment enrollment : enrollmentSet) {
             enrollmentDtos.add(DTOAssembler.getEnrollmentDTO(enrollment));
@@ -28,23 +28,33 @@ public class DTOAssembler {
                 student.getId(),
                 student.getName(),
                 student.getSurname(),
-                DTOAssembler.getEnrollmentDTO(student.getEnrollments())
+                DTOAssembler.getEnrollmentsDTO(student.getEnrollments())
         );
     }
 
     public static TeacherDto getTeacherDTO(Teacher teacher) {
         return new TeacherDto(
                 teacher.getId(),
-                DTOAssembler.getCourseDTO(teacher.getTaughtCourse())
+                DTOAssembler.getCourseDTO(teacher.getTaughtCourse()),
+                teacher.getName(),
+                teacher.getSurname()
         );
+    }
+
+    private static Set<TeacherDto> getTeachersDTO(Set<Teacher> teacherSet) {
+        Set<TeacherDto> teacherDtos = new java.util.HashSet<>(Set.of());
+        for (Teacher teacher : teacherSet) {
+            teacherDtos.add(DTOAssembler.getTeacherDTO(teacher));
+        }
+        return teacherDtos;
     }
 
     public static CourseDto getCourseDTO(Course course) {
         return new CourseDto(
                 course.getId(),
                 course.getName(),
-                course.getEnrollments(),
-                course.getTeachers()
+                DTOAssembler.getEnrollmentsDTO(course.getEnrollments()),
+                DTOAssembler.getTeachersDTO(course.getTeachers())
         );
     }
 

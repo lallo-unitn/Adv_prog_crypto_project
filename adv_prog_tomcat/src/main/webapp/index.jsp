@@ -2,11 +2,26 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>JSP - Hello World</title>
+    <title>Index</title>
 </head>
 <body>
-<h1><%= "Hello World!" %></h1>
-<br/>
-<a href="hello-servlet">Hello Servlet</a>
+<h2>Student Page</h2>
+<form action="${pageContext.request.contextPath}/StudentServlet" method="GET">
+    <input type="number"
+           required="required"
+           name="matriculation">
+    <input type="submit" value="Submit">
+</form>
+<%= request.getAttribute("messageStudent")%>
+<br>
+<hr>
+<h2>Advisor Choice Page</h2>
+<form action="${pageContext.request.contextPath}/AdvisorChoiceServlet" method="GET">
+    <input type="number"
+           required="required"
+           name="matriculation">
+    <input type="submit" value="Submit">
+</form>
+<%= request.getAttribute("messageAdvisor")%>
 </body>
 </html>

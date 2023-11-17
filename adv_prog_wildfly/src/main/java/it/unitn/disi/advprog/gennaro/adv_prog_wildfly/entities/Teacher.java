@@ -14,6 +14,28 @@ public class Teacher {
     @JoinColumn(name = "taught_course_id")
     private Course taughtCourse;
 
+    @Column(name = "name", length = 30)
+    private String name;
+
+    @Column(name = "surname", length = 30)
+    private String surname;
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public Integer getId() {
         return id;
     }
@@ -29,6 +51,4 @@ public class Teacher {
     public void setTaughtCourse(Course taughtCourse) {
         this.taughtCourse = taughtCourse;
     }
-
-    //TODO [JPA Buddy] generate columns from DB
 }

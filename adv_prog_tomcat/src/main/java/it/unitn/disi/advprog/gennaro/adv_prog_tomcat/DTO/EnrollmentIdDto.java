@@ -1,14 +1,8 @@
-package it.unitn.disi.advprog.gennaro.adv_prog_wildfly.DTO;
-
-import it.unitn.disi.advprog.gennaro.adv_prog_wildfly.entities.Enrollment;
-import it.unitn.disi.advprog.gennaro.adv_prog_wildfly.entities.EnrollmentId;
+package it.unitn.disi.advprog.gennaro.adv_prog_tomcat.DTO;
 
 import java.io.Serializable;
 import java.util.Objects;
 
-/**
- * DTO for {@link EnrollmentId}
- */
 public class EnrollmentIdDto implements Serializable {
     private final Integer courseId;
     private final Integer stMatriculation;

@@ -1,14 +1,10 @@
-package it.unitn.disi.advprog.gennaro.adv_prog_wildfly.DTO;
-
-import it.unitn.disi.advprog.gennaro.adv_prog_wildfly.entities.Course;
+package it.unitn.disi.advprog.gennaro.adv_prog_tomcat.DTO;
 
 import java.io.Serializable;
 import java.util.Objects;
 import java.util.Set;
 
-/**
- * DTO for {@link Course}
- */
+
 public class CourseDto implements Serializable {
     private final Integer id;
     private final String name;
