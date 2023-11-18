@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="https://jakarta.ee/xml/ns/jakartaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_5_0.xsd"
+         version="5.0">
+
+    <welcome-file-list>
+        <welcome-file>HomeServlet</welcome-file>
+    </welcome-file-list>
+    <servlet>
+        <servlet-name>StudentServlet</servlet-name>
+        <servlet-class>it.unitn.disi.advprog.gennaro.adv_prog_project.servlet.StudentServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AdvisorChoiceServlet</servlet-name>
+        <servlet-class>it.unitn.disi.advprog.gennaro.adv_prog_project.servlet.AdvisorChoiceServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>HomeServlet</servlet-name>
+        <servlet-class>it.unitn.disi.advprog.gennaro.adv_prog_project.servlet.HomeServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>StudentServlet</servlet-name>
+        <url-pattern>/StudentServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdvisorChoiceServlet</servlet-name>
+        <url-pattern>/AdvisorChoiceServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>HomeServlet</servlet-name>
+        <url-pattern>/HomeServlet</url-pattern>
+    </servlet-mapping>
+
+</web-app>
