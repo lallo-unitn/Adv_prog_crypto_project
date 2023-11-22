@@ -5,35 +5,22 @@ import jakarta.persistence.*;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-/**
- * Entity class representing a Course in the system.
- * It is mapped to the "course" table in the database.
- */
 @Entity
 @Table(name = "course")
 public class Course {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Integer id;
 
-    @Column(name = "name", nullable = false, length = 30)
+    @Column(name = "name", nullable = false)
     private String name;
 
-    @OneToMany(mappedBy = "course")
+    @Column(name = "cfu", nullable = false)
+    private Integer cfu;
+
+    @OneToMany(mappedBy = "course", fetch = FetchType.EAGER)
     private Set<Enrollment> enrollments = new LinkedHashSet<>();
-
-    @OneToMany(mappedBy = "taughtCourse")
-    private Set<Teacher> teachers = new LinkedHashSet<>();
-
-    public Set<Teacher> getTeachers() {
-        return teachers;
-    }
-
-    public void setTeachers(Set<Teacher> teachers) {
-        this.teachers = teachers;
-    }
 
     public Set<Enrollment> getEnrollments() {
         return enrollments;
@@ -41,6 +28,14 @@ public class Course {
 
     public void setEnrollments(Set<Enrollment> enrollments) {
         this.enrollments = enrollments;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -51,11 +46,12 @@ public class Course {
         this.name = name;
     }
 
-    public Integer getId() {
-        return id;
+    public Integer getCfu() {
+        return cfu;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setCfu(Integer cfu) {
+        this.cfu = cfu;
     }
+
 }

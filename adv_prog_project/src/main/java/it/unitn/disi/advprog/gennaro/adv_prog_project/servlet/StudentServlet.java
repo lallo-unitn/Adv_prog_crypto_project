@@ -1,8 +1,8 @@
 package it.unitn.disi.advprog.gennaro.adv_prog_project.servlet;
 
 
-import it.unitn.disi.advprog.gennaro.adv_prog_project.DTO.EnrollmentDto;
-import it.unitn.disi.advprog.gennaro.adv_prog_project.DTO.StudentDto;
+import it.unitn.disi.advprog.gennaro.adv_prog_project.dto.EnrollmentDto;
+import it.unitn.disi.advprog.gennaro.adv_prog_project.dto.StudentDto;
 import it.unitn.disi.advprog.gennaro.adv_prog_project.managers.StudentManagerBean;
 import jakarta.ejb.EJB;
 import jakarta.servlet.ServletException;
@@ -46,20 +46,24 @@ public class StudentServlet extends HttpServlet {
         if (studentDto == null) {
             // Set an error message and forward to index.jsp
             request.setAttribute("messageStudent", "Matriculation is not registered");
-            request.getRequestDispatcher("index.jsp").forward(request, response);
+            request.getRequestDispatcher("private/index.jsp").forward(request, response);
             return;
         }
 
         // Set the studentDto attribute for the JSP page
-        request.setAttribute("studentDTO", studentDto);
+        request.setAttribute("studentDto", studentDto);
 
         // Get a list of enrollments for the student
         List<EnrollmentDto> enrollmentDtoList = studentManagerBean.getStudentCourses(matriculation);
+
+        for(EnrollmentDto e : enrollmentDtoList) {
+            System.out.println(e.toString());
+        }
 
         // Set the enrollmentDtoList attribute for the JSP page
         request.setAttribute("enrollmentDtoList", enrollmentDtoList);
 
         // Forward the request to studentPage.jsp
-        request.getRequestDispatcher("studentPage.jsp").forward(request, response);
+        request.getRequestDispatcher("private/studentPage.jsp").forward(request, response);
     }
 }

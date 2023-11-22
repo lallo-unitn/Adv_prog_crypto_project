@@ -33,7 +33,7 @@ public class EnrollmentBean {
     public List<Enrollment> getEnrollmentByStudent(Student student) {
         // Constructing a JPQL query to select enrollments based on the student
         TypedQuery<Enrollment> query = entityManager.createQuery(
-                "SELECT e FROM Enrollment e WHERE e.stMatriculation = :student", Enrollment.class
+                "SELECT e FROM Enrollment e WHERE e.student = :student", Enrollment.class
         );
 
         // Setting the parameter for the student

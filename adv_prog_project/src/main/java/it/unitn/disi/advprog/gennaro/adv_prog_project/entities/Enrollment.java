@@ -1,26 +1,26 @@
 package it.unitn.disi.advprog.gennaro.adv_prog_project.entities;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
-/**
- * Entity class representing an enrollment in the system.
- * This class is mapped to the "enrollment" table in the database.
- */
 @Entity
 @Table(name = "enrollment")
 public class Enrollment {
     @EmbeddedId
     private EnrollmentId id;
 
+    @MapsId("studentId")
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JoinColumn(name = "student_id", nullable = false)
+    private Student student;
+
     @MapsId("courseId")
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "course_id", nullable = false)
     private Course course;
-
-    @MapsId("stMatriculation")
-    @ManyToOne(fetch = FetchType.EAGER, optional = false)
-    @JoinColumn(name = "st_matriculation", nullable = false)
-    private Student stMatriculation;
 
     @Column(name = "grade")
     private Integer grade;
@@ -33,20 +33,20 @@ public class Enrollment {
         this.id = id;
     }
 
+    public Student getStudent() {
+        return student;
+    }
+
+    public void setStudent(Student student) {
+        this.student = student;
+    }
+
     public Course getCourse() {
         return course;
     }
 
     public void setCourse(Course course) {
         this.course = course;
-    }
-
-    public Student getStMatriculation() {
-        return stMatriculation;
-    }
-
-    public void setStMatriculation(Student stMatriculation) {
-        this.stMatriculation = stMatriculation;
     }
 
     public Integer getGrade() {

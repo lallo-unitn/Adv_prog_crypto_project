@@ -25,20 +25,20 @@ public class StudentBean {
     /**
      * Retrieves a student entity based on the provided matriculation number.
      *
-     * @param matriculation The matriculation number of the student to retrieve.
+     * @param id The matriculation number of the student to retrieve.
      * @return The student entity associated with the provided matriculation number.
      */
-    public Student getStudentByMatriculation(int matriculation) {
+    public Student getStudentByMatriculation(int id) {
         // Logging an informational message
-        logger.info("Retrieving student [ " + matriculation + " ] info");
+        logger.info("Retrieving student [ " + id + " ] info");
 
         // Constructing a JPQL query to select a student based on the matriculation number
         TypedQuery<Student> query = this.entityManager.createQuery(
-                "SELECT s FROM Student s WHERE s.id = :matriculation", Student.class
+                "SELECT s FROM Student s WHERE s.id = :id", Student.class
         );
 
         // Setting the parameter for the matriculation number
-        query.setParameter("matriculation", matriculation);
+        query.setParameter("id", id);
 
         Student student = null;
         try {
@@ -46,7 +46,7 @@ public class StudentBean {
             student = query.getSingleResult();
         } catch (NoResultException e) {
             // Log a message if the student is not found
-            logger.info("Student [ " + matriculation + " ] is not registered");
+            logger.info("Student [ " + id + " ] is not registered");
             return null;
         }
         return student;

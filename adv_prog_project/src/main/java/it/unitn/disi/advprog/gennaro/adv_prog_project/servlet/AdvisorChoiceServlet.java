@@ -1,7 +1,7 @@
 package it.unitn.disi.advprog.gennaro.adv_prog_project.servlet;
 
-import it.unitn.disi.advprog.gennaro.adv_prog_project.DTO.StudentDto;
-import it.unitn.disi.advprog.gennaro.adv_prog_project.DTO.TeacherDto;
+import it.unitn.disi.advprog.gennaro.adv_prog_project.dto.StudentDto;
+import it.unitn.disi.advprog.gennaro.adv_prog_project.dto.TeacherDto;
 import it.unitn.disi.advprog.gennaro.adv_prog_project.managers.AdvisorChoiceManagerBean;
 import jakarta.ejb.EJB;
 import jakarta.servlet.ServletException;
@@ -46,7 +46,7 @@ public class AdvisorChoiceServlet extends HttpServlet {
         if (studentDto == null) {
             // Set an error message and forward to index.jsp
             request.setAttribute("messageAdvisor", "Matriculation is not registered");
-            request.getRequestDispatcher("index.jsp").forward(request, response);
+            request.getRequestDispatcher("private/index.jsp").forward(request, response);
             return;
         }
 
@@ -60,6 +60,6 @@ public class AdvisorChoiceServlet extends HttpServlet {
         request.setAttribute("teacherDtoList", teacherDtoList);
 
         // Forward the request to advisorChoice.jsp
-        request.getRequestDispatcher("advisorChoice.jsp").forward(request, response);
+        request.getRequestDispatcher("private/advisorChoice.jsp").forward(request, response);
     }
 }

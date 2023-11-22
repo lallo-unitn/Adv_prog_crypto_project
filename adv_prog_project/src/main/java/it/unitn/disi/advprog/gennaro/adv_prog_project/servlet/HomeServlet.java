@@ -26,6 +26,6 @@ public class HomeServlet extends HttpServlet {
     protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setAttribute("messageStudent", "");
         request.setAttribute("messageAdvisor", "");
-        request.getRequestDispatcher("index.jsp").forward(request, response);
+        request.getRequestDispatcher("private/index.jsp").forward(request, response);
     }
 }

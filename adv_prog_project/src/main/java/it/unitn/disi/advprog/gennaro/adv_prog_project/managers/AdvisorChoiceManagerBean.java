@@ -1,9 +1,9 @@
 package it.unitn.disi.advprog.gennaro.adv_prog_project.managers;
 
 
-import it.unitn.disi.advprog.gennaro.adv_prog_project.DTO.StudentDto;
-import it.unitn.disi.advprog.gennaro.adv_prog_project.DTO.TeacherDto;
-import it.unitn.disi.advprog.gennaro.adv_prog_project.DTOAssembler.DTOAssembler;
+import it.unitn.disi.advprog.gennaro.adv_prog_project.dto.StudentDto;
+import it.unitn.disi.advprog.gennaro.adv_prog_project.dto.TeacherDto;
+import it.unitn.disi.advprog.gennaro.adv_prog_project.dtoAssembler.DtoAssembler;
 import it.unitn.disi.advprog.gennaro.adv_prog_project.beans.StudentBean;
 import it.unitn.disi.advprog.gennaro.adv_prog_project.beans.TeacherBean;
 import it.unitn.disi.advprog.gennaro.adv_prog_project.entities.Student;
@@ -31,7 +31,11 @@ public class AdvisorChoiceManagerBean {
     public StudentDto getStudent(int matriculation) {
         logger.info("Retrieving student [ " + matriculation + " ] info");
         Student student = this.studentBean.getStudentByMatriculation(matriculation);
-        return DTOAssembler.getStudentDTO(student);
+        if (student == null) {
+            return null;
+        }else{
+            return DtoAssembler.getStudentDto(student);
+        }
     }
 
     public List<TeacherDto> getTeacherByStudent(int matriculation) {
@@ -47,7 +51,7 @@ public class AdvisorChoiceManagerBean {
         List<TeacherDto> teacherDTOList = (List<TeacherDto>) new LinkedList();
         for (Teacher t :
                 teacherList) {
-            teacherDTOList.add(DTOAssembler.getTeacherDTO(t));
+            teacherDTOList.add(DtoAssembler.getTeacherDto(t));
         }
         return teacherDTOList;
     }

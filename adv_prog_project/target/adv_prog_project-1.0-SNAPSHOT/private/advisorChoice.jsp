@@ -1,4 +1,4 @@
-<%@ page import="it.unitn.disi.advprog.gennaro.adv_prog_project.DTO.TeacherDto" %>
+<%@ page import="it.unitn.disi.advprog.gennaro.adv_prog_project.dto.TeacherDto" %>
 <%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
@@ -9,18 +9,15 @@
 <h2>Advisory Choice</h2>
 <jsp:useBean id="studentDto"
              scope="request"
-             class="it.unitn.disi.advprog.gennaro.adv_prog_project.DTO.StudentDto"/>
+             class="it.unitn.disi.advprog.gennaro.adv_prog_project.dto.StudentDto"/>
 <ul>
-    <li>Name: ${studentDto.name}</li>
-    <li>Surname: ${studentDto.surname}</li>
+    <li>Name: ${studentDto.userAccount.name}</li>
+    <li>Surname: ${studentDto.userAccount.surname}</li>
     <li>Matriculation: ${studentDto.id}</li>
 </ul>
 <hr>
 <h3>Teachers</h3>
 <ul>
-    <jsp:useBean id="teacherDto"
-                 scope="request"
-                 class="it.unitn.disi.advprog.gennaro.adv_prog_project.DTO.TeacherDto"/>
 
     <jsp:useBean id="teacherDtoList"
                  type="java.util.List"
@@ -29,7 +26,7 @@
     <% for (TeacherDto t :
             (List<TeacherDto>) teacherDtoList) {%>
     <li>
-        <%=t.getName() + " "%>  <%=t.getSurname()%>
+        <%=t.getUserAccount().getName() + " "%>  <%=t.getUserAccount().getSurname()%>
     </li>
     <%}%>
 </ul>

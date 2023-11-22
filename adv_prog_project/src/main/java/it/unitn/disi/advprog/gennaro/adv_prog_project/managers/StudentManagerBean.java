@@ -1,8 +1,8 @@
 package it.unitn.disi.advprog.gennaro.adv_prog_project.managers;
 
-import it.unitn.disi.advprog.gennaro.adv_prog_project.DTO.EnrollmentDto;
-import it.unitn.disi.advprog.gennaro.adv_prog_project.DTO.StudentDto;
-import it.unitn.disi.advprog.gennaro.adv_prog_project.DTOAssembler.DTOAssembler;
+import it.unitn.disi.advprog.gennaro.adv_prog_project.dto.EnrollmentDto;
+import it.unitn.disi.advprog.gennaro.adv_prog_project.dto.StudentDto;
+import it.unitn.disi.advprog.gennaro.adv_prog_project.dtoAssembler.DtoAssembler;
 import it.unitn.disi.advprog.gennaro.adv_prog_project.beans.EnrollmentBean;
 import it.unitn.disi.advprog.gennaro.adv_prog_project.beans.StudentBean;
 import it.unitn.disi.advprog.gennaro.adv_prog_project.entities.Enrollment;
@@ -31,7 +31,11 @@ public class StudentManagerBean {
     public StudentDto getStudent(int matriculation) {
         logger.info("Retrieving student [ " + matriculation + " ] info");
         Student student = this.studentBean.getStudentByMatriculation(matriculation);
-        return DTOAssembler.getStudentDTO(student);
+        if(student == null){
+            return null;
+        }else{
+            return DtoAssembler.getStudentDto(student);
+        }
     }
 
 
@@ -50,7 +54,7 @@ public class StudentManagerBean {
         List<EnrollmentDto> enrollmentDTOList = (List<EnrollmentDto>) new LinkedList();
         for (Enrollment e :
                 enrollmentList) {
-            enrollmentDTOList.add(DTOAssembler.getEnrollmentDTO(e));
+            enrollmentDTOList.add(DtoAssembler.getEnrollmentDto(e));
         }
         return enrollmentDTOList;
     }

@@ -36,12 +36,12 @@ public class TeacherBean {
         // Constructing a JPQL query to select teachers based on the courses the student is enrolled in
         TypedQuery<Teacher> query = this.entityManager.createQuery(
                 "SELECT t FROM Teacher t WHERE t.taughtCourse IN" +
-                        "(SELECT e.course FROM Enrollment e WHERE e.stMatriculation = :stMatriculation)",
+                        "(SELECT e.course.name FROM Enrollment e WHERE e.student = :student)",
                 Teacher.class
         );
 
         // Setting the parameter for the student's matriculation number
-        query.setParameter("stMatriculation", student);
+        query.setParameter("student", student);
 
         List<Teacher> teacherList = null;
         try {

@@ -1,44 +1,23 @@
 package it.unitn.disi.advprog.gennaro.adv_prog_project.entities;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
-/**
- * Entity class representing a teacher in the system.
- * This class is mapped to the "teacher" table in the "public" schema of the database.
- */
 @Entity
-@Table(name = "teacher", schema = "public")
+@Table(name = "teacher")
 public class Teacher {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Integer id;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "taught_course_id")
-    private Course taughtCourse;
+    @Column(name = "taught_course", nullable = false)
+    private String taughtCourse;
 
-    @Column(name = "name", length = 30)
-    private String name;
-
-    @Column(name = "surname", length = 30)
-    private String surname;
-
-    public String getSurname() {
-        return surname;
-    }
-
-    public void setSurname(String surname) {
-        this.surname = surname;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
+    @OneToOne(fetch = FetchType.EAGER)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JoinColumn(name = "user_account_id")
+    private UserAccount userAccount;
 
     public Integer getId() {
         return id;
@@ -48,11 +27,20 @@ public class Teacher {
         this.id = id;
     }
 
-    public Course getTaughtCourse() {
+    public String getTaughtCourse() {
         return taughtCourse;
     }
 
-    public void setTaughtCourse(Course taughtCourse) {
+    public void setTaughtCourse(String taughtCourse) {
         this.taughtCourse = taughtCourse;
     }
+
+    public UserAccount getUserAccount() {
+        return userAccount;
+    }
+
+    public void setUserAccount(UserAccount userAccount) {
+        this.userAccount = userAccount;
+    }
+
 }

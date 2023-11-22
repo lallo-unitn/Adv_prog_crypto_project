@@ -1,32 +1,28 @@
 package it.unitn.disi.advprog.gennaro.adv_prog_project.entities;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Size;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-/**
- * Entity class representing a student in the system.
- * This class is mapped to the "student" table in the database.
- */
 @Entity
 @Table(name = "student")
 public class Student {
-
     @Id
-    @Column(name = "matriculation", nullable = false)
+    @Column(name = "id", nullable = false)
     private Integer id;
 
-    @Size(max = 30)
-    @Column(name = "name", length = 30)
-    private String name;
+    @Column(name = "gpa")
+    private Float gpa;
 
-    @Size(max = 30)
-    @Column(name = "surname", length = 30)
-    private String surname;
+    @OneToOne(fetch = FetchType.EAGER)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JoinColumn(name = "user_account_id")
+    private UserAccount userAccount;
 
-    @OneToMany(mappedBy = "stMatriculation")
+    @OneToMany(mappedBy = "student", fetch = FetchType.EAGER)
     private Set<Enrollment> enrollments = new LinkedHashSet<>();
 
     public Set<Enrollment> getEnrollments() {
@@ -37,22 +33,6 @@ public class Student {
         this.enrollments = enrollments;
     }
 
-    public String getSurname() {
-        return surname;
-    }
-
-    public void setSurname(String surname) {
-        this.surname = surname;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public Integer getId() {
         return id;
     }
@@ -60,4 +40,21 @@ public class Student {
     public void setId(Integer id) {
         this.id = id;
     }
+
+    public Float getGpa() {
+        return gpa;
+    }
+
+    public void setGpa(Float gpa) {
+        this.gpa = gpa;
+    }
+
+    public UserAccount getUserAccount() {
+        return userAccount;
+    }
+
+    public void setUserAccount(UserAccount userAccount) {
+        this.userAccount = userAccount;
+    }
+
 }
