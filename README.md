@@ -90,7 +90,3 @@ The tech stack for this project is composed of the following components:
 ## License
 
 This project is licensed under the [GNU General Public License v3.0 (GPL-3.0)](https://opensource.org/licenses/GPL-3.0). See the [LICENSE](link-to-license-file) file for details.
-
-## License
-
-This project is licensed under the [GNU General Public License v3.0 (GPL-3.0)](https://opensource.org/licenses/GPL-3.0). See the [LICENSE](link-to-license-file) file for details.
