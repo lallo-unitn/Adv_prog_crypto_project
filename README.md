@@ -46,8 +46,8 @@ Since the infrastructure is dockerized, deploying the application is straightfor
 
 1. **Clone the Repository:**
    ```bash
-   git clone git@github.com:lallo-unitn/Adv_prog_crypto_project.git
-   cd Adv_prog_crypto_project
+   git clone git@github.com:lallo-unitn/Esse3-Bootleg-APFCM.git
+   cd Esse3-Bootleg-APFCM
 2. **Up the docker infrastructure:**
    ```bash
    docker-compose up
@@ -86,6 +86,10 @@ The tech stack for this project is composed of the following components:
 ## 10. License
 
 ### License Information
+
+## License
+
+This project is licensed under the [GNU General Public License v3.0 (GPL-3.0)](https://opensource.org/licenses/GPL-3.0). See the [LICENSE](link-to-license-file) file for details.
 
 ## License
 
