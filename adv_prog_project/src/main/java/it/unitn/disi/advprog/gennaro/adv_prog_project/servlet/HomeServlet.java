@@ -1,6 +1,7 @@
 package it.unitn.disi.advprog.gennaro.adv_prog_project.servlet;
 
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -12,6 +13,7 @@ import java.io.IOException;
  * This servlet sets attributes for messages related to students and advisors
  * and forwards the request to the index.jsp page.
  */
+
 public class HomeServlet extends HttpServlet {
 
     /**
@@ -26,6 +28,6 @@ public class HomeServlet extends HttpServlet {
     protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setAttribute("messageStudent", "");
         request.setAttribute("messageAdvisor", "");
-        request.getRequestDispatcher("private/index.jsp").forward(request, response);
+        request.getRequestDispatcher("restricted/index.jsp").forward(request, response);
     }
 }

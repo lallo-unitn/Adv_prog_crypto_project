@@ -2,6 +2,7 @@ package it.unitn.disi.advprog.gennaro.adv_prog_project.managers;
 
 import it.unitn.disi.advprog.gennaro.adv_prog_project.dto.EnrollmentDto;
 import it.unitn.disi.advprog.gennaro.adv_prog_project.dto.StudentDto;
+import it.unitn.disi.advprog.gennaro.adv_prog_project.dto.UserAccountDto;
 import it.unitn.disi.advprog.gennaro.adv_prog_project.dtoAssembler.DtoAssembler;
 import it.unitn.disi.advprog.gennaro.adv_prog_project.beans.EnrollmentBean;
 import it.unitn.disi.advprog.gennaro.adv_prog_project.beans.StudentBean;
@@ -31,6 +32,16 @@ public class StudentManagerBean {
     public StudentDto getStudent(int matriculation) {
         logger.info("Retrieving student [ " + matriculation + " ] info");
         Student student = this.studentBean.getStudentByMatriculation(matriculation);
+        if(student == null){
+            return null;
+        }else{
+            return DtoAssembler.getStudentDto(student);
+        }
+    }
+
+    public StudentDto getStudent(UserAccountDto userAccountDto) {
+        logger.info("Retrieving [ " + userAccountDto.toString() + " ]");
+        Student student = this.studentBean.getStudentByUserAccount(userAccountDto);
         if(student == null){
             return null;
         }else{

@@ -1,5 +1,6 @@
 package it.unitn.disi.advprog.gennaro.adv_prog_project.beans;
 
+import it.unitn.disi.advprog.gennaro.adv_prog_project.dto.UserAccountDto;
 import it.unitn.disi.advprog.gennaro.adv_prog_project.entities.Student;
 import jakarta.ejb.Local;
 import jakarta.ejb.Stateless;
@@ -47,6 +48,30 @@ public class StudentBean {
         } catch (NoResultException e) {
             // Log a message if the student is not found
             logger.info("Student [ " + id + " ] is not registered");
+            return null;
+        }
+        return student;
+    }
+
+    public Student getStudentByUserAccount(UserAccountDto userAccountDto) {
+        // Logging an informational message
+        logger.info("Retrieving student [ " + userAccountDto.toString() + " ]");
+
+        // Constructing a JPQL query to select a student based on the matriculation number
+        TypedQuery<Student> query = this.entityManager.createQuery(
+                "SELECT s FROM Student s WHERE s.userAccount.username = :username", Student.class
+        );
+
+        // Setting the parameter for the matriculation number
+        query.setParameter("username", userAccountDto.getUsername());
+
+        Student student = null;
+        try {
+            // Execute the query and retrieve the single student entity
+            student = query.getSingleResult();
+        } catch (NoResultException e) {
+            // Log a message if the student is not found
+            logger.info("Student [ " + userAccountDto.toString() + " ] is not registered");
             return null;
         }
         return student;

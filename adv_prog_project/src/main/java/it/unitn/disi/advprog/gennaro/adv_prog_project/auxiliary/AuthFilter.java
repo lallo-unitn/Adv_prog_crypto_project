@@ -2,9 +2,11 @@ package it.unitn.disi.advprog.gennaro.adv_prog_project.auxiliary;
 
 import it.unitn.disi.advprog.gennaro.adv_prog_project.dto.UserAccountDto;
 import jakarta.servlet.*;
+import jakarta.servlet.annotation.WebFilter;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
+
 
 public class AuthFilter implements Filter {
     public void init(FilterConfig config) throws ServletException {
@@ -29,7 +31,6 @@ public class AuthFilter implements Filter {
         if (userAccountDto != null && userAccountDto.getUsername() != null && !userAccountDto.getUsername().equals("null")) {
             System.out.println("AUTHFILTER: " + userAccountDto.getUsername());
             System.out.println("AUTHFILTER: " + destination);
-            // ACCESSO RBAC
             rd = httpRequest.getRequestDispatcher(destination);
         } else {
             System.out.println("AUTHFILTER: " + "not auth");

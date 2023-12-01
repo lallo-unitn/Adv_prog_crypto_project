@@ -1,5 +1,6 @@
 package it.unitn.disi.advprog.gennaro.adv_prog_project.servlet;
 
+import it.unitn.disi.advprog.gennaro.adv_prog_project.dto.UserAccountDto;
 import it.unitn.disi.advprog.gennaro.adv_prog_project.dtoAssembler.DtoAssembler;
 import it.unitn.disi.advprog.gennaro.adv_prog_project.entities.UserAccount;
 import it.unitn.disi.advprog.gennaro.adv_prog_project.managers.UserAccountManager;
@@ -14,6 +15,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 
+
 public class AuthServlet extends HttpServlet {
 
     @EJB
@@ -21,32 +23,35 @@ public class AuthServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        RequestDispatcher rd = request.getRequestDispatcher("LoginServlet");
+        RequestDispatcher rd = request.getRequestDispatcher("/LoginServlet");
         rd.forward(request, response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
-        ServletContext ctx = request.getServletContext();
         String username = request.getParameter("username");
         String password = request.getParameter("password");
-        String destination = (String) request.getAttribute("destination");
-        if (destination == null) {
-            destination = "HomeServlet";
-        }
-        RequestDispatcher rd = request.getRequestDispatcher("LoginServlet");
-        //UserBean ub = new UserBean(username, password);
-        UserAccount userAccount = null;
+        RequestDispatcher rd = request.getRequestDispatcher("/LoginServlet");
+        UserAccount userAccount;
         try{
             userAccount = userAccountManager.getUserAccountByCredentials(username, password);
         } catch (NoResultException e) {
             rd.forward(request, response);
             return;
         }
-        rd = request.getRequestDispatcher(destination);
-        session.setAttribute("userAccountDto", DtoAssembler.getUserAccountDto(userAccount));
-        // decide here rbac
+        UserAccountDto userAccountDto = DtoAssembler.getUserAccountDto(userAccount);
+        session.setAttribute("userAccountDto", userAccountDto);
+        session.setAttribute("role", userAccountDto.getRole());
+        if(userAccountDto.getRole().equals("teacher")) {
+            rd = request.getRequestDispatcher("/TeacherServlet");
+        }
+        else if(userAccountDto.getRole().equals("student")) {
+            rd = request.getRequestDispatcher("/StudentServlet");
+        }
+        else {
+            rd = request.getRequestDispatcher("/LoginServlet");
+        }
         rd.forward(request, response);
     }
 

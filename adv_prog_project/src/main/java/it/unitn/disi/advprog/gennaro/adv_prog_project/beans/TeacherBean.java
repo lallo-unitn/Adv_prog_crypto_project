@@ -1,5 +1,6 @@
 package it.unitn.disi.advprog.gennaro.adv_prog_project.beans;
 
+import it.unitn.disi.advprog.gennaro.adv_prog_project.dto.UserAccountDto;
 import it.unitn.disi.advprog.gennaro.adv_prog_project.entities.Student;
 import it.unitn.disi.advprog.gennaro.adv_prog_project.entities.Teacher;
 import jakarta.ejb.Local;
@@ -53,6 +54,28 @@ public class TeacherBean {
             return null;
         }
         return teacherList;
+    }
+
+    public Teacher getTeacherByUserAccount(UserAccountDto userAccountDto) {
+        // Constructing a JPQL query to select a teacher based on the user account
+        TypedQuery<Teacher> query = this.entityManager.createQuery(
+                "SELECT t FROM Teacher t WHERE t.userAccount.id = :userAccountId",
+                Teacher.class
+        );
+
+        // Setting the parameter for the user account
+        query.setParameter("userAccountId", userAccountDto.getId());
+
+        Teacher teacher = null;
+        try {
+            // Execute the query and retrieve the teacher
+            teacher = query.getSingleResult();
+        } catch (NoResultException e) {
+            // Log a message if the teacher is not found
+            logger.info("Teacher [ " + userAccountDto.toString() + " ] not found");
+            return null;
+        }
+        return teacher;
     }
 }
 

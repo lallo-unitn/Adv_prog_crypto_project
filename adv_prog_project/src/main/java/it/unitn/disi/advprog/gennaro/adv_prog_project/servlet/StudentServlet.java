@@ -3,9 +3,11 @@ package it.unitn.disi.advprog.gennaro.adv_prog_project.servlet;
 
 import it.unitn.disi.advprog.gennaro.adv_prog_project.dto.EnrollmentDto;
 import it.unitn.disi.advprog.gennaro.adv_prog_project.dto.StudentDto;
+import it.unitn.disi.advprog.gennaro.adv_prog_project.dto.UserAccountDto;
 import it.unitn.disi.advprog.gennaro.adv_prog_project.managers.StudentManagerBean;
 import jakarta.ejb.EJB;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -18,6 +20,7 @@ import java.util.List;
  * It retrieves information about a student and the courses in which the student is enrolled
  * and forwards the request to the studentPage.jsp page.
  */
+
 public class StudentServlet extends HttpServlet {
 
     @EJB
@@ -31,22 +34,22 @@ public class StudentServlet extends HttpServlet {
      * @throws IOException      if an input or output error is detected when the servlet handles the GET request
      * @throws ServletException if the request for the GET could not be handled
      */
-    public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+    public void service(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         // Set initial attributes for messages
         request.setAttribute("messageStudent", "");
         request.setAttribute("messageAdvisor", "");
 
-        // Retrieve matriculation parameter from the request
-        int matriculation = Integer.parseInt(request.getParameter("matriculation"));
+        // Get the userAccountDto attribute from the session
+        UserAccountDto userAccountDto = (UserAccountDto) request.getSession().getAttribute("userAccountDto");
 
         // Get student information using the StudentManagerBean
-        StudentDto studentDto = studentManagerBean.getStudent(matriculation);
+        StudentDto studentDto = studentManagerBean.getStudent(userAccountDto);
 
         // Check if the student exists
         if (studentDto == null) {
             // Set an error message and forward to index.jsp
             request.setAttribute("messageStudent", "Matriculation is not registered");
-            request.getRequestDispatcher("private/index.jsp").forward(request, response);
+            request.getRequestDispatcher("restricted/index.jsp").forward(request, response);
             return;
         }
 
@@ -54,7 +57,7 @@ public class StudentServlet extends HttpServlet {
         request.setAttribute("studentDto", studentDto);
 
         // Get a list of enrollments for the student
-        List<EnrollmentDto> enrollmentDtoList = studentManagerBean.getStudentCourses(matriculation);
+        List<EnrollmentDto> enrollmentDtoList = studentManagerBean.getStudentCourses(studentDto.getId());
 
         for(EnrollmentDto e : enrollmentDtoList) {
             System.out.println(e.toString());
@@ -64,6 +67,6 @@ public class StudentServlet extends HttpServlet {
         request.setAttribute("enrollmentDtoList", enrollmentDtoList);
 
         // Forward the request to studentPage.jsp
-        request.getRequestDispatcher("private/studentPage.jsp").forward(request, response);
+        request.getRequestDispatcher("restricted/studentPage.jsp").forward(request, response);
     }
 }

@@ -6,6 +6,7 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 
+
 public class StudentFilter implements Filter {
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
@@ -17,7 +18,6 @@ public class StudentFilter implements Filter {
             throws IOException, ServletException {
         HttpServletRequest httpRequest = (HttpServletRequest) servletRequest;
         HttpSession session = httpRequest.getSession();
-        session.getAttribute("userAccountDto");
         if(session.getAttribute("userAccountDto") == null) {
             RequestDispatcher rd = httpRequest.getRequestDispatcher("LoginServlet");
             rd.forward(servletRequest, servletResponse);

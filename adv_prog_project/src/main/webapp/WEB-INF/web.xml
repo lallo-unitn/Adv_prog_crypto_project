@@ -21,24 +21,31 @@
         <filter-name>StudentFilter</filter-name>
         <filter-class>it.unitn.disi.advprog.gennaro.adv_prog_project.auxiliary.StudentFilter</filter-class>
     </filter>
+    <filter>
+        <filter-name>TeacherFilter</filter-name>
+        <filter-class>it.unitn.disi.advprog.gennaro.adv_prog_project.auxiliary.TeacherFilter</filter-class>
+    </filter>
 
 
     <filter-mapping>
         <filter-name>JspFilter</filter-name>
         <url-pattern>/login.jsp</url-pattern>
-        <url-pattern>/private/*</url-pattern>
+        <url-pattern>/restricted/*</url-pattern>
     </filter-mapping>
     <filter-mapping>
         <filter-name>AuthFilter</filter-name>
         <url-pattern>/HomeServlet</url-pattern>
         <url-pattern>/AdvisorChoiceServlet</url-pattern>
         <url-pattern>/StudentServlet</url-pattern>
-        <url-pattern>/private/*</url-pattern>
+        <url-pattern>/HomeServlet</url-pattern>
     </filter-mapping>
     <filter-mapping>
         <filter-name>StudentFilter</filter-name>
         <url-pattern>/StudentServlet</url-pattern>
-        <url-pattern>/AdvisorChoiceServlet</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>TeacherFilter</filter-name>
+        <url-pattern>/TeacherFilter</url-pattern>
     </filter-mapping>
 
 
@@ -47,8 +54,8 @@
         <servlet-class>it.unitn.disi.advprog.gennaro.adv_prog_project.servlet.StudentServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>AdvisorChoiceServlet</servlet-name>
-        <servlet-class>it.unitn.disi.advprog.gennaro.adv_prog_project.servlet.AdvisorChoiceServlet</servlet-class>
+        <servlet-name>TeacherServlet</servlet-name>
+        <servlet-class>it.unitn.disi.advprog.gennaro.adv_prog_project.servlet.TeacherServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>HomeServlet</servlet-name>
@@ -69,8 +76,8 @@
         <url-pattern>/StudentServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>AdvisorChoiceServlet</servlet-name>
-        <url-pattern>/AdvisorChoiceServlet</url-pattern>
+        <servlet-name>TeacherServlet</servlet-name>
+        <url-pattern>/TeacherServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>HomeServlet</servlet-name>
