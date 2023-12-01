@@ -65,10 +65,10 @@ Once the containers are up and running, you can access the application by naviga
 The tech stack for this project is composed of the following components:
 
 1. **Database:**
-   - PostgreSQL v. 16.1
+   - MariaDB v. 11.3.1
 
 2. **Application Server:**
-   - WildFly 30.0.0-Final
+   - WildFly v. 30.0.0-Final
 
 3. **Java Development Kit (JDK):**
    - OpenJDK 17
@@ -89,4 +89,4 @@ The tech stack for this project is composed of the following components:
 
 ## License
 
-This project is licensed under the [GNU General Public License v3.0 (GPL-3.0)](https://opensource.org/licenses/GPL-3.0). See the [LICENSE](link-to-license-file) file for details.
+This project is licensed under the [GNU General Public License v3.0 (GPL-3.0)](https://opensource.org/licenses/GPL-3.0).
