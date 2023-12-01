@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="2c924425-0ff4-4882-8f07-232cc16ae93d" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/adv_prog_project/.idea/artifacts/adv_prog_project_war.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/adv_prog_project/.idea/artifacts/adv_prog_project_war_exploded.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/adv_prog_project/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/adv_prog_project/.idea/dataSources.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/adv_prog_project/doc/it/unitn/disi/advprog/gennaro/adv_prog_project/managers/AdvisorChoiceManagerBean.html" beforeDir="false" afterPath="$PROJECT_DIR$/adv_prog_project/doc/it/unitn/disi/advprog/gennaro/adv_prog_project/managers/AdvisorChoiceManagerBean.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/adv_prog_project/out/artifacts/adv_prog_project_war/adv_prog_project_war.war" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/adv_prog_project/out/artifacts/adv_prog_project_war_exploded/META-INF/MANIFEST.MF" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/adv_prog_project/out/artifacts/adv_prog_project_war_exploded/WEB-INF/classes/META-INF/beans.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/adv_prog_project/out/artifacts/adv_prog_project_war_exploded/WEB-INF/classes/META-INF/persistence.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/adv_prog_project/out/artifacts/adv_prog_project_war_exploded/WEB-INF/lib/antlr4-runtime-4.10.1.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/adv_prog_project/out/artifacts/adv_prog_project_war_exploded/WEB-INF/lib/byte-buddy-1.14.7.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/adv_prog_project/out/artifacts/adv_prog_project_war_exploded/WEB-INF/lib/classmate-1.5.1.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/adv_prog_project/out/artifacts/adv_prog_project_war_exploded/WEB-INF/lib/hibernate-commons-annotations-6.0.6.Final.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/adv_prog_project/out/artifacts/adv_prog_project_war_exploded/WEB-INF/lib/hibernate-core-6.3.1.Final.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/adv_prog_project/out/artifacts/adv_prog_project_war_exploded/WEB-INF/lib/istack-commons-runtime-4.0.1.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/adv_prog_project/out/artifacts/adv_prog_project_war_exploded/WEB-INF/lib/jakarta.activation-2.0.1.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/adv_prog_project/out/artifacts/adv_prog_project_war_exploded/WEB-INF/lib/jakarta.activation-api-2.1.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/adv_prog_project/out/artifacts/adv_prog_project_war_exploded/WEB-INF/lib/jakarta.inject-api-2.0.1.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/adv_prog_project/out/artifacts/adv_prog_project_war_exploded/WEB-INF/lib/jakarta.persistence-api-3.1.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/adv_prog_project/out/artifacts/adv_prog_project_war_exploded/WEB-INF/lib/jakarta.transaction-api-2.0.1.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/adv_prog_project/out/artifacts/adv_prog_project_war_exploded/WEB-INF/lib/jakarta.xml.bind-api-4.0.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/adv_prog_project/out/artifacts/adv_prog_project_war_exploded/WEB-INF/lib/jandex-3.1.2.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/adv_prog_project/out/artifacts/adv_prog_project_war_exploded/WEB-INF/lib/jaxb-core-3.0.2.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/adv_prog_project/out/artifacts/adv_prog_project_war_exploded/WEB-INF/lib/jaxb-runtime-3.0.2.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/adv_prog_project/out/artifacts/adv_prog_project_war_exploded/WEB-INF/lib/jboss-logging-3.5.3.Final.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/adv_prog_project/out/artifacts/adv_prog_project_war_exploded/WEB-INF/lib/txw2-3.0.2.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/adv_prog_project/out/artifacts/adv_prog_project_war_exploded/WEB-INF/web.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/adv_prog_project/out/artifacts/adv_prog_project_war_exploded/login.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/adv_prog_project/out/artifacts/adv_prog_project_war_exploded/private/advisorChoice.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/adv_prog_project/src/main/webapp/restricted/teacher.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/adv_prog_project/out/artifacts/adv_prog_project_war_exploded/private/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/adv_prog_project/src/main/webapp/restricted/index.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/adv_prog_project/out/artifacts/adv_prog_project_war_exploded/private/studentPage.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/adv_prog_project/src/main/webapp/restricted/studentPage.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/adv_prog_project/src/main/java/it/unitn/disi/advprog/gennaro/adv_prog_project/auxiliary/AuthFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/adv_prog_project/src/main/java/it/unitn/disi/advprog/gennaro/adv_prog_project/auxiliary/AuthFilter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/adv_prog_project/src/main/java/it/unitn/disi/advprog/gennaro/adv_prog_project/auxiliary/JspFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/adv_prog_project/src/main/java/it/unitn/disi/advprog/gennaro/adv_prog_project/auxiliary/JspFilter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/adv_prog_project/src/main/java/it/unitn/disi/advprog/gennaro/adv_prog_project/auxiliary/StudentFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/adv_prog_project/src/main/java/it/unitn/disi/advprog/gennaro/adv_prog_project/auxiliary/StudentFilter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/adv_prog_project/src/main/java/it/unitn/disi/advprog/gennaro/adv_prog_project/auxiliary/TeacherFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/adv_prog_project/src/main/java/it/unitn/disi/advprog/gennaro/adv_prog_project/auxiliary/TeacherFilter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/adv_prog_project/src/main/java/it/unitn/disi/advprog/gennaro/adv_prog_project/beans/StudentBean.java" beforeDir="false" afterPath="$PROJECT_DIR$/adv_prog_project/src/main/java/it/unitn/disi/advprog/gennaro/adv_prog_project/beans/StudentBean.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/adv_prog_project/src/main/java/it/unitn/disi/advprog/gennaro/adv_prog_project/beans/TeacherBean.java" beforeDir="false" afterPath="$PROJECT_DIR$/adv_prog_project/src/main/java/it/unitn/disi/advprog/gennaro/adv_prog_project/beans/TeacherBean.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/adv_prog_project/src/main/java/it/unitn/disi/advprog/gennaro/adv_prog_project/managers/AdvisorChoiceManagerBean.java" beforeDir="false" afterPath="$PROJECT_DIR$/adv_prog_project/src/main/java/it/unitn/disi/advprog/gennaro/adv_prog_project/managers/TeacherManagerBean.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/adv_prog_project/src/main/java/it/unitn/disi/advprog/gennaro/adv_prog_project/managers/StudentManagerBean.java" beforeDir="false" afterPath="$PROJECT_DIR$/adv_prog_project/src/main/java/it/unitn/disi/advprog/gennaro/adv_prog_project/managers/StudentManagerBean.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/adv_prog_project/src/main/java/it/unitn/disi/advprog/gennaro/adv_prog_project/servlet/AdvisorChoiceServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/adv_prog_project/src/main/java/it/unitn/disi/advprog/gennaro/adv_prog_project/servlet/TeacherServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/adv_prog_project/src/main/java/it/unitn/disi/advprog/gennaro/adv_prog_project/servlet/AuthServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/adv_prog_project/src/main/java/it/unitn/disi/advprog/gennaro/adv_prog_project/servlet/AuthServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/adv_prog_project/src/main/java/it/unitn/disi/advprog/gennaro/adv_prog_project/servlet/HomeServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/adv_prog_project/src/main/java/it/unitn/disi/advprog/gennaro/adv_prog_project/servlet/HomeServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/adv_prog_project/src/main/java/it/unitn/disi/advprog/gennaro/adv_prog_project/servlet/LoginServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/adv_prog_project/src/main/java/it/unitn/disi/advprog/gennaro/adv_prog_project/servlet/LoginServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/adv_prog_project/src/main/java/it/unitn/disi/advprog/gennaro/adv_prog_project/servlet/StudentServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/adv_prog_project/src/main/java/it/unitn/disi/advprog/gennaro/adv_prog_project/servlet/StudentServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/adv_prog_project/src/main/webapp/WEB-INF/web.xml" beforeDir="false" afterPath="$PROJECT_DIR$/adv_prog_project/src/main/webapp/WEB-INF/web.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/adv_prog_project/src/main/webapp/private/advisorChoice.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/adv_prog_project/src/main/webapp/private/index.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/adv_prog_project/src/main/webapp/private/studentPage.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/adv_prog_project/target/classes/META-INF/beans.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/adv_prog_project/target/classes/META-INF/persistence.xml" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 2
+}</component>
+  <component name="ProjectId" id="2YlEKkQiFszY1AcQGJC4UOCvmck" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;teacher-dashboard&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.project.maven.importing&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="2c924425-0ff4-4882-8f07-232cc16ae93d" name="Changes" comment="" />
+      <created>1701091705966</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1701091705966</updated>
+      <workItem from="1701091709487" duration="45000" />
+      <workItem from="1701247638010" duration="3000" />
+      <workItem from="1701258806397" duration="8000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>
