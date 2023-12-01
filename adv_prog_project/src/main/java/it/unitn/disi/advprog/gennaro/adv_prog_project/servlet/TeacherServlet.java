@@ -1,6 +1,5 @@
 package it.unitn.disi.advprog.gennaro.adv_prog_project.servlet;
 
-import it.unitn.disi.advprog.gennaro.adv_prog_project.dto.StudentDto;
 import it.unitn.disi.advprog.gennaro.adv_prog_project.dto.TeacherDto;
 import it.unitn.disi.advprog.gennaro.adv_prog_project.dto.UserAccountDto;
 import it.unitn.disi.advprog.gennaro.adv_prog_project.managers.TeacherManagerBean;
@@ -11,7 +10,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
-import java.util.List;
 
 /**
  * AdvisorChoiceServlet handles requests related to advisor choices.

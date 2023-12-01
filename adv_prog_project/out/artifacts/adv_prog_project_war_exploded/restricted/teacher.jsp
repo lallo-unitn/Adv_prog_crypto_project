@@ -11,7 +11,7 @@
 <ul>
     <li>Name: ${teacherDto.userAccount.name}</li>
     <li>Surname: ${teacherDto.userAccount.surname}</li>
-    <li>Matriculation: ${teacherDto.id}</li>
+    <li>Id: ${teacherDto.id}</li>
 </ul>
 </body>
 </html>

@@ -1,21 +1,21 @@
 version: '3'
 services:
-  datasource:
-    image: postgres:latest
+  #datasource:
+    #image: postgres:latest
       # build: ./services/datasource
-    container_name: datasource
-    network_mode: host
-    restart: always
-    stdin_open: true
-    tty: true
-    ports:
-        - 5432:5432
-    environment: 
-        - POSTGRES_DB=universityDatabase
-        - POSTGRES_USER=lallo
-        - POSTGRES_PASSWORD=lallo
-    volumes:
-        - ./services/datasource/init.sql:/docker-entrypoint-initdb.d/init.sql
+      #container_name: datasource
+      #network_mode: host
+      #restart: always
+      #stdin_open: true
+      #tty: true
+      #ports:
+      # - 5432:5432
+      #environment: 
+      #- POSTGRES_DB=universityDatabase
+      #- POSTGRES_USER=lallo
+      #- POSTGRES_PASSWORD=lallo
+      #volumes:
+      #- ./services/datasource/init.sql:/docker-entrypoint-initdb.d/init.sql
 
   application_server:
     image: quay.io/wildfly/wildfly:30.0.0.Final-jdk17
@@ -42,14 +42,37 @@ services:
 
     volumes:
       - type: bind
-        source: ./services/application_server/configuration/standalone.xml
+        source: ./services/application_server/conf2/standalone.xml
         target: /opt/jboss/wildfly/standalone/configuration/standalone.xml
       - type: bind
-        source: ./services/application_server/modules/postgresql
+        source: ./services/application_server/modules/org/postgresql
         target: /opt/jboss/wildfly/modules/org/postgresql
+      - type: bind
+        source: ./services/application_server/modules/com/mariadb
+        target: /opt/jboss/wildfly/modules/com/mariadb
       - type: bind
         source: ./services/application_server/deployments/adv_prog_project_war.war
         target: /opt/jboss/wildfly/standalone/deployments/adv_prog_project_war.war
+
+  mariadb:
+    image: mariadb:latest
+    restart: always
+    network_mode: host
+    environment:
+      MARIADB_ROOT_PASSWORD: root
+    ports:
+      - 3306:3306
+    volumes:
+      - ./services/mariadb/docker-entrypoint-initdb.d/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - type: bind
+        source: ./services/mariadb/my.cnf.d/server.cnf
+        target: /etc/mysql/conf.d/server.cnf
+          # adminer:
+          #image: adminer:latest
+          #restart: always
+          #network_mode: host
+          #ports:
+          #- 8090:8080
 
 volumes:
   configuration:
