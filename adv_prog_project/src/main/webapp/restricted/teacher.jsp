@@ -13,7 +13,7 @@
     <li>Surname: ${teacherDto.userAccount.surname}</li>
     <li>Id: ${teacherDto.id}</li>
 </ul>
-<form action="TeacherServlet" method="post">
+<form action="AssignGradeServlet" method="post">
     <label for="studentId"></label>
     <input type="text"
            placeholder="studentId"

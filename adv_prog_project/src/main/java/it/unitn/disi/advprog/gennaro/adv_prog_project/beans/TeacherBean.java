@@ -78,7 +78,7 @@ public class TeacherBean {
         return teacher;
     }
 
-    public Student setStudentGrade(Student student, Integer grade) {
+    public void setStudentGrade(Student student, Integer grade) {
         // Constructing a JPQL query to select a teacher based on the user account
         TypedQuery<Student> query = this.entityManager.createQuery(
                 "UPDATE Enrollment e SET e.grade = :grade WHERE e.student = :student",
@@ -96,9 +96,7 @@ public class TeacherBean {
         } catch (NoResultException e) {
             // Log a message if the teacher is not found
             logger.info("Teacher [ " + student.toString() + " ] not found");
-            return null;
         }
-        return studentUpdated;
     }
 
 }

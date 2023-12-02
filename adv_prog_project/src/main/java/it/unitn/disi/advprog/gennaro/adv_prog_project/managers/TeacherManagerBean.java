@@ -55,12 +55,9 @@ public class TeacherManagerBean {
         return teacherDTOList;
     }
 
-    public Student setStudentGrade(int matriculation, int grade) {
+    public void setStudentGrade(int matriculation, int grade) {
         Student student = this.getStudentAux(matriculation);
-        if (student == null) {
-            return null;
-        }
-        return this.teacherBean.setStudentGrade(student, grade);
+        this.teacherBean.setStudentGrade(student, grade);
     }
 
     private Student getStudentAux(int matriculation) {

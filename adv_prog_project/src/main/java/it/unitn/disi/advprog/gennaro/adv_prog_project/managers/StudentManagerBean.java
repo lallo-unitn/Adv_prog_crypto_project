@@ -69,5 +69,4 @@ public class StudentManagerBean {
         }
         return enrollmentDTOList;
     }
-
 }

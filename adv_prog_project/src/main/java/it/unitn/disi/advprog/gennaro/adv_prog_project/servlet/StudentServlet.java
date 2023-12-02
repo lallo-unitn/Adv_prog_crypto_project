@@ -48,7 +48,7 @@ public class StudentServlet extends HttpServlet {
         // Check if the student exists
         if (studentDto == null) {
             // Set an error message and forward to index.jsp
-            request.setAttribute("messageStudent", "Matriculation is not registered");
+            request.setAttribute("messageStudent", "studentId is not registered");
             request.getRequestDispatcher("restricted/index.jsp").forward(request, response);
             return;
         }

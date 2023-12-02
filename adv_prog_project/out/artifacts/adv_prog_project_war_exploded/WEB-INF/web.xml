@@ -45,7 +45,8 @@
     </filter-mapping>
     <filter-mapping>
         <filter-name>TeacherFilter</filter-name>
-        <url-pattern>/TeacherFilter</url-pattern>
+        <url-pattern>/TeacherServlet</url-pattern>
+        <url-pattern>/AssignGradeServlet</url-pattern>
     </filter-mapping>
 
 
@@ -56,6 +57,10 @@
     <servlet>
         <servlet-name>TeacherServlet</servlet-name>
         <servlet-class>it.unitn.disi.advprog.gennaro.adv_prog_project.servlet.TeacherServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AssignGradeServlet</servlet-name>
+        <servlet-class>it.unitn.disi.advprog.gennaro.adv_prog_project.servlet.AssignGradeServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>HomeServlet</servlet-name>
@@ -78,6 +83,10 @@
     <servlet-mapping>
         <servlet-name>TeacherServlet</servlet-name>
         <url-pattern>/TeacherServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AssignGradeServlet</servlet-name>
+        <url-pattern>/AssignGradeServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>HomeServlet</servlet-name>
