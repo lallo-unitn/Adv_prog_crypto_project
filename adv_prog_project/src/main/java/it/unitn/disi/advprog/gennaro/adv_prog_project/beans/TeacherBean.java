@@ -77,5 +77,29 @@ public class TeacherBean {
         }
         return teacher;
     }
+
+    public Student setStudentGrade(Student student, Integer grade) {
+        // Constructing a JPQL query to select a teacher based on the user account
+        TypedQuery<Student> query = this.entityManager.createQuery(
+                "UPDATE Enrollment e SET e.grade = :grade WHERE e.student = :student",
+                Student.class
+        );
+
+        // Setting the parameter for the user account
+        query.setParameter("student", student);
+        query.setParameter("grade", grade);
+
+        Student studentUpdated = null;
+        try {
+            // Execute the query and retrieve the teacher
+            studentUpdated = query.getSingleResult();
+        } catch (NoResultException e) {
+            // Log a message if the teacher is not found
+            logger.info("Teacher [ " + student.toString() + " ] not found");
+            return null;
+        }
+        return studentUpdated;
+    }
+
 }
 

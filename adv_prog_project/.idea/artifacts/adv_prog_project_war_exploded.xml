@@ -26,8 +26,8 @@
           <element id="library" level="project" name="Maven: org.antlr:antlr4-runtime:4.10.1" />
         </element>
       </element>
-      <element id="javaee-facet-resources" facet="adv_prog_project/web/Web2" />
       <element id="javaee-facet-resources" facet="adv_prog_project/web/Web" />
+      <element id="javaee-facet-resources" facet="adv_prog_project/web/Web2" />
     </root>
   </artifact>
 </component>

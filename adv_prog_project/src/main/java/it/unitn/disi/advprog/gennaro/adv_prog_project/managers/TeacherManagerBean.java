@@ -1,7 +1,5 @@
 package it.unitn.disi.advprog.gennaro.adv_prog_project.managers;
 
-
-import it.unitn.disi.advprog.gennaro.adv_prog_project.dto.StudentDto;
 import it.unitn.disi.advprog.gennaro.adv_prog_project.dto.TeacherDto;
 import it.unitn.disi.advprog.gennaro.adv_prog_project.dto.UserAccountDto;
 import it.unitn.disi.advprog.gennaro.adv_prog_project.dtoAssembler.DtoAssembler;
@@ -55,6 +53,14 @@ public class TeacherManagerBean {
             teacherDTOList.add(DtoAssembler.getTeacherDto(t));
         }
         return teacherDTOList;
+    }
+
+    public Student setStudentGrade(int matriculation, int grade) {
+        Student student = this.getStudentAux(matriculation);
+        if (student == null) {
+            return null;
+        }
+        return this.teacherBean.setStudentGrade(student, grade);
     }
 
     private Student getStudentAux(int matriculation) {
