@@ -59,14 +59,20 @@ services:
     restart: always
     network_mode: host
     environment:
+      #MARIADB_USER: user
+      #MARIADB_PASSWORD: user
       MARIADB_ROOT_PASSWORD: root
     ports:
       - 3306:3306
     volumes:
       - ./services/mariadb/docker-entrypoint-initdb.d/init.sql:/docker-entrypoint-initdb.d/init.sql
       - type: bind
-        source: ./services/mariadb/my.cnf.d/server.cnf
+        source: ./services/mariadb/mysql/conf.d/server.cnf
         target: /etc/mysql/conf.d/server.cnf
+      - type: bind
+        source: ./services/mariadb/mysql/encryption
+        target: /etc/mysql/conf.d/encryption
+
           # adminer:
           #image: adminer:latest
           #restart: always
