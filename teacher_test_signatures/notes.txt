@@ -1,0 +1,25 @@
+To generate the ECC keypair, openssl was used.
+
+openssl ecparam -name prime256v1 -genkey -noout -out private_key.pem
+
+where 
+	- ecparam: 		manipulate elliptic curves
+	- prime256v1: 		using NIST curve P-256
+	- genkey:		generate private key
+	- noout:		do not print curve parameters
+	- out private_key.pem:	output file
+
+openssl ec -in private_key.pem -pubout -out public_key.pem
+
+where
+	- ec:			generating for ecc
+	- in private_key.pem:	private key in input
+	- pubout:		only derive public key
+	- out public_key.pem:	output file
+
+Display keys with
+
+openssl ec -in private_key.pem -text -noout
+
+openssl ec -pubin -in public_key.pem -text -noout
+

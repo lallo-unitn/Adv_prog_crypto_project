@@ -27,7 +27,7 @@
 <br>
 <br>
 
-<form action="AssignGradeServlet" method="post">
+<form id="GradeForm">
     <label for="studentId"></label>
     <input type="text"
            placeholder="studentId"
@@ -40,7 +40,7 @@
            name="grade"
            id="grade"
            required="required">
-    <input type="submit" value="Submit">
+    <input type="button" value="Submit" onclick="sendGrade()">
 </form>
 <script src="js/signature_functions.js" defer></script>
 </body>

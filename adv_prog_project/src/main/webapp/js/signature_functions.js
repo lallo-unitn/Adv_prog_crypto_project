@@ -14,3 +14,10 @@ function init() {
             fr.readAsText(this.files[0]);
         })
 }
+
+function sendGrade(){
+    // Get user input values
+    const studentId = document.getElementById("studentId").value;
+    const grade = document.getElementById("grade").value;
+    const eccPrivKey = localStorage.getItem('privKey');
+}
