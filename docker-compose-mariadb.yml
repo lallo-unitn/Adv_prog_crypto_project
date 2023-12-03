@@ -12,8 +12,12 @@ services:
     volumes:
       - ./services/mariadb/docker-entrypoint-initdb.d/init.sql:/docker-entrypoint-initdb.d/init.sql
       - type: bind
-        source: ./services/mariadb/my.cnf.d/server.cnf
+        source: ./services/mariadb/mysql/conf.d/server.cnf
         target: /etc/mysql/conf.d/server.cnf
+      - type: bind
+        source: ./services/mariadb/mysql/encryption
+        target: /etc/mysql/conf.d/encryption
+
           # adminer:
           #image: adminer:latest
           #restart: always
