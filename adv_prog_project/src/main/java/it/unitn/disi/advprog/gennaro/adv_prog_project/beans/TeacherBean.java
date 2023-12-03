@@ -1,16 +1,12 @@
 package it.unitn.disi.advprog.gennaro.adv_prog_project.beans;
 
 import it.unitn.disi.advprog.gennaro.adv_prog_project.dto.UserAccountDto;
+import it.unitn.disi.advprog.gennaro.adv_prog_project.entities.Course;
+import it.unitn.disi.advprog.gennaro.adv_prog_project.entities.Enrollment;
 import it.unitn.disi.advprog.gennaro.adv_prog_project.entities.Student;
 import it.unitn.disi.advprog.gennaro.adv_prog_project.entities.Teacher;
-import jakarta.ejb.Local;
-import jakarta.ejb.Stateless;
-import jakarta.ejb.TransactionManagement;
-import jakarta.ejb.TransactionManagementType;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.NoResultException;
-import jakarta.persistence.PersistenceContext;
-import jakarta.persistence.TypedQuery;
+import jakarta.ejb.*;
+import jakarta.persistence.*;
 import org.jboss.logging.Logger;
 
 import java.util.List;
@@ -72,31 +68,33 @@ public class TeacherBean {
             teacher = query.getSingleResult();
         } catch (NoResultException e) {
             // Log a message if the teacher is not found
-            logger.info("Teacher [ " + userAccountDto.toString() + " ] not found");
+            logger.info("Teacher [ " + userAccountDto + " ] not found");
             return null;
         }
         return teacher;
     }
 
-    public void setStudentGrade(Student student, Integer grade) {
-        // Constructing a JPQL query to select a teacher based on the user account
-        TypedQuery<Student> query = this.entityManager.createQuery(
-                "UPDATE Enrollment e SET e.grade = :grade WHERE e.student = :student",
-                Student.class
+    @TransactionAttribute(TransactionAttributeType.REQUIRED)
+    public void setStudentGrade(Student student, Course course, int grade) {
+        // Constructing a JPQL query to update the student's grade
+        Query query = this.entityManager.createQuery(
+                "UPDATE Enrollment e SET e.grade = :grade " +
+                        "WHERE e.student = :student AND e.course = :courseId"
         );
 
-        // Setting the parameter for the user account
+        // Setting the parameters for the student, course, and grade
         query.setParameter("student", student);
+        query.setParameter("courseId", course);
         query.setParameter("grade", grade);
 
-        Student studentUpdated = null;
-        try {
-            // Execute the query and retrieve the teacher
-            studentUpdated = query.getSingleResult();
-        } catch (NoResultException e) {
-            // Log a message if the teacher is not found
-            logger.info("Teacher [ " + student.toString() + " ] not found");
-        }
+        // Execute the query
+        int updatedRows = query.executeUpdate();
+
+        // Log a message or handle the result as needed
+        logger.info("Updated rows: " + updatedRows);
+
+        // Log a message
+        logger.info("Student [ " + student.getId() + " ] grade updated");
     }
 
 }

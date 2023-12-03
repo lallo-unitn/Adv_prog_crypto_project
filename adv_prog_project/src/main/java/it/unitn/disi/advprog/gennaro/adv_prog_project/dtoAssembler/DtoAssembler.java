@@ -91,7 +91,8 @@ public class DtoAssembler {
         return new TeacherDto(
                 teacher.getId(),
                 teacher.getTaughtCourse(),
-                DtoAssembler.getUserAccountDto(teacher.getUserAccount())
+                DtoAssembler.getUserAccountDto(teacher.getUserAccount()),
+                DtoAssembler.getCourseDto(teacher.getCourse())
         );
     }
 }

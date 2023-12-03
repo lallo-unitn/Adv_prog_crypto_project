@@ -1,6 +1,8 @@
 package it.unitn.disi.advprog.gennaro.adv_prog_project.servlet;
 
 import it.unitn.disi.advprog.gennaro.adv_prog_project.dto.TeacherDto;
+import it.unitn.disi.advprog.gennaro.adv_prog_project.managers.CourseManagerBean;
+import it.unitn.disi.advprog.gennaro.adv_prog_project.managers.StudentManagerBean;
 import it.unitn.disi.advprog.gennaro.adv_prog_project.managers.TeacherManagerBean;
 import jakarta.ejb.EJB;
 import jakarta.servlet.ServletException;
@@ -15,6 +17,8 @@ public class AssignGradeServlet extends HttpServlet {
 
     @EJB
     private TeacherManagerBean teacherManagerBean;
+    @EJB
+    private StudentManagerBean studentManagerBean;
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         // Get the studentId number from the request
@@ -38,7 +42,11 @@ public class AssignGradeServlet extends HttpServlet {
         int grade = Integer.parseInt(req.getParameter("grade"));
 
         // Set the grade for the student using the TeacherManagerBean
-        teacherManagerBean.setStudentGrade(studentId, grade);
+        teacherManagerBean.setStudentGrade(
+                studentManagerBean.getStudent(studentId),
+                teacherDto.getCourse(),
+                grade
+        );
 
         // Forward the request to teacher.jsp
         req.getRequestDispatcher("restricted/teacher.jsp").forward(req, resp);
