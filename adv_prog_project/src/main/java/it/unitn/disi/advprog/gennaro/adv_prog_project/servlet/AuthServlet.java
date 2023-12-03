@@ -43,6 +43,7 @@ public class AuthServlet extends HttpServlet {
         UserAccountDto userAccountDto = DtoAssembler.getUserAccountDto(userAccount);
         session.setAttribute("userAccountDto", userAccountDto);
         session.setAttribute("role", userAccountDto.getRole());
+
         if(userAccountDto.getRole().equals("teacher")) {
             rd = request.getRequestDispatcher("/TeacherServlet");
         }
@@ -52,6 +53,7 @@ public class AuthServlet extends HttpServlet {
         else {
             rd = request.getRequestDispatcher("/LoginServlet");
         }
+
         rd.forward(request, response);
     }
 

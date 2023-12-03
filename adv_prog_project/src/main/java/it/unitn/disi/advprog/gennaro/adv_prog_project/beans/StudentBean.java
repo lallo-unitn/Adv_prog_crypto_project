@@ -71,7 +71,7 @@ public class StudentBean {
             student = query.getSingleResult();
         } catch (NoResultException e) {
             // Log a message if the student is not found
-            logger.info("Student [ " + userAccountDto.toString() + " ] is not registered");
+            logger.info("Student [ " + userAccountDto + " ] is not registered");
             return null;
         }
         return student;

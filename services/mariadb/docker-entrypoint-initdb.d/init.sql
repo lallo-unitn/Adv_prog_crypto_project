@@ -14,7 +14,12 @@ CREATE TABLE IF NOT EXISTS user_account (
     role VARCHAR(255) DEFAULT 'student' NOT NULL
 );
 
-
+-- Create course table
+CREATE TABLE IF NOT EXISTS course (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    cfu INTEGER NOT NULL
+);
 
 -- Create student table
 CREATE TABLE IF NOT EXISTS student (
@@ -24,35 +29,25 @@ CREATE TABLE IF NOT EXISTS student (
     FOREIGN KEY (user_account_id) REFERENCES user_account(id) ON DELETE CASCADE
 );
 
-
 -- Create teacher table
 CREATE TABLE IF NOT EXISTS teacher (
     id SERIAL PRIMARY KEY,
     taught_course VARCHAR(255) NOT NULL,
     user_account_id BIGINT UNSIGNED UNIQUE,
-    FOREIGN KEY (user_account_id) REFERENCES user_account(id) ON DELETE CASCADE
+    course_id BIGINT UNSIGNED UNIQUE,
+    FOREIGN KEY (user_account_id) REFERENCES user_account(id) ON DELETE CASCADE,
+    FOREIGN KEY (course_id) REFERENCES course(id) ON DELETE CASCADE
 );
-
-
--- Create course table
-CREATE TABLE IF NOT EXISTS course (
-    id SERIAL PRIMARY KEY,
-    name VARCHAR(255) NOT NULL,
-    cfu INTEGER NOT NULL
-);
-
 
 -- Create enrollment table
 CREATE TABLE IF NOT EXISTS enrollment (
-    student_id BIGINT UNSIGNED  NOT NULL,
-    course_id BIGINT UNSIGNED  NOT NULL,
+    student_id BIGINT UNSIGNED NOT NULL,
+    course_id BIGINT UNSIGNED NOT NULL,
     grade INTEGER,
     PRIMARY KEY (student_id, course_id),
     FOREIGN KEY (student_id) REFERENCES student(id) ON DELETE CASCADE,
     FOREIGN KEY (course_id) REFERENCES course(id) ON DELETE CASCADE
 );
-
-
 
 -- Insert test values into user_account table
 INSERT INTO user_account (username, password, name, surname, role)
@@ -68,16 +63,16 @@ VALUES
     (3.5, 2),
     (4.0, 3);
 
--- Insert test values into teacher table
-INSERT INTO teacher (taught_course, user_account_id)
-VALUES
-    ('Mathematics', 2);
-
 -- Insert test values into course table
 INSERT INTO course (name, cfu)
 VALUES
     ('Math 101', 3),
     ('History 202', 4);
+
+-- Insert test values into teacher table
+INSERT INTO teacher (taught_course, user_account_id, course_id)
+VALUES
+    ('Mathematics', 2, 1);
 
 -- Insert test values into enrollment table
 INSERT INTO enrollment (student_id, course_id, grade)
@@ -85,3 +80,4 @@ VALUES
     (1, 1, 90),
     (2, 2, 85),
     (3, 1, 95);
+

@@ -8,6 +8,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 
@@ -30,7 +31,8 @@ public class TeacherServlet extends HttpServlet {
      * @throws IOException      if an input or output error is detected when the servlet handles the GET request
      */
     @Override
-    protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession();
         // Get the userAccountDto attribute from the session
         UserAccountDto userAccountDto = (UserAccountDto) request.getSession().getAttribute("userAccountDto");
 
@@ -49,10 +51,11 @@ public class TeacherServlet extends HttpServlet {
             return;
         }
 
-        // Set the studentDto attribute for the JSP page
-        request.setAttribute("teacherDto", teacherDto);
+        // Set the studentDto attribute for the session
+        session.setAttribute("teacherDto", teacherDto);
 
         // Forward the request to teacher.jsp
         request.getRequestDispatcher("restricted/teacher.jsp").forward(request, response);
     }
+
 }
