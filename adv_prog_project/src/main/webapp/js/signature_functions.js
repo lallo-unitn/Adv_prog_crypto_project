@@ -15,44 +15,47 @@ function init() {
         })
 }
 
-function str2ab(str) {
-    const buf = new ArrayBuffer(str.length);
-    const bufView = new Uint8Array(buf);
-    for (let i = 0, strLen = str.length; i < strLen; i++) {
-        bufView[i] = str.charCodeAt(i);
+function base64StringToArrayBuffer(b64str) {
+    const byteStr = atob(b64str);
+    const bytes = new Uint8Array(byteStr.length);
+    for (let i = 0; i < byteStr.length; i++) {
+        bytes[i] = byteStr.charCodeAt(i);
     }
-    return buf;
+    return bytes.buffer;
 }
 
-function importPrivateKey(): Promise<CryptoKey> {
-    const privateKeyPEM = localStorage.getItem("privateKey");
-    if (!privateKeyPEM) {
+async function importPrivateKey() {
+    const privateKeyString = localStorage.getItem("privateKey");
+    const privateKeyJson = JSON.parse(privateKeyString);
+    if (!privateKeyJson) {
         console.error("Private key not found in local storage");
         return;
     }
-    const pem = privateKeyPEM.replace(/\n/g, '');
-    const pemHeader = "-----BEGIN EC PRIVATE KEY-----";
-    const pemFooter = "-----END EC PRIVATE KEY-----";
-    const pemContents = pem.substring(
-        pemHeader.length,
-        pem.length - pemFooter.length,
-    );
-    // base64 decode the string to get the binary data
-    const binaryDerString = window.atob(pemContents);
-    // convert from a binary string to an ArrayBuffer
-    const binaryDer = str2ab(binaryDerString);
+
+    const privateKeyJsonComplete = {
+        crv: privateKeyJson.crv,
+        d: privateKeyJson.d,
+        ext: true,
+        key_ops: ["sign"],
+        kty: privateKeyJson.kty,
+        x: privateKeyJson.x,
+        y: privateKeyJson.y,
+    };
 
     // Import private key from openssl format to WebCrypto format
-    return window.crypto.subtle.importKey(
-        "pkcs8",
-        binaryDer,
+    const importedKey = await window.crypto.subtle.importKey(
+        "jwk",
+        privateKeyJsonComplete,
         {
             name: "ECDSA",
-            hash: "SHA-256",
+            namedCurve: "P-256",
         },
         true,
         ["sign"],
     );
+
+    console.log('Private key imported successfully:', importedKey);
+    return importedKey;
 }
 
 async function sendGrade() {
@@ -79,13 +82,31 @@ async function sendGrade() {
         jsonDataBytes
     );
     jsonData.signature = new Uint8Array(signature);
-    const response = await fetch("/AssignGradeServlet", {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(jsonData),
-    });
-    const responseData = await response.json();
-    console.log('Server Response:', responseData);
+    console.log(jsonData);
+    // $.ajax({
+    //     type: "POST",
+    //     url: "adv_prog_project-1.0-SNAPSHOT/AuthServlet",
+    //     dataType: "json",
+    //     data: JSON.stringify(jsonData),
+    //     success: function (msg) {
+    //         if (msg) {
+    //             alert("Sent!");
+    //             location.reload(true);
+    //         } else {
+    //             alert("Not sent!");
+    //         }
+    //     },
+    // });
+
+    const xhr = new XMLHttpRequest();
+    const url = "AssignGradeServlet";
+    xhr.open("POST", url, true);
+    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            console.log(xhr.status);
+        }
+    };
+    const data = JSON.stringify(jsonData);
+    xhr.send(data);
 }

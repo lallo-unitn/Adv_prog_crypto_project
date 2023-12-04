@@ -18,11 +18,6 @@ import java.util.Base64;
 import java.util.List;
 
 public class AssignGradeServlet extends HttpServlet {
-
-    @EJB
-    private TeacherManagerBean teacherManagerBean;
-    @EJB
-    private StudentManagerBean studentManagerBean;
 //    @Override
 //    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 //        // Get the studentId number from the request
@@ -72,41 +67,5 @@ public class AssignGradeServlet extends HttpServlet {
 
         // print json data
         System.out.println(jsonData);
-
-    //    // Extract fields from JSON
-    //    long timestamp = jsonData.get("timestamp").getAsLong();
-    //    String studentId = jsonData.get("studentId").getAsString();
-    //    String grade = jsonData.get("grade").getAsString();
-    //    String signatureBase64 = jsonData.get("signature").getAsString();
-    //
-    //    // Verify the signature (example: using Base64-decoded signature)
-    //    byte[] signature = Base64.getDecoder().decode(signatureBase64);
-    //    boolean signatureValid = verifySignature(jsonData, signature);
-    //
-    //    // Respond based on signature verification result
-    //    if (signatureValid) {
-    //        // Signature is valid, process the data (e.g., save to a database)
-    //        processValidData(timestamp, studentId, grade);
-    //
-    //        // Respond with a success message
-    //        sendResponse(response, "Signature verified, data processed successfully");
-    //    } else {
-    //        // Signature is not valid, reject the data
-    //        sendResponse(response, "Invalid signature, data rejected");
-    //    }
-    }
-
-    private boolean verifySignature(JsonObject jsonData, byte[] signature) {
-
-        return true;
-    }
-
-    private void processValidData(long timestamp, String studentId, String grade) {
-        // Implement data processing logic (e.g., save to a database)
-        System.out.println("Processing data - Timestamp: " + timestamp + ", Student ID: " + studentId + ", Grade: " + grade);
-    }
-
-    private void sendResponse(HttpServletResponse response, String message) throws IOException {
-        throw new UnsupportedOperationException("Not supported yet.");
     }
 }
