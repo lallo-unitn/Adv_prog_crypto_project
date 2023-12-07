@@ -47,6 +47,8 @@
         <filter-name>AuthFilter</filter-name>
         <url-pattern>/StudentServlet</url-pattern>
         <url-pattern>/HomeServlet</url-pattern>
+        <url-pattern>/TeacherServlet</url-pattern>
+        <url-pattern>/AssignGradeServlet</url-pattern>
     </filter-mapping>
     <filter-mapping>
         <filter-name>StudentFilter</filter-name>
@@ -55,6 +57,7 @@
     <filter-mapping>
         <filter-name>TeacherFilter</filter-name>
         <url-pattern>/TeacherServlet</url-pattern>
+        <url-pattern>/AssignGradeServlet</url-pattern>
     </filter-mapping>
 
 
