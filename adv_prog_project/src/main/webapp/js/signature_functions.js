@@ -15,40 +15,58 @@ function init() {
         })
 }
 
-function base64StringToArrayBuffer(b64str) {
-    const byteStr = atob(b64str);
-    const bytes = new Uint8Array(byteStr.length);
-    for (let i = 0; i < byteStr.length; i++) {
-        bytes[i] = byteStr.charCodeAt(i);
+function str2ab(str) {
+    const buf = new ArrayBuffer(str.length);
+    const bufView = new Uint8Array(buf);
+    for (let i = 0, strLen = str.length; i < strLen; i++) {
+        bufView[i] = str.charCodeAt(i);
     }
-    return bytes.buffer;
+    return bufView;
 }
 
 async function importPrivateKey() {
-    const privateKeyString = localStorage.getItem("privateKey");
-    const privateKeyJson = JSON.parse(privateKeyString);
-    if (!privateKeyJson) {
-        console.error("Private key not found in local storage");
-        return;
+    const pemKey = "-----BEGIN PRIVATE KEY-----\n" +
+        "MIGHAgEAMBMGByqGSM49AgEGCCqGSM49AwEHBG0wawIBAQQgr3Mf4CKBPfodhfGQ\n" +
+        "xdRUJzK2xbF1VzGYibwjh3DflSuhRANCAAQma8CLQRY+CJrIX4rH8B3nDl7A8YZc\n" +
+        "4WCWfkwlXcM1egQeeuBVzvBNuR64M9TyzJc5YL5uWi0g9RJ2ItQ5i9a6\n" +
+        "-----END PRIVATE KEY-----";
+
+    const pemHeader = "-----BEGIN PRIVATE KEY-----";
+    const pemFooter = "-----END PRIVATE KEY-----";
+
+    // Extract the key from PEM format
+    const pemBody = pemKey
+        .replace(pemHeader, '')
+        .replace(pemFooter, '')
+        .replace(/\s/g, '')
+        .replace(/\n/g, '');
+
+    console.log('Private key:', pemBody);
+
+    // Convert from Base64 to binary
+    const binaryDer = window.atob(pemBody);
+
+    // Convert from binary to ArrayBuffer
+    const binaryDerLength = binaryDer.length;
+    const arrayBuffer = new ArrayBuffer(binaryDerLength);
+    const uint8Array = new Uint8Array(arrayBuffer);
+
+    // Fill the ArrayBuffer with data
+    for (let i = 0; i < binaryDerLength; i++) {
+        // Convert to integer in range [0,255]
+        uint8Array[i] = binaryDer.charCodeAt(i);
     }
 
-    const privateKeyJsonComplete = {
-        crv: privateKeyJson.crv,
-        d: privateKeyJson.d,
-        ext: true,
-        key_ops: ["sign"],
-        kty: privateKeyJson.kty,
-        x: privateKeyJson.x,
-        y: privateKeyJson.y,
-    };
+    console.log('Private key in DER format:', uint8Array);
 
     // Import private key from openssl format to WebCrypto format
     const importedKey = await window.crypto.subtle.importKey(
-        "jwk",
-        privateKeyJsonComplete,
+        "pkcs8",
+        uint8Array,
         {
             name: "ECDSA",
             namedCurve: "P-256",
+            hash: { name: "SHA-256" },
         },
         true,
         ["sign"],
@@ -58,45 +76,53 @@ async function importPrivateKey() {
     return importedKey;
 }
 
-async function sendGrade() {
+async function sendGrade(courseId) {
     // Get user input values
     const studentId = document.getElementById("studentId").value;
     const grade = document.getElementById("grade").value;
+
     const jsonData = {
-        timestamp: Date.now(),
-        studentId: studentId,
-        grade: grade,
+        message:{
+            timestamp: Date.now(),
+            studentId: studentId,
+            courseId: courseId,
+            grade: grade,
+        }
+        //challenge
+        //signature
     };
-    const jsonDataBytes = new TextEncoder().encode(
-            JSON.stringify(jsonData)
-        );
+
+    const concat = ""+
+        jsonData.message.timestamp +
+        jsonData.message.studentId +
+        jsonData.message.courseId +
+        jsonData.message.grade;
+
+    jsonData.challenge = concat;
+
+    console.log('Challenge:', new TextEncoder("utf-8").encode(concat));
+
     // Import private key
     const privateKey = await importPrivateKey();
     // Sign data
     const signature = await crypto.subtle.sign(
-        {
-            name: "ECDSA",
-            hash: { name: "SHA-256" },
-        },
-        privateKey,
-        jsonDataBytes
+            {
+                name: "ECDSA",
+                namedCurve: "P-256",
+                hash: { name: "SHA-256" },
+            },
+            privateKey,
+            new TextEncoder("utf-8").encode(concat),
     );
-    jsonData.signature = new Uint8Array(signature);
+    console.log('Signature:', signature);
+
+    // Convert the signature to a Base64-encoded string
+    const signatureArray = new Uint8Array(signature);
+    jsonData.signature = btoa(String.fromCharCode.apply(null, signatureArray));
+
     console.log(jsonData);
-    // $.ajax({
-    //     type: "POST",
-    //     url: "adv_prog_project-1.0-SNAPSHOT/AuthServlet",
-    //     dataType: "json",
-    //     data: JSON.stringify(jsonData),
-    //     success: function (msg) {
-    //         if (msg) {
-    //             alert("Sent!");
-    //             location.reload(true);
-    //         } else {
-    //             alert("Not sent!");
-    //         }
-    //     },
-    // });
+    console.log(jsonData.challenge);
+    console.log(jsonData.signature);
 
     const xhr = new XMLHttpRequest();
     const url = "AssignGradeServlet";
@@ -104,7 +130,8 @@ async function sendGrade() {
     xhr.setRequestHeader("Content-Type", "application/json");
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
-            console.log(xhr.status);
+            const json = JSON.parse(xhr.responseText);
+            alert(json.message);
         }
     };
     const data = JSON.stringify(jsonData);

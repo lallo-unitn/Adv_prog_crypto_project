@@ -92,7 +92,8 @@ public class DtoAssembler {
                 teacher.getId(),
                 teacher.getTaughtCourse(),
                 DtoAssembler.getUserAccountDto(teacher.getUserAccount()),
-                DtoAssembler.getCourseDto(teacher.getCourse())
+                DtoAssembler.getCourseDto(teacher.getCourse()),
+                teacher.getEccPublicKey()
         );
     }
 }

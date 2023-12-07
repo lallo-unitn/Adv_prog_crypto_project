@@ -13,12 +13,14 @@ public class TeacherDto implements Serializable {
     private final String taughtCourse;
     private final UserAccountDto userAccount;
     private final CourseDto course;
+    private final String eccPublicKey;
 
-    public TeacherDto(Integer id, String taughtCourse, UserAccountDto userAccount, CourseDto course) {
+    public TeacherDto(Integer id, String taughtCourse, UserAccountDto userAccount, CourseDto course, String eccPublicKey) {
         this.id = id;
         this.taughtCourse = taughtCourse;
         this.userAccount = userAccount;
         this.course = course;
+        this.eccPublicKey = eccPublicKey;
     }
 
     public Integer getId() {
@@ -37,6 +39,10 @@ public class TeacherDto implements Serializable {
         return course;
     }
 
+    public String getEccPublicKey() {
+        return eccPublicKey;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -45,12 +51,13 @@ public class TeacherDto implements Serializable {
         return Objects.equals(this.id, entity.id) &&
                 Objects.equals(this.taughtCourse, entity.taughtCourse) &&
                 Objects.equals(this.userAccount, entity.userAccount) &&
-                Objects.equals(this.course, entity.course);
+                Objects.equals(this.course, entity.course) &&
+                Objects.equals(this.eccPublicKey, entity.eccPublicKey);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, taughtCourse, userAccount, course);
+        return Objects.hash(id, taughtCourse, userAccount, course, eccPublicKey);
     }
 
     @Override
@@ -59,6 +66,7 @@ public class TeacherDto implements Serializable {
                 "id = " + id + ", " +
                 "taughtCourse = " + taughtCourse + ", " +
                 "userAccount = " + userAccount + ", " +
-                "course = " + course + ")";
+                "course = " + course + ", " +
+                "eccPublicKey = " + eccPublicKey + ")";
     }
 }

@@ -61,10 +61,11 @@ public class TeacherManagerBean {
         return teacherDTOList;
     }
 
-    public void setStudentGrade(StudentDto studentDto, CourseDto courseDto, int grade) {
-        logger.info("Trying setting grade [ " + grade + " ] for student [ " + studentDto.getId() + " ] in course [ " + courseDto.getId() + " ]");
-        this.teacherBean.setStudentGrade(getStudentAux(studentDto.getId()),
-                getCourseAux(courseDto.getId()),
+    public void setStudentGrade(StudentDto studentDto, int courseId, int grade) {
+        logger.info("Trying setting grade [ " + grade + " ] for student [ " + studentDto.getId() + " ] in course [ " + courseId + " ]");
+        this.teacherBean.setStudentGrade(
+                getStudentAux(studentDto.getId()),
+                getCourseAux(courseId),
                 grade
         );
     }
@@ -79,5 +80,16 @@ public class TeacherManagerBean {
         Course course = null;
         course = this.courseBean.getCourseById(courseId);
         return course;
+    }
+
+    public TeacherDto getTeacherByCourse(int courseId) {
+        Course course = this.getCourseAux(courseId);
+        Teacher teacher = null;
+        teacher = this.teacherBean.getTeacherByCourse(course);
+        if (teacher == null) {
+            return null;
+        } else {
+            return DtoAssembler.getTeacherDto(teacher);
+        }
     }
 }

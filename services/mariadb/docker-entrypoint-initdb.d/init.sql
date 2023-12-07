@@ -35,6 +35,7 @@ CREATE TABLE IF NOT EXISTS teacher (
     taught_course VARCHAR(255) NOT NULL,
     user_account_id BIGINT UNSIGNED UNIQUE,
     course_id BIGINT UNSIGNED UNIQUE,
+    ecc_public_key TEXT UNIQUE,
     FOREIGN KEY (user_account_id) REFERENCES user_account(id) ON DELETE CASCADE,
     FOREIGN KEY (course_id) REFERENCES course(id) ON DELETE CASCADE
 );
@@ -70,9 +71,9 @@ VALUES
     ('History 202', 4);
 
 -- Insert test values into teacher table
-INSERT INTO teacher (taught_course, user_account_id, course_id)
+INSERT INTO teacher (taught_course, user_account_id, course_id, ecc_public_key)
 VALUES
-    ('Mathematics', 2, 1);
+    ('Mathematics', 2, 1, 'MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEFj3DE210RCXwvBL+K+CwxOP58bvqDmvl3a0fxu2vtLMOcM2GTxV1uJZ8QBnRGdJcLOYuIr/qe9yNuGhXlvYslA==');
 
 -- Insert test values into enrollment table
 INSERT INTO enrollment (student_id, course_id, grade)

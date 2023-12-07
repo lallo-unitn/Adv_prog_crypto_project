@@ -40,7 +40,7 @@
            name="grade"
            id="grade"
            required="required">
-    <input type="button" value="Submit" onclick="sendGrade()">
+    <input type="button" value="Submit" onclick="sendGrade(${teacherDto.course.id})">
 </form>
 <script src="js/signature_functions.js" defer></script>
 </body>
