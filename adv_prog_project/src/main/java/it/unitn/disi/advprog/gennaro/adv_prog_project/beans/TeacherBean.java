@@ -97,5 +97,26 @@ public class TeacherBean {
         logger.info("Student [ " + student.getId() + " ] grade updated");
     }
 
+    public Teacher getTeacherByCourse(Course course) {
+        // Constructing a JPQL query to select a teacher based on the course
+        TypedQuery<Teacher> query = this.entityManager.createQuery(
+                "SELECT t FROM Teacher t WHERE t.course = :course",
+                Teacher.class
+        );
+
+        // Setting the parameter for the course
+        query.setParameter("course", course);
+
+        Teacher teacher = null;
+        try {
+            // Execute the query and retrieve the teacher
+            teacher = query.getSingleResult();
+        } catch (NoResultException e) {
+            // Log a message if the teacher is not found
+            logger.info("Teacher [ " + course.getName() + " ] not found");
+            return null;
+        }
+        return teacher;
+    }
 }
 
