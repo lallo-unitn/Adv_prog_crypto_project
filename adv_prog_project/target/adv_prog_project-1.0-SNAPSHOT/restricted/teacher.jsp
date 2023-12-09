@@ -13,6 +13,9 @@
     <li>Surname: ${teacherDto.userAccount.surname}</li>
     <li>Id: ${teacherDto.id}</li>
 </ul>
+<<<<<<< HEAD
+<form action="AssignGradeServlet" method="post">
+=======
 
 <label for="inputfile"></label>
 <input type="file" id="inputfile" placeholder="Enter item...">
@@ -28,6 +31,7 @@
 <br>
 
 <form id="GradeForm">
+>>>>>>> main
     <label for="studentId"></label>
     <input type="text"
            placeholder="studentId"
@@ -40,8 +44,13 @@
            name="grade"
            id="grade"
            required="required">
+<<<<<<< HEAD
+    <input type="submit" value="Submit">
+</form>
+=======
     <input type="button" value="Submit" onclick="sendGrade(${teacherDto.course.id})">
 </form>
 <script src="js/signature_functions.js" defer></script>
+>>>>>>> main
 </body>
 </html>

@@ -1,6 +1,5 @@
 package it.unitn.disi.advprog.gennaro.adv_prog_project.beans;
 
-import it.unitn.disi.advprog.gennaro.adv_prog_project.entities.Student;
 import it.unitn.disi.advprog.gennaro.adv_prog_project.entities.UserAccount;
 import jakarta.ejb.Local;
 import jakarta.ejb.Stateless;
@@ -11,7 +10,7 @@ import jakarta.persistence.NoResultException;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
 import org.jboss.logging.Logger;
-
+import org.springframework.security.crypto.bcrypt.BCrypt;
 @Local
 @Stateless
 @TransactionManagement(TransactionManagementType.CONTAINER)
@@ -21,14 +20,19 @@ public class UserAccountBean {
     @PersistenceContext(unitName = "default")
     private EntityManager entityManager;
 
+
+
     public UserAccount getUserAccountByCredentials(String username, String password) throws NoResultException{
         logger.info("Checking credentials for user [ " + username + " ]");
         TypedQuery<UserAccount> query = this.entityManager.createQuery(
-                "SELECT u FROM UserAccount u WHERE u.username = :username AND u.password = :password", UserAccount.class
+                "SELECT u FROM UserAccount u WHERE u.username = :username", UserAccount.class
         );
         query.setParameter("username", username);
-        query.setParameter("password", password);
-        return query.getSingleResult();
+        UserAccount user = query.getSingleResult();
+        if (BCrypt.checkpw(password, user.getPassword())) {
+            return user;
+        }
+        return null;
     }
 
 }
