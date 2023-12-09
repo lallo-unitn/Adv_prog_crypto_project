@@ -20,8 +20,6 @@
 <br>
 <br>
 
-<%--<button onclick="add()">Add Item <i class="fa-solid fa-plus"></i></button>
-<button onclick="del()">Clear all <i class="fa-solid fa-ban"></i></button>--%>
 <div id="output"></div>
 <div id="outputKey"></div>
 <br>

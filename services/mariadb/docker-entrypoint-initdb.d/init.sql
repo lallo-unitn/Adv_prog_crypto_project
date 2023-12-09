@@ -73,7 +73,10 @@ VALUES
 -- Insert test values into teacher table
 INSERT INTO teacher (taught_course, user_account_id, course_id, ecc_public_key)
 VALUES
-    ('Mathematics', 2, 1, 'MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEFj3DE210RCXwvBL+K+CwxOP58bvqDmvl3a0fxu2vtLMOcM2GTxV1uJZ8QBnRGdJcLOYuIr/qe9yNuGhXlvYslA==');
+    ('Mathematics', 2, 1, '-----BEGIN PUBLIC KEY-----
+MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEJmvAi0EWPgiayF+Kx/Ad5w5ewPGG
+XOFgln5MJV3DNXoEHnrgVc7wTbkeuDPU8syXOWC+blotIPUSdiLUOYvWug==
+-----END PUBLIC KEY-----');
 
 -- Insert test values into enrollment table
 INSERT INTO enrollment (student_id, course_id, grade)
