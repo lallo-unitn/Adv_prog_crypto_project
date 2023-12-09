@@ -55,7 +55,8 @@ INSERT INTO user_account (username, password, name, surname, role)
 VALUES
     ('user1', '$2a$12$z5bYbHJVEajPZyNnEA5snuS0gCZUNslpnI2MgcUk4qoItjgskzZSO', 'John', 'Doe', 'student'),
     ('jane_smith', '$2a$12$1Wlee7nzlbikykl2scLGkOOiXEk/FXl6F4upbMbQKK0XAmSd67vGi', 'Jane', 'Smith', 'teacher'),
-    ('bob_johnson', '$2a$12$Fpb/8imWNSKjB.BXmg2QBOi84bGhvaldXZEGEFN6lGWv6ruJNHrQW', 'Bob', 'Johnson', 'student');
+    ('bob_johnson', '$2a$12$Fpb/8imWNSKjB.BXmg2QBOi84bGhvaldXZEGEFN6lGWv6ruJNHrQW', 'Bob', 'Johnson', 'student'),
+    ('admin', '$2a$12$JBLpalawdFYBddWM8kV9reqkDfN4k44WQNpraB.gHvfgsnuGq4xpu', 'Bobob', 'Johnsonson', 'admin');
 
 -- Insert test values into student table
 INSERT INTO student (gpa, user_account_id)

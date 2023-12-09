@@ -1,8 +1,7 @@
-package it.unitn.disi.advprog.gennaro.adv_prog_project.auxiliary;
+package it.unitn.disi.advprog.gennaro.adv_prog_project.filters;
 
 import it.unitn.disi.advprog.gennaro.adv_prog_project.dto.UserAccountDto;
 import jakarta.servlet.*;
-import jakarta.servlet.annotation.WebFilter;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import java.io.IOException;

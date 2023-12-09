@@ -10,7 +10,7 @@ import org.jboss.logging.Logger;
 @Local
 @TransactionManagement(TransactionManagementType.CONTAINER)
 public class UserAccountManager {
-    private static final Logger logger = Logger.getLogger(StudentManagerBean.class);
+    private static final Logger logger = Logger.getLogger(StudentManager.class);
 
     @EJB
     private UserAccountBean userAccountBean;
@@ -18,4 +18,9 @@ public class UserAccountManager {
     public UserAccount getUserAccountByCredentials(String username, String password) throws NoResultException {
         return userAccountBean.getUserAccountByCredentials(username, password);
     }
+
+    public boolean addUserAccount(UserAccount userAccount) {
+        return this.userAccountBean.addUserAccount(userAccount);
+    }
+
 }

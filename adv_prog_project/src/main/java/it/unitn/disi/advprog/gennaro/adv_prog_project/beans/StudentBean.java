@@ -1,5 +1,6 @@
 package it.unitn.disi.advprog.gennaro.adv_prog_project.beans;
 
+import it.unitn.disi.advprog.gennaro.adv_prog_project.dto.StudentDto;
 import it.unitn.disi.advprog.gennaro.adv_prog_project.dto.UserAccountDto;
 import it.unitn.disi.advprog.gennaro.adv_prog_project.entities.Student;
 import jakarta.ejb.Local;
@@ -22,6 +23,18 @@ public class StudentBean {
     // Entity manager for interacting with the database
     @PersistenceContext(unitName = "default")
     private EntityManager entityManager;
+
+    public boolean addStudent(Student student) {
+        // Logging an informational message
+        logger.info("Registering student [ " + student.getId() + " ]");
+
+        // Persisting the student entity to the database
+        this.entityManager.persist(student);
+
+        // Logging a debug message
+        logger.debug("Student [ " + student.getId() + " ] successfully registered");
+        return true;
+    }
 
     /**
      * Retrieves a student entity based on the provided matriculation number.
@@ -75,5 +88,16 @@ public class StudentBean {
             return null;
         }
         return student;
+    }
+
+    public void updateStudent(Student student) {
+        // Logging an informational message
+        logger.info("Updating student [ " + student.getId() + " ]");
+
+        // Persisting the student entity to the database
+        this.entityManager.merge(student);
+
+        // Logging a debug message
+        logger.debug("Student [ " + student.getId() + " ] successfully updated");
     }
 }

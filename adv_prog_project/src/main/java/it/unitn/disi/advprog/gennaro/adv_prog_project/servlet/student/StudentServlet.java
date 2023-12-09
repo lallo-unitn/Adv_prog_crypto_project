@@ -1,13 +1,12 @@
-package it.unitn.disi.advprog.gennaro.adv_prog_project.servlet;
+package it.unitn.disi.advprog.gennaro.adv_prog_project.servlet.student;
 
 
 import it.unitn.disi.advprog.gennaro.adv_prog_project.dto.EnrollmentDto;
 import it.unitn.disi.advprog.gennaro.adv_prog_project.dto.StudentDto;
 import it.unitn.disi.advprog.gennaro.adv_prog_project.dto.UserAccountDto;
-import it.unitn.disi.advprog.gennaro.adv_prog_project.managers.StudentManagerBean;
+import it.unitn.disi.advprog.gennaro.adv_prog_project.managers.StudentManager;
 import jakarta.ejb.EJB;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -24,7 +23,7 @@ import java.util.List;
 public class StudentServlet extends HttpServlet {
 
     @EJB
-    private StudentManagerBean studentManagerBean;
+    private StudentManager studentManager;
 
     /**
      * Handles HTTP GET requests.
@@ -42,8 +41,8 @@ public class StudentServlet extends HttpServlet {
         // Get the userAccountDto attribute from the session
         UserAccountDto userAccountDto = (UserAccountDto) request.getSession().getAttribute("userAccountDto");
 
-        // Get student information using the StudentManagerBean
-        StudentDto studentDto = studentManagerBean.getStudent(userAccountDto);
+        // Get student information using the StudentManager
+        StudentDto studentDto = studentManager.getStudent(userAccountDto);
 
         // Check if the student exists
         if (studentDto == null) {
@@ -57,7 +56,7 @@ public class StudentServlet extends HttpServlet {
         request.setAttribute("studentDto", studentDto);
 
         // Get a list of enrollments for the student
-        List<EnrollmentDto> enrollmentDtoList = studentManagerBean.getStudentCourses(studentDto.getId());
+        List<EnrollmentDto> enrollmentDtoList = studentManager.getStudentCourses(studentDto.getId());
 
         for(EnrollmentDto e : enrollmentDtoList) {
             System.out.println(e.toString());

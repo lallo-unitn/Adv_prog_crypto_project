@@ -1,10 +1,8 @@
 package it.unitn.disi.advprog.gennaro.adv_prog_project.beans;
 
+import it.unitn.disi.advprog.gennaro.adv_prog_project.entities.Student;
 import it.unitn.disi.advprog.gennaro.adv_prog_project.entities.UserAccount;
-import jakarta.ejb.Local;
-import jakarta.ejb.Stateless;
-import jakarta.ejb.TransactionManagement;
-import jakarta.ejb.TransactionManagementType;
+import jakarta.ejb.*;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.NoResultException;
 import jakarta.persistence.PersistenceContext;
@@ -20,7 +18,15 @@ public class UserAccountBean {
     @PersistenceContext(unitName = "default")
     private EntityManager entityManager;
 
+    @EJB
+    private StudentBean studentBean;
 
+    public boolean setUserAccount(UserAccount userAccount) {
+        logger.info("Registering user [ " + userAccount.getUsername() + " ]");
+        this.entityManager.persist(userAccount);
+        logger.debug("User [ " + userAccount.getUsername() + " ] successfully registered");
+        return true;
+    }
 
     public UserAccount getUserAccountByCredentials(String username, String password) throws NoResultException{
         logger.info("Checking credentials for user [ " + username + " ]");
@@ -35,4 +41,15 @@ public class UserAccountBean {
         return null;
     }
 
+    public boolean addUserAccount(UserAccount userAccount) {
+        logger.info("Registering user [ " + userAccount.getUsername() + " ]");
+        Student student = new Student();
+        this.studentBean.addStudent(student);
+        userAccount.setStudent(student);
+        this.studentBean.updateStudent(student);
+        student.setUserAccount(userAccount);
+        this.entityManager.persist(userAccount);
+        logger.debug("User [ " + userAccount.getUsername() + " ] successfully registered");
+        return true;
+    }
 }

@@ -18,9 +18,9 @@ import java.util.List;
 @Stateless
 @Local
 @TransactionManagement(TransactionManagementType.CONTAINER)
-public class StudentManagerBean {
+public class StudentManager {
 
-    private static final Logger logger = Logger.getLogger(StudentManagerBean.class);
+    private static final Logger logger = Logger.getLogger(StudentManager.class);
 
     @EJB
     private StudentBean studentBean;
@@ -69,4 +69,5 @@ public class StudentManagerBean {
         }
         return enrollmentDTOList;
     }
+
 }

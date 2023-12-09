@@ -1,4 +1,4 @@
-package it.unitn.disi.advprog.gennaro.adv_prog_project.servlet;
+package it.unitn.disi.advprog.gennaro.adv_prog_project.servlet.auth;
 
 import it.unitn.disi.advprog.gennaro.adv_prog_project.dto.UserAccountDto;
 import it.unitn.disi.advprog.gennaro.adv_prog_project.dtoAssembler.DtoAssembler;
@@ -49,6 +49,9 @@ public class AuthServlet extends HttpServlet {
         }
         else if(userAccountDto.getRole().equals("student")) {
             rd = request.getRequestDispatcher("/StudentServlet");
+        }
+        else if(userAccountDto.getRole().equals("admin")) {
+            rd = request.getRequestDispatcher("/AdminServlet");
         }
         else {
             rd = request.getRequestDispatcher("/LoginServlet");

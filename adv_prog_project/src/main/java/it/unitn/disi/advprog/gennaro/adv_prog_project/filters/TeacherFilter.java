@@ -1,4 +1,4 @@
-package it.unitn.disi.advprog.gennaro.adv_prog_project.auxiliary;
+package it.unitn.disi.advprog.gennaro.adv_prog_project.filters;
 
 import jakarta.servlet.*;
 import jakarta.servlet.http.HttpServletRequest;

@@ -1,4 +1,4 @@
-package it.unitn.disi.advprog.gennaro.adv_prog_project.servlet;
+package it.unitn.disi.advprog.gennaro.adv_prog_project.servlet.auth;
 
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;

@@ -1,8 +1,6 @@
-package it.unitn.disi.advprog.gennaro.adv_prog_project.auxiliary;
+package it.unitn.disi.advprog.gennaro.adv_prog_project.filters;
 
 import jakarta.servlet.*;
-import jakarta.servlet.annotation.WebFilter;
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
