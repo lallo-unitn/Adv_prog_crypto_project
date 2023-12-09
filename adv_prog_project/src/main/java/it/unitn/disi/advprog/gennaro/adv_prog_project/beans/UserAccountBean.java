@@ -1,6 +1,5 @@
 package it.unitn.disi.advprog.gennaro.adv_prog_project.beans;
 
-import it.unitn.disi.advprog.gennaro.adv_prog_project.entities.Student;
 import it.unitn.disi.advprog.gennaro.adv_prog_project.entities.UserAccount;
 import jakarta.ejb.Local;
 import jakarta.ejb.Stateless;
