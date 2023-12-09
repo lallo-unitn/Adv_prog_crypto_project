@@ -31,7 +31,7 @@ public class TeacherServlet extends HttpServlet {
      * @throws IOException      if an input or output error is detected when the servlet handles the GET request
      */
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         // Get the userAccountDto attribute from the session
         UserAccountDto userAccountDto = (UserAccountDto) request.getSession().getAttribute("userAccountDto");

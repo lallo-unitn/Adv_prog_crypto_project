@@ -4,6 +4,17 @@
          xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_5_0.xsd"
          version="5.0">
 
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>Esse3-Bootleg</web-resource-name>
+            <url-pattern>/*</url-pattern>
+        </web-resource-collection>
+        <user-data-constraint>
+            <transport-guarantee>CONFIDENTIAL</transport-guarantee>
+        </user-data-constraint>
+    </security-constraint>
+
+
     <welcome-file-list>
         <welcome-file>HomeServlet</welcome-file>
     </welcome-file-list>
@@ -34,10 +45,10 @@
     </filter-mapping>
     <filter-mapping>
         <filter-name>AuthFilter</filter-name>
-        <url-pattern>/HomeServlet</url-pattern>
-        <url-pattern>/AdvisorChoiceServlet</url-pattern>
         <url-pattern>/StudentServlet</url-pattern>
         <url-pattern>/HomeServlet</url-pattern>
+        <url-pattern>/TeacherServlet</url-pattern>
+        <url-pattern>/AssignGradeServlet</url-pattern>
     </filter-mapping>
     <filter-mapping>
         <filter-name>StudentFilter</filter-name>
@@ -45,7 +56,8 @@
     </filter-mapping>
     <filter-mapping>
         <filter-name>TeacherFilter</filter-name>
-        <url-pattern>/TeacherFilter</url-pattern>
+        <url-pattern>/TeacherServlet</url-pattern>
+        <url-pattern>/AssignGradeServlet</url-pattern>
     </filter-mapping>
 
 
@@ -56,6 +68,10 @@
     <servlet>
         <servlet-name>TeacherServlet</servlet-name>
         <servlet-class>it.unitn.disi.advprog.gennaro.adv_prog_project.servlet.TeacherServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AssignGradeServlet</servlet-name>
+        <servlet-class>it.unitn.disi.advprog.gennaro.adv_prog_project.servlet.AssignGradeServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>HomeServlet</servlet-name>
@@ -78,6 +94,10 @@
     <servlet-mapping>
         <servlet-name>TeacherServlet</servlet-name>
         <url-pattern>/TeacherServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AssignGradeServlet</servlet-name>
+        <url-pattern>/AssignGradeServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>HomeServlet</servlet-name>

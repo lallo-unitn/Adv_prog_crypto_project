@@ -24,6 +24,18 @@ public class Teacher {
     @JoinColumn(name = "course_id")
     private Course course;
 
+    @Lob
+    @Column(name = "ecc_public_key")
+    private String eccPublicKey;
+
+    public String getEccPublicKey() {
+        return eccPublicKey;
+    }
+
+    public void setEccPublicKey(String eccPublicKey) {
+        this.eccPublicKey = eccPublicKey;
+    }
+
     public Course getCourse() {
         return course;
     }

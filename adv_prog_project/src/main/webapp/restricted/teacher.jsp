@@ -3,7 +3,7 @@
 <head>
     <title>Teacher Dashboard</title>
 </head>
-<body>
+<body onLoad="init()">
 <h2>Teacher Detail</h2>
 <jsp:useBean id="teacherDto"
              scope="session"
@@ -13,7 +13,19 @@
     <li>Surname: ${teacherDto.userAccount.surname}</li>
     <li>Id: ${teacherDto.id}</li>
 </ul>
-<form action="AssignGradeServlet" method="post">
+
+<label for="inputfile"></label>
+<input type="file" id="inputfile" placeholder="Enter item...">
+
+<br>
+<br>
+
+<div id="output"></div>
+<div id="outputKey"></div>
+<br>
+<br>
+
+<form id="GradeForm">
     <label for="studentId"></label>
     <input type="text"
            placeholder="studentId"
@@ -26,7 +38,8 @@
            name="grade"
            id="grade"
            required="required">
-    <input type="submit" value="Submit">
+    <input type="button" value="Submit" onclick="sendGrade(${teacherDto.course.id})">
 </form>
+<script src="js/signature_functions.js" defer></script>
 </body>
 </html>
