@@ -7,7 +7,7 @@ USE universityDatabase;
 -- Create user_account table
 CREATE TABLE IF NOT EXISTS user_account (
     id SERIAL PRIMARY KEY,
-    username VARCHAR(255) NOT NULL,
+    username VARCHAR(255) UNIQUE NOT NULL,
     password CHAR(72) NOT NULL,
     name VARCHAR(255) NOT NULL,
     surname VARCHAR(255) NOT NULL,

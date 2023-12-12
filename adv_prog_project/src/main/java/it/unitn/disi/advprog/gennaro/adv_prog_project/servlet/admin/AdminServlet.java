@@ -12,6 +12,7 @@ public class AdminServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setAttribute("message", "");
         RequestDispatcher rd = request.getRequestDispatcher("restricted/adminPage.jsp");
         rd.forward(request, response);
     }

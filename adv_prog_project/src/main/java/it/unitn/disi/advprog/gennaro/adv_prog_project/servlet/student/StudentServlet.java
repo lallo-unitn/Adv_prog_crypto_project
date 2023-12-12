@@ -58,14 +58,20 @@ public class StudentServlet extends HttpServlet {
         // Get a list of enrollments for the student
         List<EnrollmentDto> enrollmentDtoList = studentManager.getStudentCourses(studentDto.getId());
 
+        // if enrollmentDtoList is null, notify the user
+        if (enrollmentDtoList == null) {
+            // Set an error message and forward to index.jsp
+            request.setAttribute("messageNoCourse", "studentId is not registered in any course");
+            request.getRequestDispatcher("restricted/studentPage.jsp").forward(request, response);
+            return;
+        }
+
         for(EnrollmentDto e : enrollmentDtoList) {
             System.out.println(e.toString());
         }
-
         // Set the enrollmentDtoList attribute for the JSP page
         request.setAttribute("enrollmentDtoList", enrollmentDtoList);
-
         // Forward the request to studentPage.jsp
-        request.getRequestDispatcher("restricted/studentPage.jsp").forward(request, response);
+        request.getRequestDispatcher("restricted/studentPageDetails.jsp").forward(request, response);
     }
 }

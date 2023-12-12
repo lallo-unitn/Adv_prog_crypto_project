@@ -44,17 +44,19 @@ public class AuthServlet extends HttpServlet {
         session.setAttribute("userAccountDto", userAccountDto);
         session.setAttribute("role", userAccountDto.getRole());
 
-        if(userAccountDto.getRole().equals("teacher")) {
-            rd = request.getRequestDispatcher("/TeacherServlet");
-        }
-        else if(userAccountDto.getRole().equals("student")) {
-            rd = request.getRequestDispatcher("/StudentServlet");
-        }
-        else if(userAccountDto.getRole().equals("admin")) {
-            rd = request.getRequestDispatcher("/AdminServlet");
-        }
-        else {
-            rd = request.getRequestDispatcher("/LoginServlet");
+        switch (userAccountDto.getRole()) {
+            case "teacher":
+                rd = request.getRequestDispatcher("/TeacherServlet");
+                break;
+            case "student":
+                rd = request.getRequestDispatcher("/StudentServlet");
+                break;
+            case "admin":
+                rd = request.getRequestDispatcher("/AdminServlet");
+                break;
+            default:
+                rd = request.getRequestDispatcher("/LoginServlet");
+                break;
         }
 
         rd.forward(request, response);
