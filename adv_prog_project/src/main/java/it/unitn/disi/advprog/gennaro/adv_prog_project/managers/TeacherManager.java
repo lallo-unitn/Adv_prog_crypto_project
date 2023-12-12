@@ -1,7 +1,6 @@
 package it.unitn.disi.advprog.gennaro.adv_prog_project.managers;
 
 import it.unitn.disi.advprog.gennaro.adv_prog_project.beans.CourseBean;
-import it.unitn.disi.advprog.gennaro.adv_prog_project.dto.CourseDto;
 import it.unitn.disi.advprog.gennaro.adv_prog_project.dto.StudentDto;
 import it.unitn.disi.advprog.gennaro.adv_prog_project.dto.TeacherDto;
 import it.unitn.disi.advprog.gennaro.adv_prog_project.dto.UserAccountDto;
@@ -21,9 +20,9 @@ import java.util.List;
 @Stateless
 @Local
 @TransactionManagement(TransactionManagementType.CONTAINER)
-public class TeacherManagerBean {
+public class TeacherManager {
 
-    private static final Logger logger = Logger.getLogger(TeacherManagerBean.class);
+    private static final Logger logger = Logger.getLogger(TeacherManager.class);
 
     @EJB
     private StudentBean studentBean;

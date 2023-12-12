@@ -14,27 +14,30 @@
         </user-data-constraint>
     </security-constraint>
 
+    <session-config>
+        <session-timeout>5</session-timeout>
+    </session-config>
 
     <welcome-file-list>
-        <welcome-file>HomeServlet</welcome-file>
+        <welcome-file>LoginServlet</welcome-file>
     </welcome-file-list>
 
 
     <filter>
         <filter-name>AuthFilter</filter-name>
-        <filter-class>it.unitn.disi.advprog.gennaro.adv_prog_project.auxiliary.AuthFilter</filter-class>
+        <filter-class>it.unitn.disi.advprog.gennaro.adv_prog_project.filters.AuthFilter</filter-class>
     </filter>
     <filter>
         <filter-name>JspFilter</filter-name>
-        <filter-class>it.unitn.disi.advprog.gennaro.adv_prog_project.auxiliary.JspFilter</filter-class>
+        <filter-class>it.unitn.disi.advprog.gennaro.adv_prog_project.filters.JspFilter</filter-class>
     </filter>
     <filter>
         <filter-name>StudentFilter</filter-name>
-        <filter-class>it.unitn.disi.advprog.gennaro.adv_prog_project.auxiliary.StudentFilter</filter-class>
+        <filter-class>it.unitn.disi.advprog.gennaro.adv_prog_project.filters.StudentFilter</filter-class>
     </filter>
     <filter>
         <filter-name>TeacherFilter</filter-name>
-        <filter-class>it.unitn.disi.advprog.gennaro.adv_prog_project.auxiliary.TeacherFilter</filter-class>
+        <filter-class>it.unitn.disi.advprog.gennaro.adv_prog_project.filters.TeacherFilter</filter-class>
     </filter>
 
 
@@ -63,15 +66,15 @@
 
     <servlet>
         <servlet-name>StudentServlet</servlet-name>
-        <servlet-class>it.unitn.disi.advprog.gennaro.adv_prog_project.servlet.StudentServlet</servlet-class>
+        <servlet-class>it.unitn.disi.advprog.gennaro.adv_prog_project.servlet.student.StudentServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>TeacherServlet</servlet-name>
-        <servlet-class>it.unitn.disi.advprog.gennaro.adv_prog_project.servlet.TeacherServlet</servlet-class>
+        <servlet-class>it.unitn.disi.advprog.gennaro.adv_prog_project.servlet.teacher.TeacherServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>AssignGradeServlet</servlet-name>
-        <servlet-class>it.unitn.disi.advprog.gennaro.adv_prog_project.servlet.AssignGradeServlet</servlet-class>
+        <servlet-class>it.unitn.disi.advprog.gennaro.adv_prog_project.servlet.teacher.AssignGradeServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>HomeServlet</servlet-name>
@@ -79,11 +82,19 @@
     </servlet>
     <servlet>
         <servlet-name>LoginServlet</servlet-name>
-        <servlet-class>it.unitn.disi.advprog.gennaro.adv_prog_project.servlet.LoginServlet</servlet-class>
+        <servlet-class>it.unitn.disi.advprog.gennaro.adv_prog_project.servlet.auth.LoginServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>AuthServlet</servlet-name>
-        <servlet-class>it.unitn.disi.advprog.gennaro.adv_prog_project.servlet.AuthServlet</servlet-class>
+        <servlet-class>it.unitn.disi.advprog.gennaro.adv_prog_project.servlet.auth.AuthServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AdminServlet</servlet-name>
+        <servlet-class>it.unitn.disi.advprog.gennaro.adv_prog_project.servlet.admin.AdminServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddStudentServlet</servlet-name>
+        <servlet-class>it.unitn.disi.advprog.gennaro.adv_prog_project.servlet.admin.AddStudentServlet</servlet-class>
     </servlet>
 
 
@@ -110,6 +121,14 @@
     <servlet-mapping>
         <servlet-name>AuthServlet</servlet-name>
         <url-pattern>/AuthServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminServlet</servlet-name>
+        <url-pattern>/AdminServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddStudentServlet</servlet-name>
+        <url-pattern>/AddStudentServlet</url-pattern>
     </servlet-mapping>
 
 </web-app>

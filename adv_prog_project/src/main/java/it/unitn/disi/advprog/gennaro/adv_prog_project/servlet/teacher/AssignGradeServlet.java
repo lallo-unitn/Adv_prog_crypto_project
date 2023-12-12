@@ -1,10 +1,10 @@
-package it.unitn.disi.advprog.gennaro.adv_prog_project.servlet;
+package it.unitn.disi.advprog.gennaro.adv_prog_project.servlet.teacher;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import it.unitn.disi.advprog.gennaro.adv_prog_project.dto.TeacherDto;
-import it.unitn.disi.advprog.gennaro.adv_prog_project.managers.StudentManagerBean;
-import it.unitn.disi.advprog.gennaro.adv_prog_project.managers.TeacherManagerBean;
+import it.unitn.disi.advprog.gennaro.adv_prog_project.managers.StudentManager;
+import it.unitn.disi.advprog.gennaro.adv_prog_project.managers.TeacherManager;
 import jakarta.ejb.EJB;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -26,9 +26,9 @@ import java.util.Base64;
 
 public class AssignGradeServlet extends HttpServlet {
     @EJB
-    TeacherManagerBean teacherManagerBean;
+    TeacherManager teacherManager;
     @EJB
-    StudentManagerBean studentManagerBean;
+    StudentManager studentManager;
 
     // Convert a javascript P1363 encoded signature to ASN.1 format
     private static byte[] toASN1(byte[] p1363EncodedSignature) throws IOException {
@@ -65,12 +65,12 @@ public class AssignGradeServlet extends HttpServlet {
         int grade = Integer.parseInt(jsonMessage.get("grade").getAsString());
         int courseId = Integer.parseInt(jsonMessage.get("courseId").getAsString());
 
-        TeacherDto teacherDto = teacherManagerBean.getTeacherByCourse(courseId);
+        TeacherDto teacherDto = teacherManager.getTeacherByCourse(courseId);
         String jsonReturnMessage;
         if(validateRequest(jsonData, teacherDto)){
             jsonReturnMessage = "Grade assigned successfully";
-            // Set the grade for the student using the TeacherManagerBean
-            teacherManagerBean.setStudentGrade(studentManagerBean.getStudent(studentId), courseId, grade);
+            // Set the grade for the student using the TeacherManager
+            teacherManager.setStudentGrade(studentManager.getStudent(studentId), courseId, grade);
         } else {
             jsonReturnMessage = "Grade was not assigned";
         }

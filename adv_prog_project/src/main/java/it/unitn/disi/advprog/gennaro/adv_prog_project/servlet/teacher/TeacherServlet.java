@@ -1,8 +1,8 @@
-package it.unitn.disi.advprog.gennaro.adv_prog_project.servlet;
+package it.unitn.disi.advprog.gennaro.adv_prog_project.servlet.teacher;
 
 import it.unitn.disi.advprog.gennaro.adv_prog_project.dto.TeacherDto;
 import it.unitn.disi.advprog.gennaro.adv_prog_project.dto.UserAccountDto;
-import it.unitn.disi.advprog.gennaro.adv_prog_project.managers.TeacherManagerBean;
+import it.unitn.disi.advprog.gennaro.adv_prog_project.managers.TeacherManager;
 import jakarta.ejb.EJB;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
@@ -20,7 +20,7 @@ import java.io.IOException;
 public class TeacherServlet extends HttpServlet {
 
     @EJB
-    private TeacherManagerBean teacherManagerBean;
+    private TeacherManager teacherManager;
 
     /**
      * Handles HTTP GET requests.
@@ -40,8 +40,8 @@ public class TeacherServlet extends HttpServlet {
         request.setAttribute("messageStudent", "");
         request.setAttribute("messageAdvisor", "");
 
-        // Get student information using the TeacherManagerBean
-        TeacherDto teacherDto = teacherManagerBean.getTeacher(userAccountDto);
+        // Get student information using the TeacherManager
+        TeacherDto teacherDto = teacherManager.getTeacher(userAccountDto);
 
         // Check if the student exists
         if (teacherDto == null) {

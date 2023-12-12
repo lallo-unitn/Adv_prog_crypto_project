@@ -23,6 +23,18 @@ public class TeacherBean {
     @PersistenceContext(unitName = "default")
     private EntityManager entityManager;
 
+    public boolean setTeacher(Teacher teacher) {
+        // Logging an informational message
+        logger.info("Registering teacher [ " + teacher.getId() + " ]");
+
+        // Persisting the teacher entity to the database
+        this.entityManager.persist(teacher);
+
+        // Logging a debug message
+        logger.debug("Teacher [ " + teacher.getId() + " ] successfully registered");
+        return true;
+    }
+
     /**
      * Retrieves a list of teachers who teach courses that the specified student is enrolled in.
      *
