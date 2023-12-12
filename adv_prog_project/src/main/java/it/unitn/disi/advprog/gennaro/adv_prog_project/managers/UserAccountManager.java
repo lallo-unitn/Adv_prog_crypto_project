@@ -15,7 +15,7 @@ public class UserAccountManager {
     @EJB
     private UserAccountBean userAccountBean;
 
-    public UserAccount getUserAccountByCredentials(String username, String password) throws NoResultException {
+    public UserAccount getUserAccountByCredentials(String username, String password) throws EJBTransactionRolledbackException {
         return userAccountBean.getUserAccountByCredentials(username, password);
     }
 

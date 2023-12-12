@@ -5,9 +5,8 @@ import it.unitn.disi.advprog.gennaro.adv_prog_project.dtoAssembler.DtoAssembler;
 import it.unitn.disi.advprog.gennaro.adv_prog_project.entities.UserAccount;
 import it.unitn.disi.advprog.gennaro.adv_prog_project.managers.UserAccountManager;
 import jakarta.ejb.EJB;
-import jakarta.persistence.NoResultException;
+import jakarta.persistence.PersistenceException;
 import jakarta.servlet.RequestDispatcher;
-import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -34,9 +33,11 @@ public class AuthServlet extends HttpServlet {
         String password = request.getParameter("password");
         RequestDispatcher rd = request.getRequestDispatcher("/LoginServlet");
         UserAccount userAccount;
+        request.setAttribute("message", "");
         try{
             userAccount = userAccountManager.getUserAccountByCredentials(username, password);
-        } catch (NoResultException e) {
+        } catch (Exception e) {
+            request.setAttribute("message", "Wrong credentials");
             rd.forward(request, response);
             return;
         }

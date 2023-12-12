@@ -20,14 +20,11 @@
     <input type="submit" value="Login">
     <input type="hidden" value="<%= request.getAttribute("destination")%>">
 
-    <%
-        String message = (String) request.getAttribute("message");
-        if (message != null) {
-    %>
     <br>
-    <%= message%>
-    <%}%>
+    <br>
+    <% if (request.getAttribute("message") != null) { %>
+        <%= request.getAttribute("message")%>
+    <% } %>
 </form>
-<a href="RegistrationServlet">Click here to register</a>
 </body>
 </html>
