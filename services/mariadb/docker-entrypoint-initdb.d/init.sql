@@ -1,3 +1,7 @@
+CREATE USER 'vault'@'%' IDENTIFIED BY 'vault';
+GRANT ALL PRIVILEGES ON your_database.* TO 'vault'@'%';
+FLUSH PRIVILEGES;
+
 -- Create the database (if it doesn't exist already)
 CREATE DATABASE IF NOT EXISTS universityDatabase;
 

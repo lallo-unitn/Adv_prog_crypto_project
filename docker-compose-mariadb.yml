@@ -16,14 +16,21 @@ services:
       - type: bind
         source: ./services/mariadb/mysql/encryption
         target: /etc/mysql/conf.d/encryption
-
-          # adminer:
-          #image: adminer:latest
-          #restart: always
-          #network_mode: host
+          #vault:
+          # image: hashicorp/vault:latest
+          #container_name: vault
           #ports:
-          #- 8090:8080
+          #  - "8200:8200"
+          #volumes:
+          #  - /services/vault/vault.hcl:/vault/config/vault.hcl
+          #  - /services/vault/data:/vault/data
+          #cap_add:
+          #  - IPC_LOCK
+          #environment:
+          #  VAULT_ADDR: http://127.0.0.1:8200
+          #restart: unless-stopped
 
 volumes:
   configuration:
     name: configuration
+

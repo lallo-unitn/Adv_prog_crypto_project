@@ -82,33 +82,3 @@ volumes:
     name: configuration
   
 
-          # car-sharing:
-          #   image: car-sharing:latest
-          #   build: ./service/car-sharing
-          #   container_name: car-sharing
-          #   restart: unless-stopped
-          #   stdin_open: true
-          #   tty: true
-          #   networks:
-          #     - tech-service
-
-          # laundry-scheduler:
-          #   image: laundry-scheduler:latest
-          #   build: ./service/laundry-scheduler
-          #   container_name: laundry-scheduler
-          #   restart: unless-stopped
-          #   stdin_open: true
-          #   tty: true
-          #   networks:
-          #     - tech-service
-
-          # nest-cooking-schedule:
-          #   image: nest-cooking-schedule:latest
-          #   build: ./service/nest-cooking-schedule
-          #   container_name: nest-cooking-schedule
-          #   restart: unless-stopped
-          #   stdin_open: true
-          #   tty: true
-          #   networks:
-          #     - tech-service 
-
