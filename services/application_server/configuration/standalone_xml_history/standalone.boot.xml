@@ -127,23 +127,13 @@
         <subsystem xmlns="urn:jboss:domain:core-management:1.0"/>
         <subsystem xmlns="urn:jboss:domain:datasources:7.1">
             <datasources>
-                <datasource jndi-name="java:jboss/datasources/ExampleDS" pool-name="ExampleDS" enabled="true" use-java-context="true" statistics-enabled="${wildfly.datasources.statistics-enabled:${wildfly.statistics-enabled:false}}">
-                    <connection-url>jdbc:h2:mem:test;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE;MODE=${wildfly.h2.compatibility.mode:REGULAR}</connection-url>
-                    <driver>h2</driver>
-                    <security user-name="sa" password="sa"/>
+                <datasource jndi-name="java:jboss/datasources/mariadb" pool-name="mariadbPool">
+                    <connection-url>jdbc:mariadb://localhost:3306/universityDatabase</connection-url>
+                    <driver>mariadb</driver>
+                    <security user-name="root" password="root"/>
                 </datasource>
-                <datasource jndi-name="java:jboss/datasources/PostgresDS" pool-name="PostgresDS">
-                    <connection-url>jdbc:postgresql://localhost:5432/universityDatabase</connection-url>
-                    <driver>postgresql</driver>
-                    <security user-name="lallo" password="lallo"/>
-                </datasource>
-                <drivers>
-                    <driver name="h2" module="com.h2database.h2">
-                        <xa-datasource-class>org.h2.jdbcx.JdbcDataSource</xa-datasource-class>
-                    </driver>
-                    <driver name="postgresql" module="org.postgresql">
-                        <driver-class>org.postgresql.Driver</driver-class>
-                    </driver>
+                <drivers> 
+                    <driver name="mariadb" module="com.mariadb"/>
                 </drivers>
             </datasources>
         </subsystem>
@@ -180,7 +170,7 @@
                     <managed-scheduled-executor-service name="default" jndi-name="java:jboss/ee/concurrency/scheduler/default" context-service="default" hung-task-termination-period="0" hung-task-threshold="60000" keepalive-time="3000"/>
                 </managed-scheduled-executor-services>
             </concurrent>
-            <default-bindings context-service="java:jboss/ee/concurrency/context/default" datasource="java:jboss/datasources/ExampleDS" managed-executor-service="java:jboss/ee/concurrency/executor/default" managed-scheduled-executor-service="java:jboss/ee/concurrency/scheduler/default" managed-thread-factory="java:jboss/ee/concurrency/factory/default"/>
+            <default-bindings context-service="java:jboss/ee/concurrency/context/default" datasource="java:jboss/datasources/mariadb" managed-executor-service="java:jboss/ee/concurrency/executor/default" managed-scheduled-executor-service="java:jboss/ee/concurrency/scheduler/default" managed-thread-factory="java:jboss/ee/concurrency/factory/default"/>
         </subsystem>
         <subsystem xmlns="urn:jboss:domain:ee-security:1.0"/>
         <subsystem xmlns="urn:jboss:domain:ejb3:10.0">
@@ -335,19 +325,28 @@
             </sasl>
             <tls>
                 <key-stores>
-                    <key-store name="applicationKS">
+			<!--<key-store name="applicationKS">
                         <credential-reference clear-text="password"/>
                         <implementation type="JKS"/>
                         <file path="application.keystore" relative-to="jboss.server.config.dir"/>
+				</key-store>-->
+                    <key-store name="demoKeyStore">
+                        <credential-reference clear-text="reallyStrongPassword"/>
+                        <implementation type="JKS"/>
+			<file path="certificates/server.keystore" relative-to="jboss.server.config.dir"/>
                     </key-store>
                 </key-stores>
                 <key-managers>
-                    <key-manager name="applicationKM" key-store="applicationKS" generate-self-signed-certificate-host="localhost">
+			<!--<key-manager name="applicationKM" key-store="applicationKS" generate-self-signed-certificate-host="localhost">
                         <credential-reference clear-text="password"/>
+				</key-manager>-->
+                    <key-manager name="demoKeyManager" key-store="demoKeyStore">
+                        <credential-reference clear-text="reallyStrongPassword"/>
                     </key-manager>
                 </key-managers>
                 <server-ssl-contexts>
-                    <server-ssl-context name="applicationSSC" key-manager="applicationKM"/>
+			<!--<server-ssl-context name="applicationSSC" key-manager="applicationKM"/>-->
+                    <server-ssl-context name="demoSSLContext" cipher-suite-names="TLS_AES_256_GCM_SHA384:TLS_CHACHA20_POLY1305_SHA256:TLS_AES_128_GCM_SHA256" protocols="TLSv1.3" key-manager="demoKeyManager"/>
                 </server-ssl-contexts>
             </tls>
             <policy name="jacc">
@@ -475,7 +474,7 @@
             <buffer-cache name="default"/>
             <server name="default-server">
                 <http-listener name="default" socket-binding="http" redirect-socket="https" enable-http2="true"/>
-                <https-listener name="https" socket-binding="https" ssl-context="applicationSSC" enable-http2="true"/>
+                <https-listener name="https" socket-binding="https" ssl-context="demoSSLContext" enable-http2="true"/>
                 <host name="default-host" alias="localhost">
                     <location name="/" handler="welcome-content"/>
                     <http-invoker http-authentication-factory="application-http-authentication"/>
@@ -524,4 +523,7 @@
             <remote-destination host="${jboss.mail.server.host:localhost}" port="${jboss.mail.server.port:25}"/>
         </outbound-socket-binding>
     </socket-binding-group>
+   <deployments>
+        
+    </deployments> 
 </server>

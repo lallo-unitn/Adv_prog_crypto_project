@@ -12,7 +12,9 @@
 
 #Built war
 adv_prog_project/out/
-adv_prog_project/target/
+adv_prog_project/target/adv_prog_project-1.0-SNAPSHOT/
+adv_prog_project/target/classes/
+gadv_prog_project/target/enerated-sources/
 adv_prog_project/doc/
 adv_prog_project/index-files/
 

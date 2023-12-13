@@ -133,9 +133,14 @@
                     <security user-name="sa" password="sa"/>
                 </datasource>
                 <datasource jndi-name="java:jboss/datasources/PostgresDS" pool-name="PostgresDS">
-                    <connection-url>jdbc:postgresql://localhost:5432/postgres</connection-url>
+                    <connection-url>jdbc:postgresql://localhost:5432/universityDatabase</connection-url>
                     <driver>postgresql</driver>
                     <security user-name="lallo" password="lallo"/>
+                </datasource>
+		<datasource jndi-name="java:/jboss/datasources/mariadb" pool-name="mariadbPool">
+                    <connection-url>jdbc:mariadb://localhost:3306/universityDatabase</connection-url>
+                    <driver>mariadb</driver>
+                    <security user-name="root" password="root"/>
                 </datasource>
                 <drivers>
                     <driver name="h2" module="com.h2database.h2">
@@ -144,6 +149,7 @@
                     <driver name="postgresql" module="org.postgresql">
                         <driver-class>org.postgresql.Driver</driver-class>
                     </driver>
+                    <driver name="mariadb" module="com.mariadb"/>
                 </drivers>
             </datasources>
         </subsystem>
@@ -223,7 +229,7 @@
                 <application-security-domain name="other" security-domain="ApplicationDomain"/>
             </application-security-domains>
             <default-missing-method-permissions-deny-access value="true"/>
-            <statistics enabled="${wildfly.ejb3.statistics-enabled:${wildfly.statistics-enabled:false}}"/>
+            <statistics enabled="true"/>
             <log-system-exceptions value="true"/>
         </subsystem>
         <subsystem xmlns="urn:wildfly:elytron:18.0" final-providers="combined-providers" disallowed-providers="OracleUcrypto">
@@ -335,22 +341,31 @@
             </sasl>
             <tls>
                 <key-stores>
-                    <key-store name="applicationKS">
+			<!--<key-store name="applicationKS">
                         <credential-reference clear-text="password"/>
                         <implementation type="JKS"/>
                         <file path="application.keystore" relative-to="jboss.server.config.dir"/>
+				</key-store>-->
+                    <key-store name="demoKeyStore">
+                        <credential-reference clear-text="reallyStrongPassword"/>
+                        <implementation type="JKS"/>
+			<file path="certificates/server.keystore" relative-to="jboss.server.config.dir"/>
                     </key-store>
                 </key-stores>
                 <key-managers>
-                    <key-manager name="applicationKM" key-store="applicationKS" generate-self-signed-certificate-host="localhost">
+			<!--<key-manager name="applicationKM" key-store="applicationKS" generate-self-signed-certificate-host="localhost">
                         <credential-reference clear-text="password"/>
+				</key-manager>-->
+                    <key-manager name="demoKeyManager" key-store="demoKeyStore">
+                        <credential-reference clear-text="reallyStrongPassword"/>
                     </key-manager>
                 </key-managers>
                 <server-ssl-contexts>
-                    <server-ssl-context name="applicationSSC" key-manager="applicationKM"/>
+			<!--<server-ssl-context name="applicationSSC" key-manager="applicationKM"/>-->
+                    <server-ssl-context name="demoSSLContext" cipher-suite-names="TLS_AES_256_GCM_SHA384:TLS_CHACHA20_POLY1305_SHA256:TLS_AES_128_GCM_SHA256" protocols="TLSv1.3" key-manager="demoKeyManager"/>
                 </server-ssl-contexts>
-            </tls>
-            <policy name="jacc">
+		</tls>            
+		<policy name="jacc">
                 <jacc-policy/>
             </policy>
         </subsystem>
@@ -524,9 +539,4 @@
             <remote-destination host="${jboss.mail.server.host:localhost}" port="${jboss.mail.server.port:25}"/>
         </outbound-socket-binding>
     </socket-binding-group>
-    <deployments>
-        <deployment name="adv_prog_wildfly-1.0-SNAPSHOT" runtime-name="adv_prog_wildfly-1.0-SNAPSHOT.war">
-            <fs-exploded path="/home/lallo/uni/advanced_prog4crypto/project/adv_prog_wildfly/target/adv_prog_wildfly-1.0-SNAPSHOT"/>
-        </deployment>
-    </deployments>
 </server>

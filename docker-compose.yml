@@ -42,16 +42,13 @@ services:
 
     volumes:
       - type: bind
-        source: ./services/application_server/conf2/standalone.xml
-        target: /opt/jboss/wildfly/standalone/configuration/standalone.xml
+        source: ./services/application_server/configuration
+        target: /opt/jboss/wildfly/standalone/configuration
       - type: bind
-        source: ./services/application_server/modules/org/postgresql
-        target: /opt/jboss/wildfly/modules/org/postgresql
+        source: ./services/application_server/modules/com
+        target: /opt/jboss/wildfly/modules/com
       - type: bind
-        source: ./services/application_server/modules/com/mariadb
-        target: /opt/jboss/wildfly/modules/com/mariadb
-      - type: bind
-        source: ./services/application_server/deployments/adv_prog_project_war.war
+        source: ./adv_prog_project/target/adv_prog_project-1.0-SNAPSHOT.war
         target: /opt/jboss/wildfly/standalone/deployments/adv_prog_project_war.war
 
   mariadb:
