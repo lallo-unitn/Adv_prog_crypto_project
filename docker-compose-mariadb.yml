@@ -16,6 +16,9 @@ services:
       - type: bind
         source: ./services/mariadb/mysql/encryption
         target: /etc/mysql/conf.d/encryption
+      - type: bind
+        source: ./services/rootCA/rootCA.crt
+        target: /etc/mysql/conf.d/encryption/tls/rootCA.crt
           #vault:
           # image: hashicorp/vault:latest
           #container_name: vault

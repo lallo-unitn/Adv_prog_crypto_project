@@ -1,5 +1,5 @@
-CREATE USER 'vault'@'%' IDENTIFIED BY 'vault';
-GRANT ALL PRIVILEGES ON your_database.* TO 'vault'@'%';
+CREATE USER 'wildfly'@'%' IDENTIFIED BY 'wildfly';
+GRANT ALL PRIVILEGES ON universityDatabase.* TO 'wildfly'@'%' REQUIRE SSL;
 FLUSH PRIVILEGES;
 
 -- Create the database (if it doesn't exist already)

@@ -63,6 +63,12 @@ encrypt-tmp-disk-tables = 1
 encrypt-tmp-files = 1
 encrypt_binlog = ON
 
+ssl-ca=/etc/mysql/conf.d/encryption/tls/ca.pem
+ssl-cert=/etc/mysql/conf.d/encryption/tls/server-cert.pem
+ssl-key=/etc/mysql/conf.d/encryption/tls/server-key.pem
+
+tls_version = TLSv1.3
+
 # This group is only read by MariaDB-10.11 servers.
 # If you use the same .cnf file for MariaDB of different versions,
 # use this group for options that older servers don't understand
