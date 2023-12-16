@@ -48,9 +48,6 @@ services:
       - type: bind
         source: ./services/application_server/modules/com
         target: /opt/jboss/wildfly/modules/com
-      - type: bind
-        source: ./services/application_server/configuration/certificates/truststore.jks
-        target: /opt/jboss/wildfly/truststore.jks
 
   mariadb:
     image: mariadb:latest

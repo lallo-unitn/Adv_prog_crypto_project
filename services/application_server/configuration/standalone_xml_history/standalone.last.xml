@@ -128,7 +128,7 @@
         <subsystem xmlns="urn:jboss:domain:datasources:7.1">
             <datasources>
                 <datasource jndi-name="java:jboss/datasources/mariadb" pool-name="mariadbPool">
-                    <connection-url>jdbc:mariadb://localhost:3306/universityDatabase?sslMode=verify-ca&amp;serverSslCert=/opt/jboss/wildfly/standalone/configuration/certificates/ca.pem</connection-url>
+                    <connection-url>jdbc:mariadb://localhost:3306/universityDatabase?sslMode=verify-full&amp;serverSslCert=/opt/jboss/wildfly/standalone/configuration/certificates/server-cert.pem</connection-url>
                     <driver>mariadb</driver>
                     <security user-name="wildfly" password="wildfly"/>
                 </datasource>
