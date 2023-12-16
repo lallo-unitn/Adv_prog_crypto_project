@@ -69,6 +69,12 @@ ssl-key=/etc/mysql/conf.d/encryption/tls/server-key.pem
 
 tls_version = TLSv1.3
 
+#[client-mariadb]
+#ssl_cert = /etc/mysql/conf.d/encryption/tls/client-cert.pem
+#ssl_key = /etc/mysql/conf.d/encryption/tls/client-key.pem
+#ssl_ca = /etc/mysql/conf.d/encryption/tls/ca.pem
+#ssl-verify-server-cert
+
 # This group is only read by MariaDB-10.11 servers.
 # If you use the same .cnf file for MariaDB of different versions,
 # use this group for options that older servers don't understand
