@@ -26,11 +26,21 @@ public class AddStudentServlet extends HttpServlet {
         String password = request.getParameter("newPassword");
         String name = request.getParameter("newName");
         String surname = request.getParameter("newSurname");
+        if(password.length() < 12){
+            request.setAttribute("message", "Password must be at least 12 characters long");
+            request.setAttribute("newUsername", null);
+            request.setAttribute("newPassword", null);
+            request.setAttribute("newName", null);
+            request.setAttribute("newSurname", null);
+            RequestDispatcher rd = request.getRequestDispatcher("restricted/adminPage.jsp");
+            rd.forward(request, response);
+            return;
+        }
         String role = "student";
 
         UserAccount userAccount = new UserAccount(
                 username,
-                BCrypt.hashpw(password, BCrypt.gensalt(12)),
+                BCrypt.hashpw(password, BCrypt.gensalt(13)),
                 name,
                 surname,
                 role
@@ -42,6 +52,13 @@ public class AddStudentServlet extends HttpServlet {
             request.setAttribute("message", "Error adding student");
         }
         RequestDispatcher rd = request.getRequestDispatcher("restricted/adminPage.jsp");
+        rd.forward(request, response);
+    }
+
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        //redirect to login servlet
+        RequestDispatcher rd = request.getRequestDispatcher("/LoginServlet");
         rd.forward(request, response);
     }
 }

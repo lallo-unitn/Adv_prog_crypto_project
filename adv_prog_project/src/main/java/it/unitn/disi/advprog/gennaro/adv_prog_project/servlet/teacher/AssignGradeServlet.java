@@ -6,6 +6,8 @@ import it.unitn.disi.advprog.gennaro.adv_prog_project.dto.TeacherDto;
 import it.unitn.disi.advprog.gennaro.adv_prog_project.managers.StudentManager;
 import it.unitn.disi.advprog.gennaro.adv_prog_project.managers.TeacherManager;
 import jakarta.ejb.EJB;
+import jakarta.servlet.RequestDispatcher;
+import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -30,15 +32,11 @@ public class AssignGradeServlet extends HttpServlet {
     @EJB
     StudentManager studentManager;
 
-    // Convert a javascript P1363 encoded signature to ASN.1 format
-    private static byte[] toASN1(byte[] p1363EncodedSignature) throws IOException {
-        int n = p1363EncodedSignature.length / 2;
-        BigInteger r = new BigInteger(+1, Arrays.copyOfRange(p1363EncodedSignature, 0, n));
-        BigInteger s = new BigInteger(+1, Arrays.copyOfRange(p1363EncodedSignature, n, n * 2));
-        ASN1EncodableVector v = new ASN1EncodableVector();
-        v.add(new ASN1Integer(r));
-        v.add(new ASN1Integer(s));
-        return new DERSequence(v).getEncoded();
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        //redirect to login servlet
+        RequestDispatcher rd = request.getRequestDispatcher("/LoginServlet");
+        rd.forward(request, response);
     }
 
     @Override
@@ -85,13 +83,28 @@ public class AssignGradeServlet extends HttpServlet {
         out.flush();
     }
 
+    // Convert a javascript P1363 encoded signature to ASN.1 format
+    private static byte[] toASN1(byte[] p1363EncodedSignature) throws IOException {
+        int n = p1363EncodedSignature.length / 2;
+        BigInteger r = new BigInteger(+1, Arrays.copyOfRange(p1363EncodedSignature, 0, n));
+        BigInteger s = new BigInteger(+1, Arrays.copyOfRange(p1363EncodedSignature, n, n * 2));
+        ASN1EncodableVector v = new ASN1EncodableVector();
+        v.add(new ASN1Integer(r));
+        v.add(new ASN1Integer(s));
+        return new DERSequence(v).getEncoded();
+    }
+
     private boolean validateRequest(JsonObject jsonData, TeacherDto teacherDto) {
 
         String pemPublicKey = teacherDto.getEccPublicKey();
 
         try {
 
-            String publicKeyPEMContent = pemPublicKey.replace("-----BEGIN PUBLIC KEY-----", "").replace("-----END PUBLIC KEY-----", "").replaceAll("\\s", "").replaceAll("\\n", "");
+            String publicKeyPEMContent = pemPublicKey
+                    .replace("-----BEGIN PUBLIC KEY-----", "")
+                    .replace("-----END PUBLIC KEY-----", "")
+                    .replaceAll("\\s", "")
+                    .replaceAll("\\n", "");
 
             //load pem public key
             byte[] encodedPublicKey = Base64.getDecoder().decode(publicKeyPEMContent);

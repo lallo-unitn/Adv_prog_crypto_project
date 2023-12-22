@@ -1,25 +1,8 @@
 version: '3'
 services:
-  #datasource:
-    #image: postgres:latest
-      # build: ./services/datasource
-      #container_name: datasource
-      #network_mode: host
-      #restart: always
-      #stdin_open: true
-      #tty: true
-      #ports:
-      # - 5432:5432
-      #environment: 
-      #- POSTGRES_DB=universityDatabase
-      #- POSTGRES_USER=lallo
-      #- POSTGRES_PASSWORD=lallo
-      #volumes:
-      #- ./services/datasource/init.sql:/docker-entrypoint-initdb.d/init.sql
-
   application_server:
     image: quay.io/wildfly/wildfly:30.0.0.Final-jdk17
-      #build: ./services/application_server
+    depends_on: [mariadb]
     command: >
       bash -c "/opt/jboss/wildfly/bin/add-user.sh admin admin --silent
       && /opt/jboss/wildfly/bin/standalone.sh -b 0.0.0.0 -bmanagement 0.0.0.0"
@@ -28,18 +11,10 @@ services:
     restart: always
     stdin_open: true
     tty: true
-    ports:
-      - 8080:8080
-      - 9090:9090
     environment:
       - WILDFLY_PASS=admin
       - WILDFLY_USER=admin
       - WILDFLY_PASSWORD=admin 
-        #volumes:
-        #- ./services/application_server/deployments:/opt/wildfly/standalone/deployments
-        #- configuration:/opt/wildfly/standalone/configuration
-        #- ./services/application_server/modules/postgresql:/opt/wildfly/modules/org/postgresql
-
     volumes:
       - type: bind
         source: ./services/application_server/configuration
@@ -56,11 +31,7 @@ services:
     restart: always
     network_mode: host
     environment:
-      #MARIADB_USER: user
-      #MARIADB_PASSWORD: user
       MARIADB_ROOT_PASSWORD: root
-    ports:
-      - 3306:3306
     volumes:
       - ./services/mariadb/docker-entrypoint-initdb.d/init.sql:/docker-entrypoint-initdb.d/init.sql
       - type: bind
@@ -69,13 +40,6 @@ services:
       - type: bind
         source: ./services/mariadb/mysql/encryption
         target: /etc/mysql/conf.d/encryption
-
-          # adminer:
-          #image: adminer:latest
-          #restart: always
-          #network_mode: host
-          #ports:
-          #- 8090:8080
 
 volumes:
   configuration:

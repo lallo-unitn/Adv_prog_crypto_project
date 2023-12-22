@@ -34,14 +34,15 @@ public class AuthServlet extends HttpServlet {
         RequestDispatcher rd = request.getRequestDispatcher("/LoginServlet");
         UserAccount userAccount;
         request.setAttribute("message", "");
+        UserAccountDto userAccountDto;
         try{
             userAccount = userAccountManager.getUserAccountByCredentials(username, password);
+            userAccountDto = DtoAssembler.getUserAccountDto(userAccount);
         } catch (Exception e) {
             request.setAttribute("message", "Wrong credentials");
             rd.forward(request, response);
             return;
         }
-        UserAccountDto userAccountDto = DtoAssembler.getUserAccountDto(userAccount);
         session.setAttribute("userAccountDto", userAccountDto);
         session.setAttribute("role", userAccountDto.getRole());
 

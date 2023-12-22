@@ -25,11 +25,6 @@ function str2ab(str) {
 }
 
 async function importPrivateKey() {
-    //const pemKey = "-----BEGIN PRIVATE KEY-----\n" +
-        //"MIGHAgEAMBMGByqGSM49AgEGCCqGSM49AwEHBG0wawIBAQQgr3Mf4CKBPfodhfGQ\n" +
-        //"xdRUJzK2xbF1VzGYibwjh3DflSuhRANCAAQma8CLQRY+CJrIX4rH8B3nDl7A8YZc\n" +
-        //"4WCWfkwlXcM1egQeeuBVzvBNuR64M9TyzJc5YL5uWi0g9RJ2ItQ5i9a6\n" +
-        //"-----END PRIVATE KEY-----";
 
     const pemKey = localStorage.getItem('privateKey');
 

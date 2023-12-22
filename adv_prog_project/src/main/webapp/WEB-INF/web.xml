@@ -16,6 +16,11 @@
 
     <session-config>
         <session-timeout>5</session-timeout>
+        <cookie-config>
+            <http-only>true</http-only>
+            <secure>true</secure>
+        </cookie-config>
+        <tracking-mode>SSL</tracking-mode>
     </session-config>
 
     <welcome-file-list>
@@ -39,6 +44,10 @@
         <filter-name>TeacherFilter</filter-name>
         <filter-class>it.unitn.disi.advprog.gennaro.adv_prog_project.filters.TeacherFilter</filter-class>
     </filter>
+    <filter>
+        <filter-name>AdminFilter</filter-name>
+        <filter-class>it.unitn.disi.advprog.gennaro.adv_prog_project.filters.AdminFilter</filter-class>
+    </filter>
 
 
     <filter-mapping>
@@ -48,10 +57,7 @@
     </filter-mapping>
     <filter-mapping>
         <filter-name>AuthFilter</filter-name>
-        <url-pattern>/StudentServlet</url-pattern>
         <url-pattern>/HomeServlet</url-pattern>
-        <url-pattern>/TeacherServlet</url-pattern>
-        <url-pattern>/AssignGradeServlet</url-pattern>
     </filter-mapping>
     <filter-mapping>
         <filter-name>StudentFilter</filter-name>
@@ -61,6 +67,11 @@
         <filter-name>TeacherFilter</filter-name>
         <url-pattern>/TeacherServlet</url-pattern>
         <url-pattern>/AssignGradeServlet</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>AdminFilter</filter-name>
+        <url-pattern>/AdminServlet</url-pattern>
+        <url-pattern>/AddStudentServlet</url-pattern>
     </filter-mapping>
 
 
@@ -75,10 +86,6 @@
     <servlet>
         <servlet-name>AssignGradeServlet</servlet-name>
         <servlet-class>it.unitn.disi.advprog.gennaro.adv_prog_project.servlet.teacher.AssignGradeServlet</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>HomeServlet</servlet-name>
-        <servlet-class>it.unitn.disi.advprog.gennaro.adv_prog_project.servlet.HomeServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>LoginServlet</servlet-name>
@@ -109,10 +116,6 @@
     <servlet-mapping>
         <servlet-name>AssignGradeServlet</servlet-name>
         <url-pattern>/AssignGradeServlet</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>HomeServlet</servlet-name>
-        <url-pattern>/HomeServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>

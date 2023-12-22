@@ -46,8 +46,8 @@
 plugin_load_add=file_key_management
 file_key_management = ON 
 file_key_management_encryption_algorithm=aes_ctr
-loose_file_key_management_filename = /etc/mysql/conf.d/encryption/keyfile.enc
-loose_file_key_management_filekey = FILE:/etc/mysql/conf.d/encryption/keyfile.key
+loose_file_key_management_filename = /etc/mysql/conf.d/encryption/tde/keyfile.enc
+loose_file_key_management_filekey = FILE:/etc/mysql/conf.d/encryption/tde/keyfile.key
 
 # InnoDB/XtraDB Encryption Setup
 innodb_default_encryption_key_id = 1
@@ -62,6 +62,19 @@ aria_encrypt_tables = ON
 encrypt-tmp-disk-tables = 1
 encrypt-tmp-files = 1
 encrypt_binlog = ON
+
+ssl-ca=/etc/mysql/conf.d/encryption/tls/test/ca-cert.pem
+ssl-cert=/etc/mysql/conf.d/encryption/tls/test/server-cert.pem
+ssl-key=/etc/mysql/conf.d/encryption/tls/test/server-key.pem
+
+tls_version = TLSv1.3
+ssl_cipher = TLS_CHACHA20_POLY1305_SHA256:TLS_AES_128_GCM_SHA256:TLS_AES_256_GCM_SHA384
+
+#[client-mariadb]
+#ssl_cert = /etc/mysql/conf.d/encryption/tls/client-cert.pem
+#ssl_key = /etc/mysql/conf.d/encryption/tls/client-key.pem
+#ssl_ca = /etc/mysql/conf.d/encryption/tls/ca.pem
+#ssl-verify-server-cert
 
 # This group is only read by MariaDB-10.11 servers.
 # If you use the same .cnf file for MariaDB of different versions,
