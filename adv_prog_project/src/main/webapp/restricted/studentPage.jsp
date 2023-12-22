@@ -13,5 +13,9 @@
     <li>Surname: ${studentDto.userAccount.surname}</li>
     <li>Matriculation: ${studentDto.id}</li>
 </ul>
+
+<a href="LoginServlet">Logout</a>
+
+
 </body>
 </html>

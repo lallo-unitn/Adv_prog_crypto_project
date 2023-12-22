@@ -385,6 +385,10 @@ One notable limitation pertains to the lack of a mutual Transport Layer Security
 
 In the digital signature feature employed for teacher-assigned grades, a potential vulnerability exists in the form of replay attacks. To mitigate this risk, one proposed enhancement is the implementation of a hash table as a session object. Within this data structure, received messages are stored temporarily and automatically removed from the table after a set time period, in our case 10 seconds. The rationale behind this approach lies in the nature of replay attacks, where an adversary intercepts and maliciously retransmits a valid message. By utilizing a hash table, each incoming message is hashed and stored along with its timestamp. Subsequent messages with the same content can be cross-referenced against the hash table to check for duplicates. The effectiveness of this mechanism hinges on the assumption that replay attacks typically occur within a short timeframe and this method implements a race condition that will make replay attacks harder to execute. The 10-second window strikes a balance between providing adequate protection against replay attacks and allowing legitimate messages to be processed without unnecessary delays. Additionally, the use of a hash table as an in-memory data structure facilitates efficient lookups and minimizes the impact on system performance.
 
+\section{Already Distibuted Keys}
+
+The operation of digital signature uses key pairs that we consider to be already distributed. This is because we felt that implementing a system for key distribution would have been outside of the scope of this project. Furthermore, it is in our interest to explore the possibility to manage such keys via the use of RFID or other physical tokens for future works.
+
 \newpage
 \chapter{Installation and Execution}
 

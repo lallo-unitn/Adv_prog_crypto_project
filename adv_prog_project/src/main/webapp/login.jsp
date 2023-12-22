@@ -26,5 +26,10 @@
         <%= request.getAttribute("message")%>
     <% } %>
 </form>
+TESTING CREDENTIALS:
+    user1,password1,student
+    jane_smith,pass456,teacher
+    bob_johnson,secret789,student
+    admin,admin,admin
 </body>
 </html>

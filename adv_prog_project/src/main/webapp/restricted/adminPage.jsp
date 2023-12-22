@@ -3,7 +3,7 @@
 <head>
     <title>Admin Page</title>
 </head>
-
+<body>
 <h2>Add Student</h2>
 
 <form action="${pageContext.request.contextPath}/AddStudentServlet" method="POST">
@@ -42,5 +42,9 @@
     <%=request.getAttribute("message")%>
 <%}%>
 <br>
+
+<a href="LoginServlet">Logout</a>
+
+
 </body>
 </html>
