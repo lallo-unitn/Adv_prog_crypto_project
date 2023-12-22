@@ -36,5 +36,6 @@ public class AuthFilter implements Filter {
             rd = httpRequest.getRequestDispatcher("LoginServlet");
         }
         rd.forward(request, response);
+        chain.doFilter(request, response);
     }
 }

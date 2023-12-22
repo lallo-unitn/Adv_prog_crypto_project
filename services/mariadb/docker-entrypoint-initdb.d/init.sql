@@ -8,9 +8,6 @@ CREATE DATABASE IF NOT EXISTS universityDatabase;
 -- Switch to the newly created database
 USE universityDatabase;
 
--- Create user_account tablsource: ./services/mariadb/mysql/encryption
-        target: /etc/mysql/conf.d/encryption
-e
 CREATE TABLE IF NOT EXISTS user_account (
     id SERIAL PRIMARY KEY,
     username VARCHAR(255) UNIQUE NOT NULL,

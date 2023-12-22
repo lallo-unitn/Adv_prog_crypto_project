@@ -3,7 +3,6 @@
 <head>
     <title>Admin Page</title>
 </head>
-<body onLoad="json_handle()">
 
 <h2>Add Student</h2>
 
@@ -39,9 +38,9 @@
     <input type="submit" value="Submit">
 </form>
 
-<%= request.getAttribute("message")%>
-
+<%if (request.getAttribute("message") != null) {%>
+    <%=request.getAttribute("message")%>
+<%}%>
 <br>
-<script src="js/json_handlers.js" defer></script>
 </body>
 </html>

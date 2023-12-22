@@ -35,6 +35,7 @@ public class UserAccountBean {
         );
         query.setParameter("username", username);
         UserAccount user = query.getSingleResult();
+        // Check if the password is correct
         if (BCrypt.checkpw(password, user.getPassword())) {
             return user;
         }
