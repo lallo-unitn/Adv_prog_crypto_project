@@ -29,5 +29,8 @@
     </li>
     <%}%>
 </ul>
+
+<a href="LoginServlet">Logout</a>
+
 </body>
 </html>

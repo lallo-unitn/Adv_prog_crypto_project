@@ -40,6 +40,9 @@
            required="required">
     <input type="button" value="Submit" onclick="sendGrade(${teacherDto.course.id})">
 </form>
+
+<a href="LoginServlet">Logout</a>
+
 <script src="js/signature_functions.js" defer></script>
 </body>
 </html>
