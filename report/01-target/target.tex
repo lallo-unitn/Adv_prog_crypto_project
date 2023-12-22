@@ -1,6 +1,6 @@
 \chapter{Description}
 
-The goal of this project consist in the development of a javaEE web app that can be used by a teacher to assign grades to his or her students. The project also aims at deploying such web application on a dockerized infrastructure that will provide both data-at-rest and data-in-transit security.
+The goal of this project consists of the development of a JavaEE web app that can be used by a teacher to assign grades to his or her students. The project also aims at deploying such web applications on a dockerized infrastructure that will provide both data-at-rest and data-in-transit security.
 
 \chapter{Requirements}
 
@@ -10,7 +10,7 @@ Following, the functional requirements are divided per user story and listed.
 
 \subsection{Login}
 
-\noindent\textbf{User story}: as an unauthenticated user, I want to be able to login.\\
+\noindent\textbf{User story}: as an unauthenticated user, I want to be able to log in.\\
 \noindent\textbf{Requirements}:
 \begin{itemize}
     \item The system must allow users to log into their account by entering their \texttt{username} and \texttt{password}.
@@ -20,7 +20,7 @@ Following, the functional requirements are divided per user story and listed.
 
 \subsection{Student Dashboard}
 
-\noindent\textbf{User story}: as an authenticated user with student role, I want to be able to see my dashboard.\\
+\noindent\textbf{User story}: as an authenticated user with a student role, I want to be able to see my dashboard.\\
 \noindent\textbf{Requirements}:
 \begin{itemize}
     \item The system must allow students to see their \texttt{name}, \texttt{surname}, and \texttt{matriculation} number.
@@ -29,21 +29,21 @@ Following, the functional requirements are divided per user story and listed.
 
 \subsection{Teacher Dashboard}
 
-\noindent\textbf{User story}: as an authenticated user with teacher role, I want to be able to see my dashboard and assign \texttt{grades} to students.\\
+\noindent\textbf{User story}: as an authenticated user with a teacher role, I want to be able to see my dashboard and assign \texttt{grades} to students.\\
 \noindent\textbf{Requirements}:
 \begin{itemize}
     \item The system must allow teachers to see their \texttt{name}, \texttt{surname}, and \texttt{id} number.
     \item The system must allow teachers to select their private key from their file system.
-    \item The system must allow teachers to insert the student matriculation and assigned grade through a form.
-    \item The system must notify teacher wether the grade assignation was successful or not. 
+    \item The system must allow teachers to insert the student matriculation and assigned grades through a form.
+    \item The system must notify the teacher whether the grade assignment was successful or not. 
 \end{itemize}
 
 \subsection{Teacher Dashboard}
 
-\noindent\textbf{User story}: as an authenticated user with admin role, I want to be able to see my dashboard and add students.\\
+\noindent\textbf{User story}: as an authenticated user with an admin role, I want to be able to see my dashboard and add students.\\
 \noindent\textbf{Requirements}:
 \begin{itemize}
-    \item The system must allow admins to input username, password, first name and last name in order to add a new student.
+    \item The system must allow admins to input username, password, first name, and last name to add a new student.
 \end{itemize}
 
 \section{Security Requirements}
@@ -62,17 +62,17 @@ Following, the functional requirements are divided per user story and listed.
         \item \texttt{TLS\textunderscore CHACHA20\textunderscore POLY1305\textunderscore SHA256}
         \item \texttt{TLS\textunderscore AES\textunderscore 128\textunderscore GCM\textunderscore SHA256}
     \end{itemize}
-    \item the only tls version to be accepted during negotiation in every tls-protected communication is version 1.3. 
+    \item The only TLS version to be accepted during negotiation in every TLS-protected communication is version 1.3. 
 \end{itemize}
 
 \noindent\textbf{Authentication requirements}:
 \begin{itemize}
     \item client-server authentication is ensured by TLSv1.3 using Curve25519. The server certificate is self-signed. For this reason, even if the server authenticates to the client, the browser will raise a warning.
     \item the database certificate is self-signed. The database is authenticated by the application server.
-    \item the required password length in users credentials is greater than 12.
-    \item the passwords must be hashed and salted using bcrypt with a work factor of 13.
+    \item the required password length in user credentials is greater than 12.
+    \item The passwords must be hashed and salted using Bcrypt with a work factor of 13.
     \item the operation of grade assignation performed by the teacher role must be signed using \texttt{ECDSA} with standard NIST curve \texttt{P-256}, and the inputted challenge must be hashed using \texttt{SHA-256}.
-    \item the input challenge is composed by the json message and a timestamp used by the server to verify at what time the challenge was signed.
+    \item The input challenge is composed of the JSON message and a timestamp used by the server to verify at what time the challenge was signed.
     \item access to the web application is granted by SFA login.
 \end{itemize}
 
@@ -81,8 +81,8 @@ Following, the functional requirements are divided per user story and listed.
     \item unauthenticated users can access only the login service.
     \item authenticated users with role student can access only servlets StudentServlet and LoginServlet.
     \item authenticated users with role teacher can access only servlets TeacherServlet, AssignGradeServlet, and LoginServlet.
-    \item authenticated users with role admin can access only servlets AdminServlet, AddStudentServlet and LoginServlet.
-    \item access control is managed by java filters, and the filtering condition is based on the authentication status and assigned role.
+    \item authenticated users with role admin can access only servlets AdminServlet, AddStudentServlet, and LoginServlet.
+    \item access control is managed by Java filters, and the filtering condition is based on the authentication status and assigned role.
 \end{itemize}
 
 \noindent\textbf{Session Management requirements}:
@@ -90,7 +90,7 @@ Following, the functional requirements are divided per user story and listed.
     \item the client session has a set timeout of 5 minutes.
     \item browser script must not access cookies.
     \item cookies must be sent over HTTPS connections only.
-    \item the session ID (JSESSIONID) must be transmitted in the TLS handshake and not in the cookies or in the URL.
+    \item the session ID (JSESSIONID) must be transmitted in the TLS handshake and not in the cookies or the URL.
 \end{itemize}
 
 \noindent\textbf{Stored cryptography requirements}:
@@ -103,61 +103,61 @@ Following, the functional requirements are divided per user story and listed.
 \chapter{Technical Details}
 
 \section{Software Architecture}
-To develop this project, the MVC design pattern with some parts of the JavaEE (or J2EE) design pattern was adopted. This design pattern is composed by different parts that put together provide a modular architecture that encourages code reutilization. Following, the multiple parts of this architecture are explained.
+To develop this project, the MVC design pattern with some parts of the JavaEE (or J2EE) design pattern was adopted. This design pattern is composed of different parts that put together provide a modular architecture that encourages code reutilization. Following, the multiple parts of this architecture are explained.
 
 \subsection{Controller Layer}
-The controller layer is the layer where the business logic is implemented. In particular, this layer communicates with the model layer to request data writing and reading, and with the view layer in order to render the front-end interface. The client manipulates the web application via this layer. The business logic and view manipulation is implemented inside the servlets, while the access to the model layer is mediated by the managers.
+The controller layer is the layer where the business logic is implemented. In particular, this layer communicates with the model layer to request data writing and reading, and with the view layer to render the front-end interface. The client manipulates the web application via this layer. The business logic and view manipulation are implemented inside the servlets, while the access to the model layer is mediated by the managers.
 
 \subsection{Model Layer}
-The model layer is the layer that communicates with the database. It establishes the connection and launches queries against the datasource. The communication with the database is managed by the enterprise beans, the tables are represented by the entities, while the data are communicated to controller layer trough the Data Transfer Object (DTOs) that are assembled starting from the entities by a DTO factory. 
+The model layer is the layer that communicates with the database. It establishes the connection and launches queries against the data source. The communication with the database is managed by the enterprise beans, the tables are represented by the entities, while the data are communicated to the controller layer through the Data Transfer Objects (DTOs) that are assembled starting from the entities by a DTO factory. 
 
 \subsection{View Layer}
 \label{ss:viewLayer}
-The view layer uses the data provided by the controller layer to render the web view. In particular the web page is served thanks to the Java Server Pages (JSPs), that html pages with java code injected in them. JSPs are compiled into servlets during compilation.
+The view layer uses the data provided by the controller layer to render the web view. In particular, the web page is served thanks to the Java Server Pages (JSPs), which are HTML pages with Java code injected in them. JSPs are compiled into servlets during compilation.
 
 \section{Implementation}
 
-Following we describe the technological stack, the dependencies and the used libraries.
+Following we describe the technological stack, the dependencies, and the used libraries.
 
 \subsection*{Technological stack}
 
 To develop this web application, an open-source tech stack was used. Below, we list the used technologies during development
 
 \begin{itemize}
-    \item \texttt{Java 17.0.9 with Java Enterprise Edition v.9.1}: Java enterprise extends the set of Java API in order to enable the creation of large-scale, enterprise-level applications.
-    \item \texttt{Javascript on Brave Browser 120.1.61.104}: Javascript was used to perform client side operations. In particular, the Web Crypto API were used to sign the json used for the grades assignations.
+    \item \texttt{Java 17.0.9 with Java Enterprise Edition v.9.1}: Java enterprise extends the set of Java API to enable the creation of large-scale, enterprise-level applications.
+    \item \texttt{Javascript on Brave Browser 120.1.61.104}: Javascript was used to perform client side operations. In particular, the Web Crypto API was used to sign the JSON used for the grade assignments.
     \item \texttt{Wildfly v.30.0.0.Final}: an application server that supports and implements JavaEE API such as Java Transaction API (JTA), Java Persistence API (JPA), JavaServer Pages API (JSP), and Enterprise Java Beans (EJB).
     \item \texttt{MariaDB v.11.2.2}: MariaDB is a popular open-source database that is a fork of MySQL. Firstly we considered using PostgreSQL since we already had some experience in its setup. Unfortunately, this database didn't natively implement Transparent Data Encryption (TDE) yet. For this reason, we decided to migrate to MariaDB which already had a native implementation of this technology since version 10.1.
-    \item \texttt{Docker v.24.0.7 and docker-compose v.2.23.3}: this architecture is deployed by a docker-compose file. In particular Wildfly is pulled from \texttt{quay.io/wildfly/wildfly:30.0.0.Final-jdk17}, while MariaDB is pulled from \texttt{mariadb:latest}. To ease development and testing the network will be delivered in host mode.
-    \item \texttt{Apache Maven 4.0.0-alpha-8}: to build the java project and to manage dependencies, Maven was used. 
+    \item \texttt{Docker v.24.0.7 and docker-compose v.2.23.3}: this architecture is deployed by a docker-compose file. In particular, Wildfly is pulled from \texttt{quay.io/wildfly/wildfly:30.0.0.Final-jdk17}, while MariaDB is pulled from \texttt{mariadb:latest}. To ease development and testing the network will be delivered in host mode.
+    \item \texttt{Apache Maven 4.0.0-alpha-8}: to build the Java project and to manage dependencies, Maven was used. 
 \end{itemize}
 
 \subsection*{Dependency and libraries}
 
-The java codebase presents multiple dependencies. Firstly, we imported the \texttt{jakarta.jakartaee-api v.9.1.0} and \texttt{jakarta.jakartaee-web-api v.9.1.0} to be able to use the Java enterprise API. In order to log some operations, \texttt{jboss-logging v.3.5.3.Final} was imported along side to \texttt{hibernate-core v.6.3.1.Final} in order to manipulate the database via an Object Relational Mapping (ORM) framework. Furthermore, to serialize and deserialize JSON messages, Google \texttt{gson v.2.10.1} was used.
+The Java codebase presents multiple dependencies. Firstly, we imported the \texttt{jakarta.jakartaee-api v.9.1.0} and \texttt{jakarta.jakartaee-web-api v.9.1.0} to be able to use the Java enterprise API. To log some operations, \texttt{jboss-logging v.3.5.3.Final} was imported alongside to \texttt{hibernate-core v.6.3.1.Final} to manipulate the database via an Object Relational Mapping (ORM) framework. Furthermore, to serialize and deserialize JSON messages, Google \texttt{gson v.2.10.1} was used.
 
-\noindent In order to use bcrypt to hash and salt the users passwords, \texttt{spring-security-crypto v.6.2.0} was imported. Finally, as last dependency, \texttt{bcprov-jdk18on v.1.77} from \texttt{org.bouncycastle} was used to verify the signature that the client computes when requesting a grade assignation operation.
+\noindent To use Bcrypt to hash and salt the user's passwords, \texttt{spring-security-crypto v.6.2.0} was imported. Finally, as the last dependency, \texttt{bcprov-jdk18on v.1.77} from \texttt{org.bouncycastle} was used to verify the signature that the client computes when requesting a grade assignation operation.
 
-\noindent Regarding the Javascript script for computing the signature, Web Crypto API were used.
+\noindent Regarding the Javascript script for computing the signature, Web Crypto API was used.
 
 \section{Code structure \& configuration}
 
-Describe every file in the project would not be manageable given the high number of Java classes, configuration files, jsp and xml files. For this reason, for the Java files, we will limit our discussion at package level, making exceptions for the files that contain code related to security. Note that details regarding the methods and algorithms used can be found in \autoref{chap:secCons}. Furthermore, a discussion on the implementation of the signature made with Javascript will be carried out. Finally, to describe were we implemented TLS and TDE, configuration files will be discussed.
+Describing every file in the project would not be manageable given the high number of Java classes, configuration files, JSP, and XML files. For this reason, for the Java files, we will limit our discussion to the package level, making exceptions for the files that contain code related to security. Note that details regarding the methods and algorithms used can be found in \autoref{chap:secCons}. Furthermore, a discussion on the implementation of the signature made with Javascript will be carried out. Finally, to describe where we implemented TLS and TDE, configuration files will be discussed.
 
 \subsection*{The web application codebase}
 
-The codebase is divided in the following packages and directories:
+The codebase is divided into the following packages and directories:
 
 \begin{itemize}
-    \item \texttt{it.unitn.disi.advprog.gennaro.adv\textunderscore prog\textunderscore project.beans}: in this package the enterprise beans are defined. These beans manipulate the database using Hibernate Query Language (HQL). In this package, method \texttt{it.unitn.disi.advprog.gennaro.adv\textunderscore prog\textunderscore project.beans}\\\texttt{.UserAccountBean.getUserAccountByCredentials(Java.lang.String, Java.lang.String)} is used to retrieve user details based on its credentials. Since passwords are hashed and salted with bcrypt, the user entity is returned only if the check between the provided password and the stored hash is successful.
-    \item \texttt{it.unitn.disi.advprog.gennaro.adv\textunderscore prog\textunderscore project.entities}: here the Object Relational Mapping (ORM) is implemented. This mapping is done via the Java Persistence API by specifying the POJO to be an @Entity. Furthermore, the table columns names and other characteristics are mapped thanks to various Java annotations, like relation type, if the filed is or not a key, etc.
-    \item \texttt{it.unitn.disi.advprog.gennaro.adv\textunderscore prog\textunderscore project.dto} and \texttt{.dtoAssembler}: this is just an abstraction layer implemented to avoid the usage of the entities as a way to carry around information. Basically, entities are complex objects, and since we don't want to instantiate those object or serialize and send them every time we need the result of a query, we use Data Transfer Objects (DTO). These DTO are serialized POJOs with getter, setters, equals, hashCode, and toString methods. Servlets and JSPs access data via these objects.
-    \item \texttt{it.unitn.disi.advprog.gennaro.adv\textunderscore prog\textunderscore project.managers}: managers are simple stateless beans that decouples the access of the enterprise beans used for communication with the DB from the business logic in the servlets.
-    \item \texttt{it.unitn.disi.advprog.gennaro.adv\textunderscore prog\textunderscore project.servlet}: in the servlets we specify the business logic of the application. We have divided this package in multiple packages separated by use case scenarios.
-    \item \texttt{it.unitn.disi.advprog.gennaro.adv\textunderscore prog\textunderscore project.filters}: filters and filter chains are defined in this package in order to handle user authorization. Filters are java classes that are put in front of the target servlet of an HTTP request. For example, to access the services of the AdminServlet the request must satisfy the checks put in places by the AuthFilter, i.e. the user must be logged, and the AdminFilter, i.e. the role of the user must be admin. If these checks are not satisfied, the request is redirected to the LoginServlet. The mapping and chains of these filters can be found in file \texttt{src/main/webapp/WEB-INF/web.xml}.
+    \item \texttt{it.unitn.disi.advprog.gennaro.adv\textunderscore prog\textunderscore project.beans}: in this package, the enterprise beans are defined. These beans manipulate the database using Hibernate Query Language (HQL). In this package, method \texttt{it.unitn.disi.advprog.gennaro.adv\textunderscore prog\textunderscore project.beans}\\\texttt{.UserAccountBean.getUserAccountByCredentials(Java.lang.String, Java.lang.String)} is used to retrieve user details based on its credentials. Since passwords are hashed and salted with Bcrypt, the user entity is returned only if the check between the provided password and the stored hash is successful.
+    \item \texttt{it.unitn.disi.advprog.gennaro.adv\textunderscore prog\textunderscore project.entities}: here the Object Relational Mapping (ORM) is implemented. This mapping is done via the Java Persistence API by specifying the POJO to be an @Entity. Furthermore, the table column names and other characteristics are mapped thanks to various Java annotations, like relation type, if the field is or is not a key, etc.
+    \item \texttt{it.unitn.disi.advprog.gennaro.adv\textunderscore prog\textunderscore project.dto} and \texttt{.dtoAssembler}: this is just an abstraction layer implemented to avoid the usage of the entities as a way to carry around information. Entities are complex objects, and since we don't want to instantiate those objects or serialize and send them every time we need the result of a query, we use Data Transfer Objects (DTO). These DTOs are serialized POJOs with getter, setters, equals, hashCode, and toString methods. Servlets and JSPs access data via these objects.
+    \item \texttt{it.unitn.disi.advprog.gennaro.adv\textunderscore prog\textunderscore project.managers}: managers are simple stateless beans that decouple the access of the enterprise beans used for communication with the DB from the business logic in the servlets.
+    \item \texttt{it.unitn.disi.advprog.gennaro.adv\textunderscore prog\textunderscore project.servlet}: in the servlets, we specify the business logic of the application. We have divided this package into multiple packages separated by use case scenarios.
+    \item \texttt{it.unitn.disi.advprog.gennaro.adv\textunderscore prog\textunderscore project.filters}: filters and filter chains are defined in this package to handle user authorization. Filters are Java classes that are put in front of the target servlet of an HTTP request. For example, to access the services of the AdminServlet the request must satisfy the checks put in place by the AuthFilter, i.e. the user must be logged, and the AdminFilter, i.e. the role of the user must be admin. If these checks are not satisfied, the request is redirected to the LoginServlet. The mapping and chains of these filters can be found in file \texttt{src/main/webapp/WEB-INF/web.xml}.
     \item \texttt{src/main/webapp/restricted}: in this directory the JSPs can be found. JSPs are described in \autoref{ss:viewLayer}.
-    \item \texttt{src/main/webapp/js/signature\textunderscore functions.js}: this is the file in which the Web Crypto API are used to compute the signatures for the grade assignation operation.
-    \item \texttt{src/main/webapp/WEB-INF/web.xml}: other then the servlet and filter mapping, at the beginning of these file, rules for the session security configuration can be found.
+    \item \texttt{src/main/webapp/js/signature\textunderscore functions.js}: this is the file in which the Web Crypto API is used to compute the signatures for the grade assignation operation.
+    \item \texttt{src/main/webapp/WEB-INF/web.xml}: other than the servlet and filter mapping, at the beginning of this file, rules for the session security configuration can be found.
 \end{itemize}
 
 Now, we analyze the files that we think are more related to the security requirements listed in the previous section.
@@ -165,20 +165,20 @@ Now, we analyze the files that we think are more related to the security require
 \subsubsection{AddStudentServlet and UserAccountBean}
 \label{ss:AddStuServ}
 
-AddStudentServlet accepts POST requests for adding users with student role. In particular, before requesting the entity addition of the new student userAccount, the password provided by the admin at the moment of registration is hashed and salted using bcrypt hashing function following OWASP recommendations at \cite{online:OWASPpass}. To check the credentials validity, in class \texttt{UserAccountBean} we check that the provided password matches the hash stored in the database.
+AddStudentServlet accepts POST requests for adding users with student roles. In particular, before requesting the entity addition of the new student user account, the password provided by the admin at the moment of registration is hashed and salted using the Bcrypt hashing function following OWASP recommendations at \cite{online:OWASPpass}. To check the credentials validity, in class \texttt{UserAccountBean} we check that the provided password matches the hash stored in the database.
 
 \subsubsection{AssignGradeServlet and signature\textunderscore functions.js}
 \label{ss:SignFunct}
 
-In order to sign the JSON message crafted by the client using \texttt{signature\textunderscore functions.js} script we produce a challenge string that is a concatenation of the JSON fields. The JSON also includes a timestamp. To provide message integrity, the challenge is signed using Web Crypto API \texttt{SubtleCrypto:sign()} method using ECDSA with curve P-256. We could have used the Java Cryptographic Architecture (JCA) to sign the message, but that would have required the development of a client-side Java application, and that would have been too time-consuming. 
+To sign the JSON message crafted by the client using \texttt{signature\textunderscore functions.js} script we produce a challenge string that is a concatenation of the JSON fields. The JSON also includes a timestamp. To provide message integrity, the challenge is signed using Web Crypto API \texttt{SubtleCrypto:sign()} method using ECDSA with curve P-256. We could have used the Java Cryptographic Architecture (JCA) to sign the message, but that would have required the development of a client-side Java application, and that would have been too time-consuming. 
 
-To generate the keys for the teacher signature we used the \texttt{openssl} commands that can be found in file \texttt{\${PROJECT\textunderscore HOME}/teacher\textunderscore test\textunderscore signatures/commands.sh}. The generated keys are in \texttt{Privacy-Enhanced Mail (PEM)} format, but this API doesn't accept PEM keys. For this reason the private key is converted to \texttt{PKCS\#8} format.
+To generate the keys for the teacher signature we used the \texttt{openssl} commands that can be found in file \texttt{\${PROJECT\textunderscore HOME}/teacher\textunderscore test\textunderscore signatures/commands.sh}. The generated keys are in \texttt{Privacy-Enhanced Mail (PEM)} format, but this API doesn't accept PEM keys. For this reason, the private key is converted to \texttt{PKCS\#8} format.
 
 The JSON is sent to the server and the verification is carried out by AddStudentServlet. What took us a while to recognize while trying to make the verification work is that method \texttt{SubtleCrypto:sign()} outputs an ECDSA signature in  \texttt{IEEE P1363} format, while the verification implemented in java accepts only signatures in \texttt{ASN.1} format. To address this issue we implemented a simple function to convert the first format into the second.
 
 \subsection*{Wildfly and MariaDB configuration}
 
-The infrastructure is composed by a database and an application server. In this section we will highlight the pieces of configuration files that enables client-server and server-database TLS, other then mariaDB TDE. 
+The infrastructure is composed of a database and an application server. In this section, we will highlight the pieces of configuration files that enable client-server and server-database TLS, other than MariaDB TDE. 
 
 \subsubsection{TLS configuration}
 TLSv1.3 for client-server is configured in file \\\texttt{\$PROJECT\textunderscore HOME/services/application\textunderscore server/configuration/standalone.xml}.Following, the TLSv1.3 setup 
@@ -210,7 +210,7 @@ TLS_CHACHA20_POLY1305_SHA256:TLS_AES_128_GCM_SHA256"
 
 The Java KeyStore (JKS), is stored in file \\\texttt{\$PROJECT\textunderscore HOME/services/application\textunderscore server/configuration/certificates} and the commands used are in file \texttt{commands.sh}.
 
-Also the xml code that enables TLSv1.3 for database-server connection is located in the \texttt{standalone.xml} file.
+Also, the XML code that enables TLSv1.3 for database-server connection is located in the \texttt{standalone.xml} file.
 In particular, to enable the secure connection, \texttt{Java DataBase Connector (JDBC)} connection URL was to be modified to integrate the attributes specifying what certificate Wildfly should verify against MariaDB\cite{online:TlsJdbc}.
 
 \begin{lstlisting}[style=XMLStyle]
@@ -223,7 +223,7 @@ In particular, to enable the secure connection, \texttt{Java DataBase Connector 
     </datasource>
 \end{lstlisting}
 
-Furthermore, MariaDB needs configuration of its private key, certificate authority certificate, and its own certificate. This is done in file \\\texttt{\$PROJECT\textunderscore HOME/services/mariadb/mysql/conf.d/server.cnf} under group \texttt{[mariadb]} while TLS certificate and keys for mariadb are in directory \texttt{\$PROJECT\textunderscore HOME/services/mariadb/mysql/encryption/tls}.
+Furthermore, MariaDB needs configuration of its private key, certificate authority certificate, and its certificate. This is done in file \\\texttt{\$PROJECT\textunderscore HOME/services/mariadb/mysql/conf.d/server.cnf} under group \texttt{[mariadb]} while TLS certificate and keys for mariadb are in directory \texttt{\$PROJECT\textunderscore HOME/services/mariadb/mysql/encryption/tls}.
 
 \begin{lstlisting}[style=XMLStyle]
     ssl-ca=/etc/mysql/conf.d/encryption/tls/ca.pem
@@ -264,25 +264,25 @@ Like TLS, MariaDB TDE is enabled in file \texttt{\$PROJECT\textunderscore HOME/s
     encrypt_binlog = ON
 \end{lstlisting}
 
-Even if we have specified the encryption of the Aria tables, in our implementation we only use the InnoDB engine. Furthermore, encryption is performed at tablespace level and not per single table. The used encryption algorithms are \texttt{AES\textunderscore 128\textunderscore CTR} for the data tables, and \texttt{AES\textunderscore 128\textunderscore GCM} for temporary files. This is specified with variable \texttt{file\textunderscore key\textunderscore management\textunderscore encryption\textunderscore algorithm}. Despite the name of the variable, this sets the encryption algorithm for the tablespaces, not the algorithm that MariaDB uses to decrypt the key file\cite{online:FileKeyManMariaDB}.
+Even if we have specified the encryption of the Aria tables, in our implementation we only use the InnoDB engine. Furthermore, encryption is performed at the tablespace level and not per single table. The used encryption algorithms are \texttt{AES\textunderscore 128\textunderscore CTR} for the data tables, and \texttt{AES\textunderscore 128\textunderscore GCM} for temporary files. This is specified with variable \texttt{file\textunderscore key\textunderscore management\textunderscore encryption\textunderscore algorithm}. Despite the name of the variable, this sets the encryption algorithm for the tablespaces, not the algorithm that MariaDB uses to decrypt the key file\cite{online:FileKeyManMariaDB}.
 
 \newpage
 \chapter{Security Considerations}
 \label{chap:secCons}
 
-In this part of the document we will discuss about key generation, TLS, Transparent Data Encryption (TDE), password hashing and salting, and signatures.
+In this part of the document, we will discuss about key generation, TLS, Transparent Data Encryption (TDE), password hashing and salting, and signatures.
 
 \section{Key generation}
 
-Almost all keys and certificates where produced with OpenSSL. Exception is made for the server that uses Java KeyStores that we produced using Java Keytool.
+Almost all keys and certificates were produced with OpenSSL. The exception is made for the server that uses Java KeyStores that we produced using Java Keytool.
 
-In order to generate a Certificate Authority (CA) and a certificate signed by it using OpenSSL for the TLS handshake between Wildfly and MariaDB, we started by running\\
+To generate a Certificate Authority (CA) and a certificate signed by it using OpenSSL for the TLS handshake between Wildfly and MariaDB, we started by running\\
 
 \begin{center}
     \texttt{openssl ecparam -genkey -name prime256v1 -out ca-key.pem}
 \end{center}
 
-this command outputs a key pair for our new CA. In particular, the outputted keys are generated by subcommand \texttt{ecparam} that ensures that such keys are EC keys. Furthermore, parameter \texttt{prime256v1} specifies that the elliptic curve to use is NIST standard curve P-256. We decided to use this curve not only because it is widely employed, but also because it is approved by guideline \texttt{NIST SP 800-186} section 3.1, and represent a good balance between cryptographic strength and efficiency\cite{article:NistRecCurves}.
+this command outputs a key pair for our new CA. In particular, the outputted keys are generated by subcommand \texttt{ecparam} that ensures that such keys are EC keys. Furthermore, the parameter \texttt{prime256v1} specifies that the elliptic curve to use is NIST standard curve P-256. We decided to use this curve not only because it is widely employed, but also because it is approved by guideline \texttt{NIST SP 800-186} section 3.1, and represents a good balance between cryptographic strength and efficiency\cite{article:NistRecCurves}.
 
 \begin{center}
     \texttt{openssl req -new -key ca-key.pem -out ca-csr.pem}
@@ -294,7 +294,7 @@ Here we generate a certificate signing request using subcommand \texttt{req}. We
     \texttt{openssl x509 -req -in ca-csr.pem -signkey ca-key.pem -out ca-cert.pem}
 \end{center}
 
-We then self-sign the CA certificate by giving in input the Certificate Signing Request (CSR) and the CA private key. We now have the CA certificate.
+We then self-sign the CA certificate by giving as input the Certificate Signing Request (CSR) and the CA private key. We now have the CA certificate.
 
 \begin{center}
     \texttt{openssl ecparam -genkey -name prime256v1 -out server-key.pem}
@@ -312,66 +312,66 @@ Here we generate a CSR starting from the new key pair.
     \texttt{openssl x509 -req -in server-csr.pem -CA ca-cert.pem -CAkey ca-key.pem -CAcreateserial -out server-cert.pem}
 \end{center}
 
-And in the end, we sign the MariaDB certificate using the previously generated CA.\\For MariaDB, we generated a CA because the TLS configuration require a CA certificate to be passed as variable as per documentation.
+And in the end, we signed the MariaDB certificate using the previously generated CA.\\For MariaDB, we generated a CA because the TLS configuration requires a CA certificate to be passed as a variable as per documentation.
 
-With regard to Wildfly, a certificate authority was not necessary. We used the following command to generate a self-signed certificate and EC keys using again curve P-256.
+About Wildfly, a certificate authority was not necessary. We used the following command to generate a self-signed certificate and EC keys using again curve P-256.
 
 \begin{center}
     \texttt{keytool -genkeypair -alias localhost -keyalg EC -groupname secp256r1 -sigalg SHA256withECDSA -validity 365 -keystore server.keystore -dname "cn=localhost,o=Acme,c=IT" -keypass reallyStrongPassword -storepass reallyStrongPassword}
 \end{center}
 
-This command generate a data structure, the JKS, that encapsulates key pairs and certificates. Furthermore, the keystore is protected by a password.
+This command generates a data structure, the JKS, that encapsulates key pairs and certificates. Furthermore, the keystore is protected by a password.
 
 \section{Transport Layer Security (TLS)}
 
 Both TLS setups use the default cipher suite for TLSv1.3. The configurations have been tested using \texttt{testssl v.3.0.8}, and the results of such tests are in file folder \texttt{\${PROJECT\textunderscore HOME}/testsslResults}. Neither one of the configurations suffers from the tested vulnerabilities. The only warnings are thrown by the fact that the certificates are self-signed or signed by a self-signed CA.
 
-Futhermore, following the guidelines given to us during the course, the selected cipher suites do not make use of RSA for key exchange (see the 2018 oracle BB attack), and the key pairs were generated using elliptic curves instead of RSA in order to avoid the risk of low entropy in the generated key.
+Furthermore, following the guidelines given to us during the course, the selected cipher suites do not make use of RSA for key exchange (see the 2018 oracle BB attack), and the key pairs were generated using elliptic curves instead of RSA to avoid the risk of low entropy in the generated key.
 
 Also, as shown by the tests, version downgrade is not possible since the only offered version is v.1.3. 
 
-Finally, regarding data-in-transit encryption, the communication is encrypted using AES in Galois Counter Mode with key sizes 128 or 256 bits, or ChaCha20 with key size of 256 bits.
+Finally, regarding data-in-transit encryption, the communication is encrypted using AES in Galois Counter Mode with key sizes of 128 or 256 bits, or ChaCha20 with a key size of 256 bits.
 
 \section{Transparent Data Encryption (TDE)}
 
-Transparent Data Encryption is a technology employed in databases to guarantee data-at-rest encryption with minimal performance impact. The storage of a database is usually divided in logical containers used to organize and store tables, indexes, etc. These containers are called tablespaces, and their specification differs from one RDBMS to another. In our project, we decided to encrypt the database at tablespace level since we didn't have reasons to encrypt single columns with different policies.
+Transparent Data Encryption is a technology employed in databases to guarantee data-at-rest encryption with minimal performance impact. The storage of a database is usually divided into logical containers used to organize and store tables, indexes, etc. These containers are called tablespaces, and their specification differs from one RDBMS to another. In our project, we decided to encrypt the database at the tablespace level since we didn't have reasons to encrypt single columns with different policies.
 
-TDE requires multiple keys to work. Every tablespace has an header that contains its tablespace key. A tablespace key is a data-encrypting-key that is used to encrypt every piece of data that is contained inside a tablespace. To encrypt the tablespaces key we use a key-encrypting-key called master key. Such master key is strongly recommended to be stored outside the database and preferably inside a vault server.\\ In MariaDB, in particular talking about the InnoDB engine, the tablespace keys are encrypted using AES in CBC mode with 128, 192, or 256 bits of key length, while data is encrypted using CTR mode for tables and permanent logs, and GCM for temporary files and logs.
+TDE requires multiple keys to work. Every tablespace has a header that contains its tablespace key. A tablespace key is a data-encrypting key that is used to encrypt every piece of data that is contained inside a tablespace. To encrypt the tablespaces key we use a key-encrypting-key called master key. Such master key is strongly recommended to be stored outside the database and preferably inside a vault server.\\ In MariaDB, in particular, talking about the InnoDB engine, the tablespace keys are encrypted using AES in CBC mode with 128, 192, or 256 bits of key length, while data is encrypted using CTR mode for tables and permanent logs, and GCM for temporary files and logs.
 
-The reason because AES is used in CTR mode for tablespace encryption is because this mode allows good performances with random memory access operations since it does not operate on a ciphertext feedback basis.
+The reason AES is used in CTR mode for tablespace encryption is that this mode allows good performances with random memory access operations since it does not operate on a ciphertext feedback basis.
 
-The reason why we choose to use TDE to secure data-at-rest in our database is because the alternatives that we weighted were not appealing to our situation: the first alternative was to encrypt the whole disk, while the second was to encrypt at attribute level every single query. 
+The reason why we chose to use TDE to secure data-at-rest in our database is that the alternatives that we weighted were not appealing to our situation: the first alternative was to encrypt the whole disk, while the second was to encrypt at the attribute level every single query. 
 
-Encrypting the disk has its advantages since if the disk is not mounted in the OS, the data are protected by encryption. Nontheless, this security mechanism is not usefull in the case a malicious actor logs into the system where this given disk is mounted, as all data will be unencrypted, contrary to TDE, where the dataspaces are always encrypted. Furthermore, the delivery of a dockerize MariaDB database with encrypted volumes would have added another layer of complexity to the project.
+Encrypting the disk has its advantages since if the disk is not mounted in the OS, the data are protected by encryption. Nonetheless, this security mechanism is not useful in the case a malicious actor logs into the system where this given disk is mounted, as all data will be unencrypted, contrary to TDE, where the dataspaces are always encrypted. Furthermore, the delivery of a dockerized MariaDB database with encrypted volumes would have added another layer of complexity to the project.
 
-Encrypting single attributes of a query, and in general handling the data-at-rest cryptography from the java application would have added significant computational overhead since for every read/write access to the persistance layer, non-optimezed cryptographic operations would have been executed. Furthermore, encrypting only the attributes of the tables of a database leaves a significant amount of metadata (like indexes, headers, logs) in plaintext.
+Encrypting single attributes of a query, and in general, handling the data-at-rest cryptography from the Java application would have added significant computational overhead since for every read/write access to the persistence layer, non-optimized cryptographic operations would have been executed. Furthermore, encrypting only the attributes of the tables of a database leaves a significant amount of metadata (like indexes, headers, and logs) in plaintext.
 
-In the end we have chosen TDE for the fact that it decaouples the cryptography operations from our application code, and it gurantees a good balance between security and computatiuonal overhead.
+In the end, we have chosen TDE for the fact that it decouples the cryptography operations from our application code, and it guarantees a good balance between security and computational overhead.
 
 \newpage
 \section{Password hashing \& salting}
 
-In order to protect the confidentiality of the user's passwords, we decided to implement password hashing and salting following OWASP recommendations (as seen in \autoref{ss:AddStuServ}). In particular, we decided to use bcrypt with a cost factor of 13\footnote{The cost factor is a parameter that determines the computational cost of the hash function, making it harder and time-consuming for attackers to perform brute-force or dictionary attacks on hashed passwords.}.
-Password hashing is a security technique used to protect the passwords in case of exfiltration or unauthorized access. If a malicious actor tries to access the password of a given user, the only thing it will find is an hash.
+To protect the confidentiality of the user's passwords, we decided to implement password hashing and salting following OWASP recommendations (as seen in \autoref{ss:AddStuServ}). In particular, we decided to use Bcrypt with a cost factor of 13\footnote{The cost factor is a parameter that determines the computational cost of the hash function, making it harder and time-consuming for attackers to perform brute-force or dictionary attacks on hashed passwords.}.
+Password hashing is a security technique used to protect passwords in case of exfiltration or unauthorized access. If a malicious actor tries to access the password of a given user, the only thing it will find is a hash.
 
-Unfortunately, hashing alone does not ensure uniqueness: if a password are equals, also the generated hash will be. An attacker could leverage this to understand that salting is not employed and try to break common credentials using rainbow tables attacks\footnote{A rainbow table is a precomputed table containing password hash values for commonly used credentials strings. If an attacker acquire access to a list of password hashes, they can rapidly crack all passwords associated with it.}, also focusing on repeating hashes.
+Unfortunately, hashing alone does not ensure uniqueness: if a password is equal, also the generated hash will be. An attacker could leverage this to understand that salting is not employed and try to break common credentials using rainbow tables attacks\footnote{A rainbow table is a precomputed table containing password hash values for commonly used credentials strings. If an attacker acquires access to a list of password hashes, they can rapidly crack all passwords associated with it.}, also focusing on repeating hashes.
 
-To solve this problem, we use salting to append a securely random-generated value that is appended to the end of the password before it is hashed. This way, launching a successful rainbow table attack becomes virtually impossible, since the rainbow table should contain also the hashes of randomly salted passwords. In our case, Bcrypt securely handles salt generation, but, in any other case, one should put particular care in selecting a PRNG for salt generation as using a predictable generator would compromise the security of the salting operation.
+To solve this problem, we use salt to append a securely random-generated value that is appended to the end of the password before it is hashed. This way, launching a successful rainbow table attack becomes virtually impossible, since the rainbow table should contain also the hashes of randomly salted passwords. In our case, Bcrypt securely handles salt generation, but, in any other case, one should put particular care in selecting a PRNG for salt generation as using a predictable generator would compromise the security of the salting operation.
 
 \section{Signature for grade assignation}
 
-We decided to make the grade assignation a signed operation not only as an excercise for integrating Java JCA with Javascript Web Crypto API, but also because implementing this ensure an higher level of integrity and accountability for a particularly sesnsitive operation that is assigning grades to students. As stated before in \autoref{ss:SignFunct}, the used public key cryptographic algorithm was ECDSA with curve P-256 as this algorithm is considered to be a good trade-off between computation cost and security. For example, ECDSA provides a higher security strength (for a given key length) than RSA but does not add performance overhead. ECDSA P-256 is as performant as RSA 2048 while providing security strength that is comparable to RSA 3072, with 128-bit security strength\cite{online:AWS}. We are aware that using Edwards Curves in EdDSA algorithms should be preferred in modern applications given that they are easier to implement. In fact, an incorrect implementation could introduce a vulnerability to side channel attacks, see section 3.0 in \cite{Adalier2015EfficientAS}. Unfortunately, Javascript Web Crypto API only implemet support for \texttt{ RSASSA-PKCS1-v1\textunderscore 5}, \texttt{RSA-PSS}, \texttt{ECDSA}, and \texttt{HMAC}, and not for algorithms that use Edwards Curves.
+We decided to make the grade assignation a signed operation not only as an exercise for integrating Java JCA with Javascript Web Crypto API but also because implementing this ensures a higher level of integrity and accountability for a particularly sensitive operation that is assigning grades to students. As stated before in \autoref{ss:SignFunct}, the used public key cryptographic algorithm was ECDSA with curve P-256 as this algorithm is considered to be a good trade-off between computation cost and security. For example, ECDSA provides a higher security strength (for a given key length) than RSA but does not add performance overhead. ECDSA P-256 is as performant as RSA 2048 while providing security strength that is comparable to RSA 3072, with 128-bit security strength\cite{online:AWS}. We are aware that using Edwards Curves in EdDSA algorithms should be preferred in modern applications given that they are easier to implement. An incorrect implementation could introduce a vulnerability to side-channel attacks, see section 3.0 in \cite{Adalier2015EfficientAS}. Unfortunately, Javascript Web Crypto API only implements support for \texttt{ RSASSA-PKCS1-v1\textunderscore 5}, \texttt{RSA-PSS}, \texttt{ECDSA}, and \texttt{HMAC}, and not for algorithms that use Edwards Curves.
 
 \newpage
 \chapter{Known Limitations}
 
 \section{Wildfly admin console with no TLS}
 
-Even if it was not a requirement for this project, enabling TLS on the admin console of the application server is foundamental since when an admin do login, it's credentials are sent in clear. 
+Even if it was not a requirement for this project, enabling TLS on the admin console of the application server is fundamental since when an admin does log in, its credentials are sent in cleartext. 
 
 \section{MariaDB and Wildfly in development configuration}
 
-MariaDB and Wildfly uses default users: (root, root)\footnote{this notation means (username, password)} for MariaDB and used for connecting our IDE to the databse, and (admin, admin) for Wildfly. Exception is made for user (wildfly, wildfly) in MariaDB that was created with the requirement of using TLS protected communications. For this and other reasons in this section, this infrastructure is not to be considered production-ready.
+MariaDB and Wildfly use default users: (root, root)\footnote{this notation means (username, password)} for MariaDB and used for connecting our IDE to the database, and (admin, admin) for Wildfly. An exception is made for the user (wildfly, wildfly) in MariaDB that was created with the requirement of using TLS-protected communications. For this and other reasons in this section, this infrastructure is not to be considered production-ready.
 
 \section{Key Management with No Vault Integration}
 
@@ -379,35 +379,39 @@ In the TDE implementation, we opted not to incorporate a dedicated key vault for
 
 \section{No Mutual TLS between WildFly and MariaDB}
 
-One notable limitation pertains to the lack of a mutual Transport Layer Security (mTLS) connection between the WildFly application server and the MariaDB database. Despite our efforts, we encountered challenges in finding comprehensive documentation on establishing mutual TLS for this specific combination. Numerous attempts were made to resolve the issue, but even if we were able to understand how to configure the JDBC driver in Wildfly, we were not able to find satisfying documentation to enable sucessfully mTLS in MariaDB with JDBC Connector/J. Consequently, WildFly will not partake in the TLS authentication process. On the other hand, to access the database as user wildfly (that is the dedicated user for wildfly to use while connecting to MariaDB) a pair <username, password> is still required since anonymous sessions are not permitted.
+One notable limitation pertains to the lack of a mutual Transport Layer Security (mTLS) connection between the WildFly application server and the MariaDB database. Despite our efforts, we encountered challenges in finding comprehensive documentation on establishing mutual TLS for this specific combination. Numerous attempts were made to resolve the issue, but even if we were able to understand how to configure the JDBC driver in Wildfly, we were not able to find satisfying documentation to enable mTLS in MariaDB with JDBC Connector/J successfully. Consequently, WildFly will not partake in the TLS authentication process. On the other hand, to access the database as user wildfly (that is the dedicated user for wildfly to use while connecting to MariaDB) a pair <username, password> is still required since anonymous sessions are not permitted.
 
 \section{Security Against Replay Attacks for Digital Signature}
 
-In the digital signature feature employed for teacher-assigned grades, a potential vulnerability exists in the form of replay attacks. To mitigate this risk, one proposed enhancement is the implementation of a hash table as a session object. Within this data structure, received messages are stored temporarily and automatically removed from the table after a set time period, in our case 10 seconds. The rationale behind this approach lies in the nature of replay attacks, where an adversary intercepts and maliciously retransmits a valid message. By utilizing a hash table, each incoming message is hashed and stored along with its timestamp. Subsequent messages with the same content can be cross-referenced against the hash table to check for duplicates. The effectiveness of this mechanism hinges on the assumption that replay attacks typically occur within a short timeframe and this method implements a race condition that will make replay attacks harder to execute. The 10-second window strikes a balance between providing adequate protection against replay attacks and allowing legitimate messages to be processed without unnecessary delays. Additionally, the use of a hash table as an in-memory data structure facilitates efficient lookups and minimizes the impact on system performance.
+In the digital signature feature employed for teacher-assigned grades, a potential vulnerability exists in the form of replay attacks. To mitigate this risk, one proposed enhancement is the implementation of a hash table as a session object. Within this data structure, received messages are stored temporarily and automatically removed from the table after a set period, in our case 10 seconds. The rationale behind this approach lies in replay attacks, where an adversary intercepts and maliciously retransmits a valid message. By utilizing a hash table, each incoming message is hashed and stored along with its timestamp. Subsequent messages with the same content can be cross-referenced against the hash table to check for duplicates. The effectiveness of this mechanism hinges on the assumption that replay attacks typically occur within a short timeframe and this method implements a race condition that will make replay attacks harder to execute. The 10-second window strikes a balance between providing adequate protection against replay attacks and allowing legitimate messages to be processed without unnecessary delays. Additionally, the use of a hash table as an in-memory data structure facilitates efficient lookups and minimizes the impact on system performance.
 
 \section{Already Distibuted Keys}
 
-The operation of digital signature uses key pairs that we consider to be already distributed. This is because we felt that implementing a system for key distribution would have been outside of the scope of this project. Furthermore, it is in our interest to explore the possibility to manage such keys via the use of RFID or other physical tokens for future works.
+The digital signature operation uses key pairs that we consider to be already distributed. This is because we felt that implementing a system for key distribution would have been outside of the scope of this project. Furthermore, it is in our interest to explore the possibility of managing such keys via the use of RFID or other physical tokens for future works.
 
 \newpage
 \chapter{Installation and Execution}
 
-Firstly, you'll need to have installed \texttt{docker} and \texttt{docker-compose}. Check that you don't have any process listening on ports 3306, 8080, 8443, and 9991. Change directory into \texttt{\$PROJECT\textunderscore HOME}, and run command \texttt{docker-compose up --remove-orphans}. Now, Wildfly should already have in deployment the project web application archive, with runtime name \texttt{adv\textunderscore prog\textunderscore project\textunderscore war.war}, while MariaDB is running with the test values defined in file \\\texttt{services/mariadb/docker-entrypoint-initdb.d/init.sql}.
+Firstly, unpack the tarball with command \texttt{tar xpvf deliverable.tar.xz --numeric-owner}. Successively, you'll need to instal \texttt{docker} and \texttt{docker-compose}. Check that you don't have any process listening on ports 3306, 8080, 8443, and 9990. Change the directory into \texttt{\$PROJECT\textunderscore HOME}, and run command \texttt{docker-compose up --remove-orphans}. Now, Wildfly should already have in deployment the project web application archive, with runtime name \texttt{adv\textunderscore prog\textunderscore project\textunderscore war.war}, while MariaDB is running with the test values defined in file \\\texttt{services/mariadb/docker-entrypoint-initdb.d/init.sql}.
 
 To access the web application visit the link \url{https://0.0.0.0:8443/adv_prog_project_war/}.
 
-If for some reasons, like the IP of the server is not \texttt{0.0.0.0}, you can connect to URL \url{http://localhost:9991/console/index.html} with credentials (admin, admin). From here access \texttt{Deplyments > adv\textunderscore prog\textunderscore project\textunderscore war.war} and click on the value of field Context Root (it's highlighted in blue).
+You can also connect to URL \url{http://localhost:9990/console/index.html} with credentials (admin, admin). From here access \texttt{Deplyments > adv\textunderscore prog\textunderscore project\textunderscore war.war} and click on the value of the field Context Root (it's highlighted in blue).
 
 From here you can test the functionalities of the three roles:
 
 \begin{itemize}
-    \item \textbf{log as student} using test credentials (user1, password1). From here you see the student dashboard with the grades. Use this dashboard to check if a given grade has been modified, or you can always log in Mariadb with credentials (root,root) and query for the student table.
-    \item \textbf{log as teacher} using test credentials (jane\textunderscore smith, pass456). Here you find a simple dashboard, a button to import the private key used to sign the operation of grade assignation, and a POST form to assign a grade to a given student. Existing student that are enrolled in the course of the test teacher are IDs are 1 and 3. You can use these to test the functionality. You can add other students logging as an admin user but no functionality for enrollment is provided.
+    \item \textbf{log as student} using test credentials (user1, password1). From here you see the student dashboard with the grades. Use this dashboard to check if a given grade has been modified, or you can always log in to MariaDB with credentials (root,root) and query for the student table.
+    \item \textbf{log as teacher} using test credentials (jane\textunderscore smith, pass456). Here you find a simple dashboard, a button to import the private key used to sign the operation of grade assignation, and a POST form to assign a grade to a given student. Existing students who are enrolled in the course of the test teacher are IDs 1 and 3. You can use these to test the functionality. You can add other students by logging in as an admin user but no functionality for enrollment is provided.
     \item \textbf{log as admin} using credentials (admin, admin). Here you can submit the form to add a new student. IDs are automatically assigned incrementally.
 \end{itemize}
 
-Furthermore, you can check the data-at-rest encryption by logging in the MariaDB docker using command \texttt{docker exec -it project-mariadb-1 bash}. From here change directory into \\\texttt{/var/lib/mysql/universityDatabase} and choose a .ibd file to test. Run \texttt{apt update} and \texttt{apt install -y binutils}. Now, for example, take enrollments.ibd and run \texttt{strings enrollments.ibd}. The table should be encrypted.
+Furthermore, you can check the data-at-rest encryption by logging in to the MariaDB docker using command \texttt{docker exec -it project-mariadb-1 bash}. From here change the directory into \\\texttt{/var/lib/mysql/universityDatabase} and choose a .ibd file to test. Run \texttt{apt update} and \texttt{apt install -y binutils}. Now, for example, take enrollments.ibd and run \texttt{strings enrollments.ibd}. The table should be encrypted.
 
-You can also compile from source code. For this we suggest to use IDE IntellijIDEA, as it is the same one we used for developing the web application. Firstly, you'll need to run the docker-compose file as before. Successively, you'll need to open the project in IntellijIDEA as maven project. Then, create a configuration for JBoss/Wildfly server in remote mode. Setup management port as 9991, username and password as (admin, admin). Furthermore, put as host \texttt{0.0.0.0} and as port \texttt{8443}. In the "Before launch" section put "Build project" and Build artifacts (select both when prompted). In tab "Deployment" select artifact "adv\textunderscore prog\textunderscore project:war". Finally, apply the changes and run the application. 
+The web archive that is deployed is the result of the last project build since the docker volume of Wildfly for deployment is bound to the project war output directory (as you can see in the docker-compose.yml). So, if you want to re-compile from source you just have to rebuild the project and rebuild the artifacts.
 
-If you find this part unclear, you can follow the tutorial at \url{https://dzone.com/articles/deploy-to-wildfly-and-docker-from-intellij-using-m} in section "Configure a Remote Wildfly Server in IntelliJ".
+Alternatively, you can build from source code and deploy it remotely. Doing so requires some setup. For this, we suggest using IDE IntellijIDEA, as it is the same one we used for developing the web application. Firstly, you'll need to run the docker-compose file as before. Successively, you'll need to open the project in IntellijIDEA as a maven project. Then, create a configuration for the JBoss/Wildfly server in remote mode. Set up management port as 9990, username and password as (admin, admin). Furthermore, put as host \texttt{0.0.0.0} and as port \texttt{8443}. In the "Before launch" section put "Build project" and Build artifacts (select both when prompted). In the tab "Deployment" select artifact "adv\textunderscore prog\textunderscore project:war". Finally, apply the changes and run the application. 
+
+If you find this part unclear, you can follow the tutorial at \url{https://dzone.com/articles/deploy-to-wildfly-and-docker-from-intellij-using-m} in the section "Configure a Remote Wildfly Server in IntelliJ".
+
+We have tried to make the installation and deployment as simple as we could. If you face any problem, please do not hesitate to contact us.
