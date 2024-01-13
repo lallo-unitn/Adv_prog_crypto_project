@@ -21,7 +21,7 @@ Students access a dashboard displaying enrolled and accessible courses with grad
 Administrators can add student and teacher accounts, and also courses.
 
 The app is an MVC web app implemented following the J2EE design pattern. 
-Data persistence is ensured by a PostgreSQL database that must ensure data at rest confidentiality.
+Data persistence is ensured by a MariaDB database that must ensure data at rest confidentiality.
 The model communication with the database is mediated by Java Persistence API (JPA) and must guarantee data in motion confidentiality.
 Also, client-server communication must be encrypted. TLS with self-signed certificates will be used.
 Grades assignation operated by the teacher role must be signed.
