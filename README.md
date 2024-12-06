@@ -1,92 +1,64 @@
-# Esse3-Bootleg Wiki
+# Esse3-Bootleg Project
 
-Welcome to the documentation for the Esse3-Bootleg MVC Web Application.
+## Project Description
 
-## Table of Contents
+Esse3-Bootleg is a JavaEE web application developed to assist teachers in assigning grades to their students. The application includes functionalities for students and administrators, offering a secure, user-friendly platform for managing academic information. The project was developed as part of the Advanced Programming of Cryptographic Methods course and aims to provide secure data handling, utilizing both data-at-rest and data-in-transit security mechanisms. The entire system is dockerized for ease of deployment and testing.
 
-1. [Introduction](#1-introduction)
-2. [Getting Started](#2-getting-started)
-    1. [Prerequisites](#21-prerequisites)
-    2. [Installation and deployment](#22-installation-and-deployment)
-3. [Architecture Overview](#3-architecture-overview)
-4. [License](#4-license)
-    - [License Information](#license-information)
+## Functional Requirements
 
-## 1. Introduction
+- **Login:** Users can log in with a username and password. Unauthorized users are only able to access the login page.
+- **Student Dashboard:** Students can view their personal details, the courses they are enrolled in, and their grades.
+- **Teacher Dashboard:** Teachers can assign grades to students using a secure key-based mechanism.
+- **Admin Dashboard:** Admins can add new students to the system by inputting user details.
 
-This project aims to develop a web app designed for student career management and teacher course management and mark assignments for the course of Advanced Programming of Cryptographic Methods.
+## Security Features
 
-The application offers authentication, role-based access, and tailored dashboards. Role-based access distinguishes student, teacher, and administrator privileges. 
-Students access a dashboard displaying enrolled and accessible courses with grades. Professors utilize a specialized dashboard for course management and grade assignments.
-Administrators can add student and teacher accounts, and also courses.
+- **Transport Layer Security (TLS):** All communications between the client, the application server, and the database are protected using TLSv1.3.
+- **Data Encryption:** Data-at-rest in the database is encrypted using Transparent Data Encryption (TDE) with AES-128 in CTR mode.
+- **Password Security:** Passwords are hashed and salted using Bcrypt with a work factor of 13.
+- **Digital Signatures:** Teachers must sign grade assignments using ECDSA to ensure data integrity.
 
-The app is an MVC web app implemented following the J2EE design pattern. 
-Data persistence is ensured by a MariaDB database that must ensure data at rest confidentiality.
-The model communication with the database is mediated by Java Persistence API (JPA) and must guarantee data in motion confidentiality.
-Also, client-server communication must be encrypted. TLS with self-signed certificates will be used.
-Grades assignation operated by the teacher role must be signed.
+## Software Architecture
 
-## 2. Getting Started
+Esse3-Bootleg follows the MVC (Model-View-Controller) design pattern:
 
-### 2.1 Prerequisites
+- **Controller Layer:** Handles the business logic, implemented via servlets that manage interactions between the model and view layers.
+- **Model Layer:** Manages data persistence using Java Persistence API (JPA) and interacts with the database through enterprise beans.
+- **View Layer:** Uses Java Server Pages (JSPs) to render the web interface, providing user interactions.
 
-To run the application locally, you'll need to have the following software, tools, and dependencies installed:
+## Technological Stack
 
-1. **Docker:**
-   - Version: 24.0.7
-   - [Docker Installation Guide](https://docs.docker.com/get-docker/)
-  
-2. **Docker Compose:**
-   - Version: 2.23.1
-   - [Docker Compose Installation Guide](https://docs.docker.com/compose/install/)
+- **Java 17.0.9 with JavaEE v.9.1** for backend development.
+- **WildFly v.30.0.0.Final** as the application server.
+- **MariaDB v.11.2.2** for database management.
+- **Docker & Docker-Compose** for containerized deployment.
+- **Apache Maven** for building the project and managing dependencies.
 
-### 2.2 Installation and deployment
+## Installation and Execution
 
-Since the infrastructure is dockerized, deploying the application is straightforward. Follow these steps:
+1. **Prerequisites:** Ensure Docker and Docker Compose are installed. Make sure ports 3306, 8080, 8443, and 9990 are available.
+2. **Deployment:**
+   - Unzip the project archive.
+   - Navigate to the project directory and run: `docker-compose up --remove-orphans`.
+   - Access the web application at: [https://0.0.0.0:8443/adv_prog_project_war/](https://0.0.0.0:8443/adv_prog_project_war/).
+3. **Testing Roles:**
+   - **Student:** Use credentials (user1, password1) to view the student dashboard.
+   - **Teacher:** Use credentials (jane_smith, pass456) to assign grades.
+   - **Admin:** Use credentials (admin, admin) to add new students.
 
-1. **Clone the Repository:**
-   ```bash
-   git clone git@github.com:lallo-unitn/Esse3-Bootleg-APFCM.git
-   cd Esse3-Bootleg-APFCM
-2. **Up the docker infrastructure:**
-   ```bash
-   docker-compose up
+## Known Limitations
 
-This command initializes and starts the Docker containers based on the configurations in the docker-compose.yml file. The application, along with its dependencies, will be deployed.
+- **WildFly Admin Console Security:** The admin console does not have TLS enabled, leaving administrative credentials vulnerable.
+- **Development Configuration:** Default credentials are used for MariaDB and WildFly, which is not secure for production environments.
+- **No Vault Integration for Key Management:** Keys are managed through file permissions rather than a dedicated key management solution.
+- **No Mutual TLS Between WildFly and MariaDB:** Mutual TLS was not implemented due to documentation limitations.
+- **Replay Attack Mitigation:** Currently, the digital signature system lacks adequate protection against replay attacks.
 
-Once the containers are up and running, you can access the application by navigating to [http://localhost:8080/adv_prog_project_war](http://localhost:8080/adv_prog_project_war) in your web browser.
+## Contact and Support
 
-1. **Down the Docker Infrastructure:**
-   ```bash
-   docker-compose down
+For any issues, please contact the project maintainers at the email addresses provided above.
 
-## 3. Architecture Overview
+---
 
-The tech stack for this project is composed of the following components:
+Feel free to open issues or contribute by submitting a pull request if you have improvements or bug fixes to suggest!
 
-1. **Database:**
-   - MariaDB v. 11.3.1
-
-2. **Application Server:**
-   - WildFly v. 30.0.0-Final
-
-3. **Java Development Kit (JDK):**
-   - OpenJDK 17
-
-4. **Model (Persistence):**
-   - Java Persistence API (JPA) with Hibernate
-
-5. **Control:**
-   - Servlets
-
-6. **View:**
-   - JavaServer Pages (JSP)
-
-
-## 10. License
-
-### License Information
-
-## License
-
-This project is licensed under the [GNU General Public License v3.0 (GPL-3.0)](https://opensource.org/licenses/GPL-3.0).
