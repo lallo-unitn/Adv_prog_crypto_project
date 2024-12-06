@@ -54,11 +54,4 @@ Esse3-Bootleg follows the MVC (Model-View-Controller) design pattern:
 - **No Mutual TLS Between WildFly and MariaDB:** Mutual TLS was not implemented due to documentation limitations.
 - **Replay Attack Mitigation:** Currently, the digital signature system lacks adequate protection against replay attacks.
 
-## Contact and Support
-
-For any issues, please contact the project maintainers at the email addresses provided above.
-
----
-
-Feel free to open issues or contribute by submitting a pull request if you have improvements or bug fixes to suggest!
 
